@@ -6,6 +6,9 @@ import errno
 import signal
 import subprocess
 
+#instead of setting the PYTHONPATH, it is better to set it here:
+sys.path.append("/home/pi/openpilot")
+
 from common.basedir import BASEDIR
 sys.path.append(os.path.join(BASEDIR, "pyextra"))
 os.environ['BASEDIR'] = BASEDIR
