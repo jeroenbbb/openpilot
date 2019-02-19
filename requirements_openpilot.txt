@@ -7,6 +7,12 @@ pip3 install zmq
 sh launch_openpilot.sh
 
 
+to get updsates, run:
+
+git pull
+
+-------------------------
+
 old file:
 
 -e git+https://github.com/commaai/le_python.git@5eef8f5be5929d33973e1b10e686fa0cdcd6792f#egg=Logentries
