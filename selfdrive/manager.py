@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.5
 import os
 import sys
 import fcntl
@@ -37,7 +37,7 @@ def unblock_stdout():
         break
 
       try:
-        sys.stdout.write(dat)
+        sys.stdout.write(dat.decode("utf-8"))
       except (OSError, IOError):
         pass
 
