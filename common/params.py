@@ -282,7 +282,7 @@ def write_db(params_path, key, value):
   try:
     tmp_path = tempfile.mktemp(prefix=".tmp", dir=params_path)
     with open(tmp_path, "wb") as f:
-      f.write(value)
+      f.write(str.encode(value))
       f.flush()
       os.fsync(f.fileno())
 
