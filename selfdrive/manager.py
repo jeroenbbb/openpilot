@@ -459,6 +459,7 @@ def main():
   logging.info('NOCONTROL=' + xstr(os.getenv("NOCONTROL")))
   logging.info('PASSIVE=' + xstr(os.getenv("PASSIVE")))
   logging.info('PREPAREONLY=' + xstr(os.getenv("PREPAREONLY")))
+  logging.info('BASEDIR=' + xstr(os.getenv("BASEDIR")))
 
   if os.getenv("NOLOG") is not None:
     del managed_processes['loggerd']
@@ -522,10 +523,15 @@ def main():
     spinner_proc = None
   else:
     spinner_text = "chffrplus" if params.get("Passive")=="1" else "openpilot"
-    logging.info('Spinner=' + spinner_text)
-    spinner_proc = subprocess.Popen(["./spinner", "loading %s"%spinner_text],
-      cwd=os.path.join(BASEDIR, "selfdrive", "ui", "spinner"),
-      close_fds=True)
+    logging.info('Try to start C executable Spinner=' + spinner_text)
+    # TODO: add try/
+    try:
+      spinner_proc = subprocess.Popen(["./spinner", "loading %s"%spinner_text],
+        cwd=os.path.join(BASEDIR, "selfdrive", "ui", "spinner"),
+        close_fds=True)
+    except OSError:
+      logging.info('C executable Spinner falied with OSError')
+      
   try:
     manager_update()
     manager_init()
