@@ -283,7 +283,7 @@ def manager_init(should_register=True):
     dongle_id = "c"*16
 
   # set dongle id
-  cloudlog.info("dongle id is " + dongle_id)
+  cloudlog.info("dongle id is " + dongle_id.decode())
   os.environ['DONGLE_ID'] = dongle_id
 
   cloudlog.info("dirty is %d" % dirty)
