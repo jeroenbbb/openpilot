@@ -12,7 +12,7 @@ from common.params import Params
 
 def get_imei():
   #ret = subprocess.check_output(["getprop", "oem.device.imeicache"]).strip()
-  ret = "RPi"
+  ret = "356938035643809"
   if ret == "":
     ret = "000000000000000"
   return ret
