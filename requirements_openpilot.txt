@@ -3,6 +3,11 @@
 git clone git://github.com/jeroenbbb/openpilot
 
 pip3 install zmq
+pip3 install setproctitle
+pip3 install pycapnp
+pip3 install pyyaml
+pip3 install cffi
+
 
 sh launch_openpilot.sh
 
