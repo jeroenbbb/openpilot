@@ -445,17 +445,20 @@ def uninstall():
   # IPowerManager.reboot(confirm=false, reason="recovery", wait=true)
   os.system("service call power 16 i32 0 s16 recovery i32 1")
 
+def xstr(s):
+    return '' if s is None else str(s)  
+    
 def main():
   # the flippening!
   os.system('LD_LIBRARY_PATH="" content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1')
   
-  logging.info('NOLOG=' + os.getenv("NOLOG"))
-  logging.info('NOUPLOAD=' + os.getenv("NOUPLOAD"))
-  logging.info('NOVISION=' + os.getenv("NOVISION"))
-  logging.info('LEAN=' + os.getenv("LEAN"))
-  logging.info('NOCONTROL=' + os.getenv("NOCONTROL"))
-  logging.info('PASSIVE=' + os.getenv("PASSIVE"))
-  logging.info('PREPAREONLY=' + os.getenv("PREPAREONLY"))
+  logging.info('NOLOG=' + xstr(os.getenv("NOLOG")))
+  logging.info('NOUPLOAD=' + xstr(os.getenv("NOUPLOAD")))
+  logging.info('NOVISION=' + xstr(os.getenv("NOVISION")))
+  logging.info('LEAN=' + xstr(os.getenv("LEAN")))
+  logging.info('NOCONTROL=' + xstr(os.getenv("NOCONTROL")))
+  logging.info('PASSIVE=' + xstr(os.getenv("PASSIVE")))
+  logging.info('PREPAREONLY=' + xstr(os.getenv("PREPAREONLY")))
 
   if os.getenv("NOLOG") is not None:
     del managed_processes['loggerd']
