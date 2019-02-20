@@ -6,6 +6,10 @@ from selfdrive.version import version, training_version
 from common.api import api_get
 from common.params import Params
 
+# register device usung IMEI, serial number
+#
+#
+
 def get_imei():
   ret = subprocess.check_output(["getprop", "oem.device.imeicache"]).strip()
   if ret == "":
@@ -37,9 +41,12 @@ def register():
   try:
     if dongle_id is None or access_token is None:
       cloudlog.info("getting pilotauth")
+      # read http://api.commadotai.com/ using IMEI and serial number
+      print ("Posting to pilotauth")
       resp = api_get("v1/pilotauth/", method='POST', timeout=15,
                      imei=get_imei(), serial=get_serial())
       dongleauth = json.loads(resp.text)
+      print ("Reading pilotauth - 2")
       dongle_id, access_token = dongleauth["dongle_id"].encode('ascii'), dongleauth["access_token"].encode('ascii')
 
       params.put("DongleId", dongle_id)
