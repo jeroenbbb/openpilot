@@ -9,11 +9,21 @@ pip3 install pyyaml
 pip3 install cffi
 pip3 install raven
 
+capnp C++ compiler stuff:
+----------------------------
+https://capnproto.org/install.html
+https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
+
+git clone https://bitbucket.org/sol_prog/raspberry-pi-gcc-binary.git
+cd raspberry-pi-gcc-binary
+tar xf gcc-8.1.0.tar.bz2
+sudo mv gcc-8.1.0 /usr/local
+export PATH=/usr/local/gcc-8.1.0/bin:$PATH
 
 sudo apt-get -y install capnproto
 sudo apt-get -y update
 sudo apt-get -y upgrade
-
+sudo apt autoremove
 
 sh launch_openpilot.sh
 
