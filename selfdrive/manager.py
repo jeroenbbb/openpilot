@@ -44,6 +44,10 @@ def unblock_stdout():
 
     os._exit(os.wait()[1])
 
+
+# update NEOS routine
+# not required on Rpi
+
 if __name__ == "__main__":
   neos_update_required = os.path.isfile("/init.qcom.rc") \
     and (not os.path.isfile("/VERSION") or int(open("/VERSION").read()) < 8)
@@ -90,31 +94,31 @@ from selfdrive.loggerd.config import ROOT
 
 # set logging level
 logging.basicConfig(level=logging.INFO)
-logging.info('So should this')
-logging.warning('And this, too')
+logging.info('Info level logging activated')
+logging.warning('Warning level logging activated')
 
 # comment out anything you don't want to run
 managed_processes = {
   "thermald": "selfdrive.thermald",
-  "uploader": "selfdrive.loggerd.uploader",
+#  "uploader": "selfdrive.loggerd.uploader",
   "controlsd": "selfdrive.controls.controlsd",
   "radard": "selfdrive.controls.radard",
-  "ubloxd": "selfdrive.locationd.ubloxd",
+#  "ubloxd": "selfdrive.locationd.ubloxd",
   "mapd": "selfdrive.mapd.mapd",
   "loggerd": ("selfdrive/loggerd", ["./loggerd"]),
   "logmessaged": "selfdrive.logmessaged",
-  "tombstoned": "selfdrive.tombstoned",
-  "logcatd": ("selfdrive/logcatd", ["./logcatd"]),
-  "proclogd": ("selfdrive/proclogd", ["./proclogd"]),
-  "boardd": ("selfdrive/boardd", ["./boardd"]),   # not used directly
-  "pandad": "selfdrive.pandad",
-  "ui": ("selfdrive/ui", ["./start.sh"]),
+#  "tombstoned": "selfdrive.tombstoned",
+#  "logcatd": ("selfdrive/logcatd", ["./logcatd"]),
+#  "proclogd": ("selfdrive/proclogd", ["./proclogd"]),
+#  "boardd": ("selfdrive/boardd", ["./boardd"]),   # not used directly
+#  "pandad": "selfdrive.pandad",
+#  "ui": ("selfdrive/ui", ["./start.sh"]),
   "calibrationd": "selfdrive.locationd.calibrationd",
-  "visiond": ("selfdrive/visiond", ["./visiond"]),
-  "sensord": ("selfdrive/sensord", ["./sensord"]),
+#  "visiond": ("selfdrive/visiond", ["./visiond"]),
+#  "sensord": ("selfdrive/sensord", ["./sensord"]),
   "gpsd": ("selfdrive/sensord", ["./gpsd"]),
   "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
-  "updated": "selfdrive.updated",
+#  "updated": "selfdrive.updated",
 }
 android_packages = ("ai.comma.plus.offroad", "ai.comma.plus.frame")
 
@@ -444,6 +448,14 @@ def uninstall():
 def main():
   # the flippening!
   os.system('LD_LIBRARY_PATH="" content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1')
+  
+  logging.info('NOLOG=' + os.getenv("NOLOG"))
+  logging.info('NOUPLOAD=' + os.getenv("NOUPLOAD"))
+  logging.info('NOVISION=' + os.getenv("NOVISION"))
+  logging.info('LEAN=' + os.getenv("LEAN"))
+  logging.info('NOCONTROL=' + os.getenv("NOCONTROL"))
+  logging.info('PASSIVE=' + os.getenv("PASSIVE"))
+  logging.info('PREPAREONLY=' + os.getenv("PREPAREONLY"))
 
   if os.getenv("NOLOG") is not None:
     del managed_processes['loggerd']
@@ -507,6 +519,7 @@ def main():
     spinner_proc = None
   else:
     spinner_text = "chffrplus" if params.get("Passive")=="1" else "openpilot"
+    logging.info('Spinner=' + spinner_text)
     spinner_proc = subprocess.Popen(["./spinner", "loading %s"%spinner_text],
       cwd=os.path.join(BASEDIR, "selfdrive", "ui", "spinner"),
       close_fds=True)
@@ -536,6 +549,7 @@ def main():
     uninstall()
 
 if __name__ == "__main__":
+  logging.info('Start main()')
   main()
   # manual exit because we are forked
   sys.exit(0)
