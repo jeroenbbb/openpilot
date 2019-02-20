@@ -7,17 +7,29 @@ from common.api import api_get
 from common.params import Params
 
 # register device usung IMEI, serial number
-#
+# but RPi has no IMEI so put in fake numbers
 #
 
 def get_imei():
-  ret = subprocess.check_output(["getprop", "oem.device.imeicache"]).strip()
+  #ret = subprocess.check_output(["getprop", "oem.device.imeicache"]).strip()
+  ret = "RPi"
   if ret == "":
     ret = "000000000000000"
   return ret
 
 def get_serial():
-  return subprocess.check_output(["getprop", "ro.serialno"]).strip()
+  #return subprocess.check_output(["getprop", "ro.serialno"]).strip()
+  cpuserial = "0000000000000000"
+  try:
+    f = open('/proc/cpuinfo','r')
+    for line in f:
+      if line[0:6]=='Serial':
+        cpuserial = line[10:26]
+    f.close()
+  except:
+    cpuserial = "ERROR000000000"
+  return cpuserial
+
 
 def get_git_commit():
   return subprocess.check_output(["git", "rev-parse", "HEAD"]).strip()
