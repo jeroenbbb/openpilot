@@ -5,6 +5,7 @@ import fcntl
 import errno
 import signal
 import subprocess
+import logging
 
 #instead of setting the PYTHONPATH, it is better to set it here:
 sys.path.append("/home/pi/openpilot")
@@ -86,6 +87,11 @@ from selfdrive.version import version, dirty
 import selfdrive.crash as crash
 
 from selfdrive.loggerd.config import ROOT
+
+# set logging level
+logging.basicConfig(level=logging.info)
+logging.info('So should this')
+logging.warning('And this, too')
 
 # comment out anything you don't want to run
 managed_processes = {
