@@ -283,15 +283,16 @@ def manager_init(should_register=True):
     dongle_id = "c"*16
 
   # set dongle id
-  cloudlog.info("dongle id is " + dongle_id.decode())
-  os.environ['DONGLE_ID'] = dongle_id
+  dongle_id_str = dongle_id.decode()
+  cloudlog.info("dongle id is " + dongle_id_str
+  os.environ['DONGLE_ID'] = dongle_id_str
 
   cloudlog.info("dirty is %d" % dirty)
   if not dirty:
     os.environ['CLEAN'] = '1'
 
-  cloudlog.bind_global(dongle_id=dongle_id, version=version, dirty=dirty, is_eon=True)
-  crash.bind_user(id=dongle_id)
+  cloudlog.bind_global(dongle_id=dongle_id_str, version=version, dirty=dirty, is_eon=True)
+  crash.bind_user(id=dongle_id_str)
   crash.bind_extra(version=version, dirty=dirty, is_eon=True)
 
   os.umask(0)
