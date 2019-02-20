@@ -374,7 +374,7 @@ def get_installed_apks():
   # use pm command to list all available packages, not required on Rpi
   try:
     dat = subprocess.check_output(["pm", "list", "packages", "-f"]).strip().split("\n")
-  exception FileNotFoundError:
+  except FileNotFoundError:
     # make empty list
     dat = []
     
