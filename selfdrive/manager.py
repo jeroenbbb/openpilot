@@ -406,7 +406,7 @@ def update_apks():
 
   cloudlog.info("installed apks %s" % (str(installed), ))
 
-  for app in installed.iterkeys():
+  for app in installed.keys():
 
     apk_path = os.path.join(BASEDIR, "apk/"+app+".apk")
     if not os.path.exists(apk_path):
