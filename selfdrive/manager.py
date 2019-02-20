@@ -371,7 +371,13 @@ def manager_thread():
       break
 
 def get_installed_apks():
-  dat = subprocess.check_output(["pm", "list", "packages", "-f"]).strip().split("\n")
+  # use pm command to list all available packages, not required on Rpi
+  try:
+    dat = subprocess.check_output(["pm", "list", "packages", "-f"]).strip().split("\n")
+  exception FileNotFoundError:
+    # make empty list
+    dat = []
+    
   ret = {}
   for x in dat:
     if x.startswith("package:"):
@@ -531,6 +537,7 @@ def main():
         close_fds=True)
     except OSError:
       logging.info('C executable Spinner falied with OSError')
+      spinner_proc = False
       
   try:
     manager_update()
