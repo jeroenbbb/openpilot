@@ -57,7 +57,7 @@ def register():
       print ("Posting to pilotauth")
       resp = api_get("v1/pilotauth/", method='POST', timeout=15,
                      imei=get_imei(), serial=get_serial())
-      print ("Output received using " + get_imei() + " / " + get_serial() + "=" + resp)
+      print ("Output received using " + get_imei() + " / " + get_serial() + "=" + resp.text)
       dongleauth = json.loads(resp.text)
       print ("Reading pilotauth - 2")
       dongle_id, access_token = dongleauth["dongle_id"].encode('ascii'), dongleauth["access_token"].encode('ascii')
