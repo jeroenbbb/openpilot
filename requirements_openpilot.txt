@@ -10,6 +10,11 @@ pip3 install cffi
 pip3 install raven
 
 
+sudo apt-get -y install capnproto
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
+
 sh launch_openpilot.sh
 
 
