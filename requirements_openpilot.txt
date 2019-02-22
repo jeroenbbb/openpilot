@@ -8,11 +8,13 @@ pip3 install pycapnp
 pip3 install pyyaml
 pip3 install cffi
 pip3 install raven
+pip3 install fastcluster
 
 capnp C++ compiler stuff:
 ----------------------------
 https://capnproto.org/install.html
 https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
+https://solarianprogrammer.com/2018/04/22/raspberry-pi-raspbian-install-clang-compile-cpp-17-programs/
 
 git clone https://bitbucket.org/sol_prog/raspberry-pi-gcc-binary.git
 cd raspberry-pi-gcc-binary
