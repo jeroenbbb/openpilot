@@ -438,7 +438,8 @@ def manager_update():
 
 def manager_prepare():
   # build cereal first
-  subprocess.check_call(["make", "-j4"], cwd=os.path.join(BASEDIR, "cereal"))
+  # cereal is capnp stuff for rpc calls to c++ and java
+  # subprocess.check_call(["make", "-j4"], cwd=os.path.join(BASEDIR, "cereal"))
 
   # build all processes
   os.chdir(os.path.dirname(os.path.abspath(__file__)))
