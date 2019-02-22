@@ -5,7 +5,10 @@ from cffi import FFI
 
 can_dir = os.path.dirname(os.path.abspath(__file__))
 libdbc_fn = os.path.join(can_dir, "libdbc.so")
-subprocess.check_call(["make"], cwd=can_dir)
+try:
+  subprocess.check_call(["make"], cwd=can_dir)
+except subprocess.CalledProcessError:
+  cloudlog.warning("building in can/libdbc_py failed")
 
 ffi = FFI()
 ffi.cdef("""
