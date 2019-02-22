@@ -15,6 +15,7 @@ pip3 install numpy --upgrade
 
 cv2/ cv3/ opencv:
 --------------------
+https://www.pyimagesearch.com/2016/04/18/install-guide-raspberry-pi-3-raspbian-jessie-opencv-3/
 https://breakthrough.github.io/Installing-OpenCV/#downloading-opencv
 https://github.com/Itseez/opencv/archive/3.1.0.zip
 mkdir build
