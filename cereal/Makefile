@@ -1,4 +1,5 @@
 # check http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on makefile
+# started from manager.py, make -j4 in cereal dir
 
 PWD := $(shell pwd)
 
@@ -31,6 +32,8 @@ endif
 .PHONY: all
 all: $(GENS)
 js: $(JS)
+
+@echo "Start with $CAPNPC for @UNAME_M in directory $PWD" 
 
 .PHONY: clean
 clean:
