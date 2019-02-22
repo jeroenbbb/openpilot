@@ -1,3 +1,5 @@
+# check http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on makefile
+
 PWD := $(shell pwd)
 
 SRCS := log.capnp car.capnp
