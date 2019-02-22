@@ -9,7 +9,10 @@ except ImportError as e:
   from common.basedir import BASEDIR
 
   openblas_path = os.path.join(BASEDIR, "phonelibs/openblas/")
-  os.environ['LD_LIBRARY_PATH'] += ':' + openblas_path
+  try:
+    os.environ['LD_LIBRARY_PATH'] += ':' + openblas_path
+  except KeyError:
+    os.environ['LD_LIBRARY_PATH']  = openblas_path
 
   args = [sys.executable]
   args.extend(sys.argv)
