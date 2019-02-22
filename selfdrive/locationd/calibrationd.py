@@ -238,7 +238,7 @@ def calibrationd_thread(gctx=None, addr="127.0.0.1"):
 
     new_vp = calibrator.handle_orb_features(of)
     if DEBUG and new_vp is not None:
-      print 'got new vp', new_vp
+      print ('got new vp', new_vp)
     if l100 is not None:
       calibrator.handle_live100(l100)
     if DEBUG:
