@@ -33,39 +33,40 @@ endif
 all: $(GENS)
 js: $(JS)
 
-all1:
-	@echo "Start with $CAPNPC for @UNAME_M in directory $PWD" 
-
-all2:
-	@echo "Start"
 
 .PHONY: clean
 clean:
+	@echo "Start cleaning"
 	rm -rf gen
 	rm -rf node_modules
 	rm -rf package-lock.json
 
 gen/c/%.capnp.c: %.capnp
+	@echo "Start c"
 	@echo "[ CAPNPC C ] $@"
 	mkdir -p gen/c/
 	$(CAPNPC) '$<' -o c:gen/c/
 
 gen/js/%.capnp.js: %.capnp
+	@echo "Start JS"
 	@echo "[ CAPNPC JavaScript ] $@"
 	mkdir -p gen/js/
 	sh ./generate_javascript.sh
 
 gen/cpp/%.capnp.c++: %.capnp
+	@echo "Start c++"
 	@echo "[ CAPNPC C++ ] $@"
 	mkdir -p gen/cpp/
 	$(CAPNPC) '$<' -o c++:gen/cpp/
 
 gen/java/Car.java gen/java/Log.java: $(SRCS)
+	@echo "Start java"
 	@echo "[ CAPNPC java ] $@"
 	mkdir -p gen/java/
 	$(CAPNPC) $^ -o java:gen/java
 
 # c-capnproto needs some empty headers
 gen/c/include/c++.capnp.h gen/c/include/java.capnp.h:
+	@echo "Start touch"
 	mkdir -p gen/c/include
 	touch '$@'
