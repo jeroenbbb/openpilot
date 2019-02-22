@@ -9,6 +9,7 @@ pip3 install pyyaml
 pip3 install cffi
 pip3 install raven
 pip3 install fastcluster
+pip3 install numpy --upgrade
 
 capnp C++ compiler stuff:
 ----------------------------
