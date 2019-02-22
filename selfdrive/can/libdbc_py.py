@@ -93,4 +93,7 @@ void* canpack_init(const char* dbc_name);
 uint64_t canpack_pack(void* inst, uint32_t address, size_t num_vals, const SignalPackValue *vals, int counter);
 """)
 
-libdbc = ffi.dlopen(libdbc_fn)
+try:
+  libdbc = ffi.dlopen(libdbc_fn)
+except OSError:
+  cloudlog.warning("load library in can/libdbc_py failed")
