@@ -33,8 +33,11 @@ endif
 all: $(GENS)
 js: $(JS)
 
-all:
+all1:
 	@echo "Start with $CAPNPC for @UNAME_M in directory $PWD" 
+
+all2:
+	@echo "Start"
 
 .PHONY: clean
 clean:
