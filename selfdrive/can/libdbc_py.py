@@ -1,5 +1,6 @@
 import os
 import subprocess
+from selfdrive.swaglog import cloudlog
 
 from cffi import FFI
 
