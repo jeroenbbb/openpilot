@@ -194,6 +194,7 @@ class DBWriter(DBAccessor):
       self._lock = self._get_lock(True)
       self._vals = self._read_values_locked()
     except:
+      print ("Permission error in" + self._path)
       os.umask(self._prev_umask)
       self._prev_umask = None
       raise
