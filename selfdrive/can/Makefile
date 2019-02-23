@@ -29,7 +29,7 @@ else ifeq ($(UNAME_M),aarch64)
 	ZMQ_FLAGS = -I$(PHONELIBS)/zmq/aarch64/include
 	ZMQ_LIBS = -L$(PHONELIBS)/zmq/aarch64/lib -l:libzmq.a
 	CXXFLAGS += -lgnustl_shared
-else ifeq ($(UNAME_M),armv71)
+else ifeq ($(UNAME_M),armv7l)
 	ZMQ_FLAGS = -I$(PHONELIBS)/zmq/aarch64-linux/include
 	ZMQ_LIBS = -L$(PHONELIBS)/zmq/aarch64-linux/lib -l:libzmq.a
 	CXXFLAGS += -lgnustl_shared
