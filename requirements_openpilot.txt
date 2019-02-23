@@ -10,6 +10,7 @@ pip3 install cffi
 pip3 install raven
 pip3 install fastcluster
 pip3 install logentries
+pip3 install smbus2
 pip3 install numpy --upgrade
 
 
