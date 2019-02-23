@@ -7,7 +7,7 @@ from cffi import FFI
 TMPDIR = "/tmp/ccache"
 
 def ffi_wrap(name, c_code, c_header, tmpdir=TMPDIR, cflags="", libraries=[]):
-  cache = name + "_" + hashlib.sha1(c_code).hexdigest()
+  cache = name + "_" + hashlib.sha1(c_code.encode('utf-8')).hexdigest()
   try:
     os.mkdir(tmpdir)
   except OSError:
