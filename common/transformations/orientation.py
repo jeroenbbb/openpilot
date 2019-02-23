@@ -29,7 +29,7 @@ def euler2quat(eulers):
        np.sin(gamma / 2) * np.sin(theta / 2) * np.cos(psi / 2)
 
   quats = array([q0, q1, q2, q3]).T
-  for i in xrange(len(quats)):
+  for i in range(len(quats)):
     if quats[i,0] < 0:
       quats[i] = -quats[i]
   return quats.reshape(output_shape)
