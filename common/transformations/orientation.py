@@ -99,7 +99,7 @@ def rot2quat(rots):
   K3[:, 3, 2] = K3[:, 2, 3]
   K3[:, 3, 3] = (rots[:, 0, 0] + rots[:, 1, 1] + rots[:, 2, 2]) / 3.0
   q = np.empty((len(rots), 4))
-  for i in xrange(len(rots)):
+  for i in range(len(rots)):
     _, eigvecs = linalg.eigh(K3[i].T)
     eigvecs = eigvecs[:,3:]
     q[i, 0] = eigvecs[-1]
