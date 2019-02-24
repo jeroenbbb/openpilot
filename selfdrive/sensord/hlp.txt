@@ -1,0 +1,1 @@
+see https://github.com/wanman/openpilot/blob/master/selfdrive/sensord/sensors.cc
