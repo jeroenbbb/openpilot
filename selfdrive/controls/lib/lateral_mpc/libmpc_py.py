@@ -27,4 +27,8 @@ int run_mpc(state_t * x0, log_t * solution,
              double l_prob, double r_prob, double p_prob, double curvature_factor, double v_ref, double lane_width);
 """)
 
-libmpc = ffi.dlopen(libmpc_fn)
+try:
+    libmpc = ffi.dlopen(libmpc_fn)
+except OSError:
+    print ("Warning: could not use " + libmpc_fn)
+    libmpc = None
