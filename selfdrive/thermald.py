@@ -52,7 +52,7 @@ def setup_eon_fan():
       #os.system("echo 1 > /sys/devices/soc/6a00000.ssusb/power_supply/usb/usb_otg")
       LEON = True
     bus.close()
-  except FileNotFound:
+  except FileNotFoundError:
     print ("Warning: I2C bus not accessible")
 
 last_eon_fan_val = None
