@@ -31,7 +31,7 @@ from common.params import Params
 from common.transformations.coordinates import geodetic2ecef
 from selfdrive.services import service_list
 import selfdrive.messaging as messaging
-from mapd_helpers import MAPS_LOOKAHEAD_DISTANCE, Way, circle_through_points
+from selfdrive.mapd.mapd_helpers import MAPS_LOOKAHEAD_DISTANCE, Way, circle_through_points
 import selfdrive.crash as crash
 from selfdrive.version import version, dirty
 
