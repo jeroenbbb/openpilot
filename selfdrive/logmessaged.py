@@ -19,8 +19,10 @@ def main(gctx):
   pub_sock = messaging.pub_sock(ctx, service_list['logMessage'].port)
 
   while True:
+    # changed in python3, no more auto conversion from bytes to string
     #dat = ''.join(sock.recv_multipart())
     dat = b''.join(sock.recv_multipart())
+    dat = dat.decode('ascii')
     
 
     # print "RECV", repr(dat)
