@@ -48,7 +48,10 @@ def _get_libmpc(mpc_id):
                 double l, double a_l_0);
     """)
     
-    lib_result = ffi.dlopen(libmpc_fn)
+    try:
+      lib_result = ffi.dlopen(libmpc_fn)
+    except OSError:
+      print ("Warning: cannot use " + libmpc_fn)
 
     return (ffi, ffi.dlopen(libmpc_fn))
 
