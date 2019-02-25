@@ -17,6 +17,9 @@ ThermalStatus = log.ThermalData.ThermalStatus
 CURRENT_TAU = 2.   # 2s time constant
 
 def read_tz(x):
+  # CPU temperature is stored in /sys/devices/virtual/thermal/thermal_zonex/temp
+  # multiple CPU system have multiple directories
+  # Rpi uses thermal_zone0
   with open("/sys/devices/virtual/thermal/thermal_zone%d/temp" % x) as f:
     try:
       ret = max(0, int(f.read()))
