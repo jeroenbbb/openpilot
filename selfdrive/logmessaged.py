@@ -20,7 +20,7 @@ def main(gctx):
 
   while True:
     #dat = ''.join(sock.recv_multipart())
-    dat = ''.join(sock.recv_multipart()).decode("utf-8")
+    dat = b''.join(sock.recv_multipart())
     
 
     # print "RECV", repr(dat)
