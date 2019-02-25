@@ -207,7 +207,7 @@ def thermald_thread():
     msg.thermal.freeSpace = avail
     
     # battery directory is not available on a RPi
-    if not os.path.exists("/sys/class/power_supply/battery"):
+    if os.path.exists("/sys/class/power_supply/battery"):
       with open("/sys/class/power_supply/battery/capacity") as f:
         msg.thermal.batteryPercent = int(f.read())
       with open("/sys/class/power_supply/battery/status") as f:
