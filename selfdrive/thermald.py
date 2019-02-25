@@ -199,22 +199,32 @@ def thermald_thread():
     msg = read_thermal()
 
     # loggerd is gated based on free space
+    # ROOT is set in loggerd/config.py
     statvfs = os.statvfs(ROOT)
     avail = (statvfs.f_bavail * 1.0)/statvfs.f_blocks
 
     # thermal message now also includes free space
     msg.thermal.freeSpace = avail
-    with open("/sys/class/power_supply/battery/capacity") as f:
-      msg.thermal.batteryPercent = int(f.read())
-    with open("/sys/class/power_supply/battery/status") as f:
-      msg.thermal.batteryStatus = f.read().strip()
-    with open("/sys/class/power_supply/battery/current_now") as f:
-      msg.thermal.batteryCurrent = int(f.read())
-    with open("/sys/class/power_supply/battery/voltage_now") as f:
-      msg.thermal.batteryVoltage = int(f.read())
-    with open("/sys/class/power_supply/usb/present") as f:
-      msg.thermal.usbOnline = bool(int(f.read()))
-
+    
+    # battery directory is not available on a RPi
+    if not os.path.exists("/sys/class/power_supply/battery"):
+      with open("/sys/class/power_supply/battery/capacity") as f:
+        msg.thermal.batteryPercent = int(f.read())
+      with open("/sys/class/power_supply/battery/status") as f:
+        msg.thermal.batteryStatus = f.read().strip()
+      with open("/sys/class/power_supply/battery/current_now") as f:
+        msg.thermal.batteryCurrent = int(f.read())
+      with open("/sys/class/power_supply/battery/voltage_now") as f:
+        msg.thermal.batteryVoltage = int(f.read())
+      with open("/sys/class/power_supply/usb/present") as f:
+        msg.thermal.usbOnline = bool(int(f.read()))
+    else:
+      msg.thermal.batteryPercent = 100
+      msg.thermal.batteryStatus = ""
+      msg.thermal.batteryCurrent = 0
+      msg.thermal.batteryVoltage = 0
+      msg.thermal.usbOnline = False
+      
     current_filter.update(msg.thermal.batteryCurrent / 1e6)
 
     # TODO: add car battery voltage check
