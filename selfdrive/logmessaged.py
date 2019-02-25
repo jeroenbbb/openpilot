@@ -19,7 +19,9 @@ def main(gctx):
   pub_sock = messaging.pub_sock(ctx, service_list['logMessage'].port)
 
   while True:
-    dat = ''.join(sock.recv_multipart())
+    #dat = ''.join(sock.recv_multipart())
+    dat = ''.join(sock.recv_multipart().decode("utf-8"))
+    
 
     # print "RECV", repr(dat)
 
