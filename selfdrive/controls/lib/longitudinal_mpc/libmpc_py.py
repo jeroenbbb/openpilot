@@ -6,6 +6,11 @@ from cffi import FFI
 
 mpc_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
+# platform machine = arm7l = 32 bit for RPi 3A
+# x86_64 = windows 64 bit
+# MPC = Model Predictive Control
+
+
 if platform.machine() == "x86_64":
   try:
     FFI().dlopen(os.path.join(mpc_dir, "libmpc1.so"))
@@ -13,6 +18,7 @@ if platform.machine() == "x86_64":
     # libmpc1.so is likely built for aarch64. cleaning...
     subprocess.check_call(["make", "clean"], cwd=mpc_dir)
 
+#try to compile
 subprocess.check_call(["make", "-j4"], cwd=mpc_dir)
 
 def _get_libmpc(mpc_id):
@@ -41,6 +47,8 @@ def _get_libmpc(mpc_id):
     int run_mpc(state_t * x0, log_t * solution,
                 double l, double a_l_0);
     """)
+    
+    lib_result = ffi.dlopen(libmpc_fn)
 
     return (ffi, ffi.dlopen(libmpc_fn))
 
