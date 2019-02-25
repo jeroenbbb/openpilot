@@ -325,7 +325,12 @@ def manager_thread():
   cloudlog.info({"environ": os.environ})
 
   # save boot log
-  subprocess.call(["./loggerd", "--bootlog"], cwd=os.path.join(BASEDIR, "selfdrive/loggerd"))
+  # this is closed software so it cannot run on a RPi
+  try:
+    subprocess.call(["./loggerd", "--bootlog"], cwd=os.path.join(BASEDIR, "selfdrive/loggerd"))
+  except OSError:
+    # no worries, it is only logging
+    logger_dead = True
 
   for p in persistent_processes:
     start_managed_process(p)
