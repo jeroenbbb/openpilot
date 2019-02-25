@@ -18,7 +18,10 @@ CURRENT_TAU = 2.   # 2s time constant
 
 def read_tz(x):
   with open("/sys/devices/virtual/thermal/thermal_zone%d/temp" % x) as f:
-    ret = max(0, int(f.read()))
+    try:
+      ret = max(0, int(f.read()))
+    except FileNotFoundError:
+      ret = 0
   return ret
 
 def read_thermal():
