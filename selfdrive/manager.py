@@ -190,8 +190,12 @@ def nativelauncher(pargs, cwd):
 
   # because when extracted from pex zips permissions get lost -_-
   os.chmod(pargs[0], 0o700)
-
-  os.execvp(pargs[0], pargs)
+  
+  # native processesmay fail 
+  try:
+    os.execvp(pargs[0], pargs)
+  except OSError:
+    cloudlog.info("Warning: native process not started: " + pargs[0] + " in directory " + cwd)
 
 def start_managed_process(name):
   if name in running or name not in managed_processes:
