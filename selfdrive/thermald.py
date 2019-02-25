@@ -38,18 +38,22 @@ def setup_eon_fan():
   global LEON
 
   os.system("echo 2 > /sys/module/dwc3_msm/parameters/otg_switch")
-
-  bus = SMBus(7, force=True)
+  
+  # open I2C bus to write some data on bus 7, address 0x21, offset 0x010, data=0xf
   try:
-    bus.write_byte_data(0x21, 0x10, 0xf)   # mask all interrupts
-    bus.write_byte_data(0x21, 0x03, 0x1)   # set drive current and global interrupt disable
-    bus.write_byte_data(0x21, 0x02, 0x2)   # needed?
-    bus.write_byte_data(0x21, 0x04, 0x4)   # manual override source
-  except IOError:
-    print ("LEON detected")
-    #os.system("echo 1 > /sys/devices/soc/6a00000.ssusb/power_supply/usb/usb_otg")
-    LEON = True
-  bus.close()
+    bus = SMBus(7, force=True)
+    try:
+      bus.write_byte_data(0x21, 0x10, 0xf)   # mask all interrupts
+      bus.write_byte_data(0x21, 0x03, 0x1)   # set drive current and global interrupt disable
+      bus.write_byte_data(0x21, 0x02, 0x2)   # needed?
+      bus.write_byte_data(0x21, 0x04, 0x4)   # manual override source
+    except IOError:
+      print ("LEON detected")
+      #os.system("echo 1 > /sys/devices/soc/6a00000.ssusb/power_supply/usb/usb_otg")
+      LEON = True
+    bus.close()
+  except FileNotFound:
+    print ("Warning: I2C bus not accessible")
 
 last_eon_fan_val = None
 def set_eon_fan(val):
