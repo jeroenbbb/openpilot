@@ -42,13 +42,14 @@ def read_thermal():
 
 LEON = False
 def setup_eon_fan():
-  global LEON
+  global LEON, I2C
 
   os.system("echo 2 > /sys/module/dwc3_msm/parameters/otg_switch")
   
   # open I2C bus to write some data on bus 7, address 0x21, offset 0x010, data=0xf
   try:
     bus = SMBus(7, force=True)
+    I2C = True
     try:
       bus.write_byte_data(0x21, 0x10, 0xf)   # mask all interrupts
       bus.write_byte_data(0x21, 0x03, 0x1)   # set drive current and global interrupt disable
@@ -61,12 +62,13 @@ def setup_eon_fan():
     bus.close()
   except FileNotFoundError:
     print ("Warning: I2C bus not accessible")
+    I2C = False
 
 last_eon_fan_val = None
 def set_eon_fan(val):
-  global LEON, last_eon_fan_val
+  global LEON, last_eon_fan_val, I2C
 
-  if last_eon_fan_val is None or last_eon_fan_val != val:
+  if (last_eon_fan_val is None or last_eon_fan_val != val) and I2C:
     bus = SMBus(7, force=True)
     if LEON:
       try:
