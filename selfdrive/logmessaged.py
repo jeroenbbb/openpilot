@@ -34,6 +34,7 @@ def main(gctx):
       # push to logentries does not work with emit_raw (LogentriesHandler object has no object emit_raw)
       # so skip it
       # le_handler.emit_raw(dat)
+      pass
 
     # then we publish them
     msg = messaging.new_message()
