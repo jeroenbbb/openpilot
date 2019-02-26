@@ -5,7 +5,7 @@ import fcntl
 import errno
 import signal
 import subprocess
-import logging
+#import logging
 
 #instead of setting the PYTHONPATH, it is better to set it here:
 sys.path.append("/home/pi/openpilot")
@@ -92,10 +92,7 @@ import selfdrive.crash as crash
 
 from selfdrive.loggerd.config import ROOT
 
-# set logging level
-logging.basicConfig(level=logging.INFO)
-logging.info('Info level logging activated')
-logging.warning('Warning level logging activated')
+cloudlog.info('Cloudlog info level is activated')
 
 # comment out anything you don't want to run
 managed_processes = {
@@ -270,6 +267,7 @@ def cleanup_all_processes(signal, frame):
 
   for name in list(running.keys()):
     kill_managed_process(name)
+    cloudlog.info("Killing " + name)
   cloudlog.info("everything is dead")
 
 
@@ -330,6 +328,7 @@ def manager_thread():
 
   # save boot log
   # this is closed software so it cannot run on a RPi
+  logger_dead = False
   try:
     subprocess.call(["./loggerd", "--bootlog"], cwd=os.path.join(BASEDIR, "selfdrive/loggerd"))
   except OSError:
@@ -347,7 +346,7 @@ def manager_thread():
     start_managed_process("pandad")
 
   params = Params()
-  logger_dead = False
+  
 
   while 1:
     # get health of board, log this in "thermal"
@@ -375,7 +374,7 @@ def manager_thread():
 
     # check the status of all processes, did any of them die?
     for p in running:
-      cloudlog.debug("   running %s %s" % (p, running[p]))
+      cloudlog.debug("   Running %s %s" % (p, running[p]))
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
@@ -470,14 +469,14 @@ def main():
   # the flippening!
   os.system('LD_LIBRARY_PATH="" content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1')
   
-  logging.info('NOLOG=' + xstr(os.getenv("NOLOG")))
-  logging.info('NOUPLOAD=' + xstr(os.getenv("NOUPLOAD")))
-  logging.info('NOVISION=' + xstr(os.getenv("NOVISION")))
-  logging.info('LEAN=' + xstr(os.getenv("LEAN")))
-  logging.info('NOCONTROL=' + xstr(os.getenv("NOCONTROL")))
-  logging.info('PASSIVE=' + xstr(os.getenv("PASSIVE")))
-  logging.info('PREPAREONLY=' + xstr(os.getenv("PREPAREONLY")))
-  logging.info('BASEDIR=' + xstr(os.getenv("BASEDIR")))
+  cloudlog.info('NOLOG=' + xstr(os.getenv("NOLOG")))
+  cloudlog.info('NOUPLOAD=' + xstr(os.getenv("NOUPLOAD")))
+  cloudlog.info('NOVISION=' + xstr(os.getenv("NOVISION")))
+  cloudlog.info('LEAN=' + xstr(os.getenv("LEAN")))
+  cloudlog.info('NOCONTROL=' + xstr(os.getenv("NOCONTROL")))
+  cloudlog.info('PASSIVE=' + xstr(os.getenv("PASSIVE")))
+  cloudlog.info('PREPAREONLY=' + xstr(os.getenv("PREPAREONLY")))
+  cloudlog.info('BASEDIR=' + xstr(os.getenv("BASEDIR")))
 
   if os.getenv("NOLOG") is not None:
     del managed_processes['loggerd']
