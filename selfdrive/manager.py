@@ -576,7 +576,7 @@ def main():
     uninstall()
 
 if __name__ == "__main__":
-  logging.info('Start main()')
+  cloudlog.info('Start main()')
   main()
   # manual exit because we are forked
   sys.exit(0)
