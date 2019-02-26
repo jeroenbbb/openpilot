@@ -540,14 +540,14 @@ def main():
     spinner_proc = None
   else:
     spinner_text = "chffrplus" if params.get("Passive")=="1" else "openpilot"
-    logging.info('Try to start C executable Spinner=' + spinner_text)
+    cloudlog.info('Try to start C executable Spinner=' + spinner_text)
     # TODO: add try/
     try:
       spinner_proc = subprocess.Popen(["./spinner", "loading %s"%spinner_text],
         cwd=os.path.join(BASEDIR, "selfdrive", "ui", "spinner"),
         close_fds=True)
     except OSError:
-      logging.info('C executable Spinner falied with OSError')
+      cloudlog.info('C executable Spinner falied with OSError')
       spinner_proc = False
       
   try:
