@@ -4,6 +4,14 @@ from logentries import LogentriesHandler
 from selfdrive.services import service_list
 import selfdrive.messaging as messaging
 
+# this program reads all messages from ipc (Inter Process Comm).
+# IPC is using a file to transfer messages, /tmp/logmessage
+# logmessage is used by loggerd, swaglog.c, swaglog.py, sensord
+# all ipc messages are forwarded to zmq
+# severe stuff (more than info) are sent to logentries which is a central cloudbased logging database
+# logentries is skipped in this version
+
+
 def main(gctx):
   # setup logentries. we forward log messages to it
   le_token = "e8549616-0798-4d7e-a2ca-2513ae81fa17"
