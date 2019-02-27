@@ -1,5 +1,9 @@
 # check http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on makefile
 # started from manager.py, make -j4 in cereal dir
+# required command on Rpi: (only c++ stuff is needed)
+
+# mkdir -p gen/cpp
+# capnp compile car.capnp -o c++:gen/cpp
 
 PWD := $(shell pwd)
 
