@@ -1,3 +1,5 @@
+// read cpu, memory, cache info every 2 secs and send it to zmq 8031
+
 #include <cstdio>
 #include <cstdlib>
 #include <climits>
