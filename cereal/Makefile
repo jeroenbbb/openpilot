@@ -4,6 +4,7 @@
 
 # mkdir -p gen/cpp
 # capnp compile car.capnp -o c++:gen/cpp
+# capnp compile log.capnp -o c++:gen/cpp
 
 PWD := $(shell pwd)
 
