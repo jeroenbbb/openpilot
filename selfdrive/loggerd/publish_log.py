@@ -4,6 +4,10 @@
 
 import time
 import zmq
+import os
+
+sys.path.append("/home/pi/openpilot")
+
 import selfdrive.messaging as messaging
 
 def listen_to_all():
