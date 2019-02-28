@@ -11,6 +11,12 @@ sys.path.append("/home/pi/openpilot")
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
 
+# display all services
+for service in services_list:
+    print (service)
+    print (service_list[service].port)
+    
+
 def listen_to_all():
     # port = "12344"       
     context = zmq.Context()
