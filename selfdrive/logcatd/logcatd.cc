@@ -1,3 +1,5 @@
+// read android log and send it to zmq
+
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
