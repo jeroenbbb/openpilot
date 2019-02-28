@@ -4,7 +4,7 @@
 
 import time
 import zmq
-import os
+import sys
 
 sys.path.append("/home/pi/openpilot")
 
