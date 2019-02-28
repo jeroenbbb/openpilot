@@ -27,7 +27,7 @@ def listen_to_all():
     for service in service_list:
         print (service)
         print (service_list[service].port)
-        service_sock.append = messaging.sub_sock(context, service_list[service].port)
+        service_sock.append(messaging.sub_sock(context, service_list[service].port))
         # count = count + 1
 
     # loop through all services to listen to the socks
