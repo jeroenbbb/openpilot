@@ -37,7 +37,10 @@ def listen_to_all():
         for service in service_list:
             msg = messaging.recv_sock(service_sock[count], wait=False)
             if msg is not None:
-                print (service + "=" + msg)
+                if isinstance(msg, str):
+                    print (service + "=" + msg)
+                else:
+                    print ("message received from " + service)
             count = count + 1
         
         time.sleep(1)
