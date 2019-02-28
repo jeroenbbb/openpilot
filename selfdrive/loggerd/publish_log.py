@@ -31,8 +31,9 @@ def listen_to_all():
         # count = count + 1
 
     # loop through all services to listen to the socks
-    count = 0
+
     while True:
+        count = 0
         for service in service_list:
             msg = messaging.recv_sock(service_sock[count], wait=False)
             if msg is not None:
