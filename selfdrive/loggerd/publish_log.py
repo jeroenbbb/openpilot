@@ -12,7 +12,7 @@ import selfdrive.messaging as messaging
 from selfdrive.services import service_list
 
 # display all services
-for service in services_list:
+for service in service_list:
     print (service)
     print (service_list[service].port)
     
