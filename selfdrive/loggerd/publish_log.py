@@ -40,8 +40,8 @@ def listen_to_all():
                 if isinstance(msg, str):
                     print (service + "=" + msg)
                 else:
-                    print ("message received from " + service + " ")
-                    type(msg)
+                    print ("message received from " + service + " " + str(msg))
+                    #type(msg)
             count = count + 1
         
         time.sleep(1)
