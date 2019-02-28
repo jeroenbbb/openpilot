@@ -21,14 +21,18 @@ def listen_to_all():
 
     context = zmq.Context()
 
-    # loop through all services
+    # loop through all services to define socks
     for service in service_list:
         print (service)
         print (service_list[service].port)
-        service_sock = messaging.sub_sock(context, service_list[service].port)
-        msg = messaging.recv_sock(service_sock, wait=False)
+        service_sock[]
+        service_sock[service] = messaging.sub_sock(context, service_list[service].port)
+
+    # loop through all services to listen to the socks
+    for service in service_list:
+        msg = messaging.recv_sock(service_sock[service], wait=False)
         if msg is not None:
-            print (msg)
+            print (service + "=" + msg)
 
 if __name__ == "__main__":
     listen_to_all()
