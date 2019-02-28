@@ -26,7 +26,7 @@ def listen_to_all():
         print (service)
         print (service_list[service].port)
         service_sock = messaging.sub_sock(context, service_list[service].port)
-        msg = messaging.recv_sock(thermal_sock, wait=False)
+        msg = messaging.recv_sock(service_sock, wait=False)
         if msg is not None:
             print (msg)
 
