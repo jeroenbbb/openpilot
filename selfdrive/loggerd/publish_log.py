@@ -18,11 +18,17 @@ for service in service_list:
     
 
 def listen_to_all():
-    # port = "12344"       
+
     context = zmq.Context()
-    thermal_sock = messaging.sub_sock(context, service_list['thermal'].port)
-    msg = messaging.recv_sock(thermal_sock, wait=True)
-    print (msg)
+
+    # loop through all services
+    for service in service_list:
+        print (service)
+        print (service_list[service].port)
+        service_sock = messaging.sub_sock(context, service_list[service].port)
+        msg = messaging.recv_sock(thermal_sock, wait=False)
+        if msg is not None:
+            print (msg)
 
 if __name__ == "__main__":
     listen_to_all()
