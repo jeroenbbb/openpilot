@@ -9,6 +9,7 @@ import sys
 sys.path.append("/home/pi/openpilot")
 
 import selfdrive.messaging as messaging
+from selfdrive.services import service_list
 
 def listen_to_all():
     # port = "12344"       
