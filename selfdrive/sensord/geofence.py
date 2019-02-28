@@ -1,5 +1,6 @@
 # check geofence vs gps position
 # and send result on zmq
+# https://shapely.readthedocs.io/en/latest/manual.html#introduction
 
 #import shapely
 from shapely.geometry import Polygon
