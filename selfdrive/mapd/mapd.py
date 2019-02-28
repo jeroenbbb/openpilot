@@ -35,7 +35,7 @@ from selfdrive.mapd.mapd_helpers import MAPS_LOOKAHEAD_DISTANCE, Way, circle_thr
 import selfdrive.crash as crash
 from selfdrive.version import version, dirty
 
-
+# Kumi offers an API for openmaps
 OVERPASS_API_URL = "https://overpass.kumi.systems/api/interpreter"
 OVERPASS_HEADERS = {
     'User-Agent': 'NEOS (comma.ai)',
@@ -141,6 +141,10 @@ def query_thread():
 
 
 def mapsd_thread():
+  # get gps location from zmq using gps or gps_external (lat, long, bearing, speed)
+  # calculate the curve of the road ahead, find max_speed
+  # and send all results to zmq
+  
   global last_gps
 
   context = zmq.Context()
@@ -253,7 +257,7 @@ def mapsd_thread():
     if cur_way is not None:
       dat.liveMapData.wayId = cur_way.id
 
-      # Seed limit
+      # Speed limit
       max_speed = cur_way.max_speed
       if max_speed is not None:
         dat.liveMapData.speedLimitValid = True
