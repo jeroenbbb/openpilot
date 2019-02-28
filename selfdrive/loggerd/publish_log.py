@@ -34,6 +34,7 @@ def listen_to_all():
             msg = messaging.recv_sock(service_sock[service], wait=False)
             if msg is not None:
                 print (service + "=" + msg)
+         sleep(1)
 
 if __name__ == "__main__":
     listen_to_all()
