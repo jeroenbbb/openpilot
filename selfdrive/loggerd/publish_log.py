@@ -11,7 +11,7 @@ def listen_to_all():
     context = zmq.Context()
     thermal_sock = messaging.sub_sock(context, service_list['thermal'].port)
     msg = messaging.recv_sock(thermal_sock, wait=True)
-    print msg
+    print (msg)
 
 if __name__ == "__main__":
     listen_to_all()
