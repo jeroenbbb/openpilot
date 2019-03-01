@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 import os
 import zmq
-import psutil
+#import psutil
 from smbus2 import SMBus
 from cereal import log
 from selfdrive.version import training_version
@@ -39,7 +39,7 @@ def read_thermal():
   dat.thermal.mem = read_tz(2)
   dat.thermal.gpu = read_tz(16)
   dat.thermal.bat = read_tz(29)
-  dat.thermal.cpu_perc = psutil.cpu_percent()
+  #dat.thermal.cpu_perc = psutil.cpu_percent()
   
   # for raspberry and single cpu hardware
   if dat.thermal.cpu0 == 0:
