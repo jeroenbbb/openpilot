@@ -43,7 +43,7 @@ def read_thermal():
   
   # for raspberry and single cpu hardware
   if dat.thermal.cpu0 == 0:
-    dat.thermal.cpu0 = read_tz(5)
+    dat.thermal.cpu0 = read_tz(0)
   return dat
 
 LEON = False
