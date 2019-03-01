@@ -5,4 +5,5 @@
 # http://www.danmandle.com/blog/getting-gpsd-to-work-with-python/
 # http://www.catb.org/gpsd/
 # http://www.catb.org/gpsd/hardware.html
+# https://github.com/Knio/pynmea2
 
