@@ -15,8 +15,11 @@ for bus in busses:
         print ("Device:", dev.filename)
         print ("  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
         print ("  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
+        print ("  iMan: %d (0x%04x)" % (dev.idProduct, dev.iManufacturer))
+        
 
 for dev in usb.core.find(find_all=True):
+    print (dev.get_active_configuration())
     print ("Device:", dev.filename)
     print ("  idVendor: %d (%s)" % (dev.idVendor, hex(dev.idVendor)))
     print ("  idProduct: %d (%s)" % (dev.idProduct, hex(dev.idProduct)))
