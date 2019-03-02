@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 import os
 import zmq
-#import psutil
+import psutil
 from smbus2 import SMBus
 from cereal import log
 from selfdrive.version import training_version
