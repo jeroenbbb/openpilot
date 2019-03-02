@@ -39,7 +39,8 @@ def read_thermal():
   dat.thermal.mem = read_tz(2)
   dat.thermal.gpu = read_tz(16)
   dat.thermal.bat = read_tz(29)
-  dat.thermal.cpu0Percent = psutil.cpu_percent()
+  dat.thermal.cpu0Percent = 0
+  #dat.thermal.cpu0Percent = psutil.cpu_percent()
   
   # for raspberry and single cpu hardware
   if dat.thermal.cpu0 == 0:
