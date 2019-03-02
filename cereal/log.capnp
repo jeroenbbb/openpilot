@@ -276,7 +276,7 @@ struct ThermalData {
   thermalStatus @14 :ThermalStatus;
   chargingError @17 :Bool;
   chargingDisabled @18 :Bool;
-  cpu0Percentage @25 :Float32;
+  cpu0Percent @25 :Float32;
 
   enum ThermalStatus {
     green @0;   # all processes run
