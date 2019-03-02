@@ -21,5 +21,8 @@ for bus in busses:
         print ("  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
         print ("  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
         print ("  devnum: " + str(dev.iManufacturer) + str(dev.devnum))
-        print ("  dev: " + str(dev.dev.bDeviceClass))
+        print ("  deviceClass: " + str(dev.dev.bDeviceClass))
+        print ("  dev: " + str(dev.dev))
+        
+        dev.set_configuration()
         
