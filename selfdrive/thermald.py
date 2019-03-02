@@ -1,7 +1,4 @@
-#!/usr/bin/env python2.7
-
-import sys
-print(sys.version)
+#!/usr/bin/env python
 
 import os
 import zmq
