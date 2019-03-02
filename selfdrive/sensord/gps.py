@@ -24,5 +24,8 @@ for bus in busses:
         print ("  deviceClass: " + str(dev.dev.bDeviceClass))
         print ("  dev: " + str(dev.dev))
         
-        dev.dev.set_configuration()
+        try:
+            dev.dev.set_configuration()
+        except USBError:
+            print "USB authorisation error, use sudo chgrp users /dev/bus"
         
