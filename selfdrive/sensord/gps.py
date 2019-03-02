@@ -12,6 +12,7 @@ busses = usb.busses()
 for bus in busses:
     devices = bus.devices
     for dev in devices:
+        dev.__dict__
         print ("Device:", dev.filename)
         print ("  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
         print ("  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
