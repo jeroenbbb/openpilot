@@ -270,14 +270,13 @@ struct ThermalData {
   batteryCurrent @15 :Int32;
   batteryVoltage @16 :Int32;
   usbOnline @12 :Bool;
-
   fanSpeed @10 :UInt16;
   started @11 :Bool;
   startedTs @13 :UInt64;
-
   thermalStatus @14 :ThermalStatus;
   chargingError @17 :Bool;
   chargingDisabled @18 :Bool;
+  cpu0Percentage @25 :Float32;
 
   enum ThermalStatus {
     green @0;   # all processes run
