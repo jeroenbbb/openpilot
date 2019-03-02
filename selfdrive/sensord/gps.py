@@ -27,5 +27,5 @@ for bus in busses:
         try:
             dev.dev.set_configuration()
         except USBError:
-            print "USB authorisation error, use sudo chgrp users /dev/bus"
+            print ("USB authorisation error, use sudo chgrp users /dev/bus/usb/001/*")
         
