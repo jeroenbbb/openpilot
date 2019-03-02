@@ -24,5 +24,5 @@ for bus in busses:
         print ("  deviceClass: " + str(dev.dev.bDeviceClass))
         print ("  dev: " + str(dev.dev))
         
-        dev.set_configuration()
+        dev.dev.set_configuration()
         
