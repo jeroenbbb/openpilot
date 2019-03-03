@@ -16,6 +16,7 @@ pip3 install overpy
 pip3 install reverse_geocoder
 pip3 install psutil
 pip3 install pyusb
+pip3 install gps3
 pip3 install numpy --upgrade
 
 packages are installed in 
@@ -23,6 +24,10 @@ packages are installed in
  /home/pi/.local/lib/python3.5/site-packages/ 
  if packages re not found use
  ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
+ 
+ GPS
+ -------------
+ sudo apt-get install gpsd
 
 cv2/ cv3/ opencv:
 --------------------
