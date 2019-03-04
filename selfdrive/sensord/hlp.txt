@@ -1,1 +1,3 @@
 see https://github.com/wanman/openpilot/blob/master/selfdrive/sensord/sensors.cc
+
+sensord is used to read acceleration (see visiond/camera_qcom.c
