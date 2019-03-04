@@ -11,6 +11,9 @@
 from shapely.geometry import Polygon, Point, mapping, shape
 from shapely.ops import nearest_points
 import json
+mport geopy.distance
+
+
 
 from shapely import speedups
 if speedups.available:
@@ -40,6 +43,11 @@ print (d[0])
 print (d[1])
 print (d[0].x)
 print (d[0].y)
+
+coords_1 = (52.0, 4.0)
+coords_2 = (53.0, 5.0)
+
+print geopy.distance.vincenty(coords_1, coords_2).km
 
 # the area in square degrees, usefull?
 # area_sdeg = polygon.area
