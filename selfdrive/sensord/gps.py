@@ -75,11 +75,11 @@ for new_data in gpsd_socket:
         latitude = data_stream.TPV['lat']
         print('Altitude = ',data_stream.TPV['alt'])
         print('Latitude = ',latitude)
-        latitude = float64(5)
+        latitude = float(5)
     else:
         # noting received
         print ("Nothing" + str(count))
-        latitude = float64(5)
+        latitude = float(5)
     
     sleep(0.5)
     count = count + 1
