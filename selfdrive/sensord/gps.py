@@ -3,8 +3,11 @@
 # http://doschman.blogspot.com/2013/01/parsing-nmea-sentences-from-gps-with.html
 # https://raspberrytips.nl/ublox-neo-6m-gps-raspberry-pi-3/
 # http://www.danmandle.com/blog/getting-gpsd-to-work-with-python/
+
 # http://www.catb.org/gpsd/
+# http://www.catb.org/gpsd/gpsd_json.html
 # http://www.catb.org/gpsd/hardware.html
+
 # https://github.com/Knio/pynmea2
 # http://www.linux-usb.org/usb.ids  lists all vendors, product id in hex
 # https://en.wikipedia.org/wiki/USB#Device_classes   (devclass 9 = hub)
@@ -12,6 +15,7 @@
 # https://github.com/MartijnBraam/gpsd-py3
 # http://catb.org/gpsd/
 # http://ozzmaker.com/using-python-with-a-gps-receiver-on-a-raspberry-pi/
+
 
 import usb
 busses = usb.busses()
