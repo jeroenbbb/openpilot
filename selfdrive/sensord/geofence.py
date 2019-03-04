@@ -7,15 +7,22 @@
 # 
 # see also https://stackoverflow.com/questions/16942697/geojson-circles-supported-or-not
 
-import shapely
-from shapely.geometry import Polygon
+#import shapely
+from shapely.geometry import Polygon, mapping, shape
+import json
 
-print (shapely.__version__)
+
+>>> print(json.dumps(mapping(s)))
+
+#print (shapely.__version__)
 
 # read geofence from parameter file
 # bloemendaal = 52.3992479,4.630414
-points = [(34.093523, -118.274893), (34.091414, -118.275887), (34.092082, -118.278062), (34.093867, -118.276609), (34.093523, -118.274893)]
-polygon = Polygon(points)
+#points = [(34.093523, -118.274893), (34.091414, -118.275887), (34.092082, -118.278062), (34.093867, -118.276609), (34.093523, -118.274893)]
+#polygon = Polygon(points)
+
+geojson = {"type": "Polygon", "coordinates": [  [[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]   ]  }
+s = shape(json.loads(geojson))
 
 # the area in square degrees, usefull?
 # area_sdeg = polygon.area
