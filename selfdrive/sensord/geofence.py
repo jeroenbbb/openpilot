@@ -36,7 +36,7 @@ d = Point(52.3992479,4.630414).distance(s2)
 print (d)
 
 d = nearest_points(Point(52.3992479,4.630414), s2)
-print (d)
+print (d.wkt)
 
 # the area in square degrees, usefull?
 # area_sdeg = polygon.area
