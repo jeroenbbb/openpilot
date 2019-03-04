@@ -1,9 +1,16 @@
 # check geofence vs gps position
 # and send result on zmq
 # https://shapely.readthedocs.io/en/latest/manual.html#introduction
+# IsGeofenceEnabled (0/1) and the GeoFence data are stored in params
+# a geofence is stored in geojson format  OR kml file??
+# for example:
+# 
+# see also https://stackoverflow.com/questions/16942697/geojson-circles-supported-or-not
 
 #import shapely
 from shapely.geometry import Polygon
+
+print shapely.__version__
 
 # read geofence from parameter file
 # bloemendaal = 52.3992479,4.630414
