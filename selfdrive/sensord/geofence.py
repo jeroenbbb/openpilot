@@ -22,7 +22,8 @@ geojson = '{"type": "Polygon", "coordinates": [  [[30, 10], [40, 40], [20, 40], 
 s = shape(json.loads(geojson))
 print(json.dumps(mapping(s)))
 
-Point(52.3992479,4.630414).distance(s)
+d = Point(52.3992479,4.630414).distance(s)
+print (d)
 
 # the area in square degrees, usefull?
 # area_sdeg = polygon.area
