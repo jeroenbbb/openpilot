@@ -16,10 +16,28 @@
 # http://catb.org/gpsd/
 # http://ozzmaker.com/using-python-with-a-gps-receiver-on-a-raspberry-pi/
 
+import sys
+
+if __name__ == "__main__":
+    sys.path.append("/home/pi/openpilot")
+
+import time
+import zmq
+
 # gps3 uses gpsd
 from gps3 import gps3
 import usb
 from time import sleep
+
+import selfdrive.messaging as messaging
+from selfdrive.services import service_list
+
+# use message port number for GPS messages defined in 
+# use message structure GpsLocationData defined in log.capnp
+# service_list['gpsNMEA'].port                    # consist of a long string of NMEa data
+# service_list['gpsLocationExternal'].port
+
+
 
 def list_usb_devices():
     busses = usb.busses()
@@ -42,13 +60,27 @@ data_stream = gps3.DataStream()
 gpsd_socket.connect()
 gpsd_socket.watch()
 count = 0
+
+# set message stuff
+context = zmq.Context()
+gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
+    
 for new_data in gpsd_socket:
     if new_data:
         data_stream.unpack(new_data)
+        latitude = data_stream.TPV['lat']
         print('Altitude = ',data_stream.TPV['alt'])
-        print('Latitude = ',data_stream.TPV['lat'])
+        print('Latitude = ',latitude)
+
     else:
         # noting received
         print ("Nothing" + str(count))
+        latitude = 5
+    
     sleep(0.5)
     count = count + 1
+    
+    # send message
+    msg.GpsLocationData.latitude = latitude
+    gps_sock.send(msg.to_bytes())
+    
