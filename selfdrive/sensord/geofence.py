@@ -20,9 +20,13 @@ import json
 
 geojson = '{"type": "Polygon", "coordinates": [  [[52, 4.7], [52, 5], [53, 5], [53, 4.7], [52, 4.7]]   ]  }'
 s = shape(json.loads(geojson))
+s2 = shape(geojson)
 print(json.dumps(mapping(s)))
 
 d = Point(52.3992479,4.630414).distance(s)
+print (d)
+
+d = Point(52.3992479,4.630414).distance(s2)
 print (d)
 
 # the area in square degrees, usefull?
