@@ -9,7 +9,12 @@
 
 #import shapely
 from shapely.geometry import Polygon, Point, mapping, shape
+from shapely.ops import nearest_points
 import json
+
+from shapely import speedups
+if speedups.available:
+  speedups.enabled
 
 #print (shapely.__version__)
 
@@ -28,6 +33,9 @@ d = Point(52.3992479,4.630414).distance(s)
 print (d)
 
 d = Point(52.3992479,4.630414).distance(s2)
+print (d)
+
+d = nearest_points(Point(52.3992479,4.630414), s2)
 print (d)
 
 # the area in square degrees, usefull?
