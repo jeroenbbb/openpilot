@@ -19,6 +19,7 @@
 # gps3 uses gpsd
 from gps3 import gps3
 import usb
+from time import sleep
 
 def list_usb_devices():
     busses = usb.busses()
@@ -34,11 +35,13 @@ def list_usb_devices():
             print ("  dev: " + str(dev.dev))
             
 # -------------------------------
+list_usb_devices()
 
 gpsd_socket = gps3.GPSDSocket()
 data_stream = gps3.DataStream()
 gpsd_socket.connect()
 gpsd_socket.watch()
+count = 0
 for new_data in gpsd_socket:
     if new_data:
         data_stream.unpack(new_data)
@@ -46,4 +49,6 @@ for new_data in gpsd_socket:
         print('Latitude = ',data_stream.TPV['lat'])
     else:
         # noting received
-        print ("Nothing")
+        print ("Nothing" + str(count))
+    sleep(0.5)
+    count = count + 1
