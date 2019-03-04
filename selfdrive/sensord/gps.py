@@ -77,7 +77,7 @@ for new_data in gpsd_socket:
     else:
         # noting received
         print ("Nothing" + str(count))
-        latitude = 5
+        latitude = float(5)
     
     sleep(0.5)
     count = count + 1
