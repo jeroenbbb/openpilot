@@ -6,7 +6,8 @@ import time
 import zmq
 import sys
 
-sys.path.append("/home/pi/openpilot")
+if __name__ == "__main__":
+    sys.path.append("/home/pi/openpilot")
 
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
