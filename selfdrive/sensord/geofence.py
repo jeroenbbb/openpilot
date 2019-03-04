@@ -28,8 +28,10 @@ if speedups.available:
 
 geojson = '{"type": "Polygon", "coordinates": [  [[52, 4.7], [52, 5], [53, 5], [53, 4.7], [52, 4.7]]   ]  }'
 geojson2 = {"type": "Polygon", "coordinates": [  [[53, 4], [53, 5], [54, 5], [54, 4], [53, 4]]   ]  }
+geojson3 = {"type": "Polygon", "coordinates": [  [[52, 5], [52, 6], [53, 6], [53, 5], [52, 5]]   ]  }
 s = shape(json.loads(geojson))
 s2 = shape(geojson2)
+s3 = shape(geojson3)
 print(json.dumps(mapping(s)))
 
 d = Point(52.0, 4.0).distance(s)
@@ -38,15 +40,18 @@ print (d)
 d = Point(52.0 ,4.0).distance(s2)
 print (d)
 
-d = nearest_points(Point(52.0,4.0), s2)
+d = Point(52.0 ,4.0).distance(s3)
+print (d)
+
+d = nearest_points(Point(52.0,4.0), s3)
 print (d[0])
 print (d[1])
 print (d[0].x)
 print (d[0].y)
 
-print ("Geopy")
+print ("Geopy distance in meters")
 coords_1 = (52.0, 4.0)
-coords_2 = (53.0, 5.0)
+coords_2 = (53.0, 4.0)
 
 print (geopy.distance.distance(coords_1, coords_2).m)
 
