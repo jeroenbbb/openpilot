@@ -33,7 +33,7 @@ import selfdrive.messaging as messaging
 from selfdrive.services import service_list
 
 # use message port number for GPS messages defined in 
-# use message structure GpsLocationData defined in log.capnp
+# use message structure GpsLocationData defined in log.capnp and gpsLocationExternal in Event message
 # service_list['gpsNMEA'].port                    # consist of a long string of NMEa data
 # service_list['gpsLocationExternal'].port
 
@@ -65,6 +65,7 @@ count = 0
 context = zmq.Context()
 gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
 msg = messaging.new_message()
+msg.init('gpsLocationExternal')
     
 for new_data in gpsd_socket:
     if new_data:
