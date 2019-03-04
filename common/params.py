@@ -2,7 +2,7 @@
 """ROS has a parameter server, we have files.
 
 The parameter store is a persistent key value store, implemented as a directory with a writer lock.
-On Android, we store params under params_dir = /data/params. The writer lock is a file
+On Android and Linux/RPi, we store params under params_dir = /data/params. The writer lock is a file
 "<params_dir>/.lock" taken using flock(), and data is stored in a directory symlinked to by
 "<params_dir>/d".
 
@@ -79,6 +79,14 @@ keys = {
   "LimitSetSpeed": TxType.PERSISTENT,
 
   "RecordFront": TxType.PERSISTENT,
+# written: manually
+# read : geofence.py
+  "GeoFence": TxType.PERSISTENT,
+  
+# written: manually
+# read : loggerd/publish_log.py
+  "UploadWebsite": TxType.PERSISTENT,
+  
 }
 
 def fsync_dir(path):
