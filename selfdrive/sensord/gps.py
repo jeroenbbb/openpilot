@@ -20,7 +20,7 @@
 from gps3 import gps3
 import usb
 
-def list_usb_devices:
+def list_usb_devices():
     busses = usb.busses()
     for bus in busses:
         print (vars(bus))
