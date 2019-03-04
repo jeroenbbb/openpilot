@@ -18,7 +18,7 @@ import json
 #points = [(34.093523, -118.274893), (34.091414, -118.275887), (34.092082, -118.278062), (34.093867, -118.276609), (34.093523, -118.274893)]
 #polygon = Polygon(points)
 
-geojson = '{"type": "Polygon", "coordinates": [  [[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]   ]  }'
+geojson = '{"type": "Polygon", "coordinates": [  [[52, 4], [52, 5], [53, 5], [53, 4], [52, 4]]   ]  }'
 s = shape(json.loads(geojson))
 print(json.dumps(mapping(s)))
 
