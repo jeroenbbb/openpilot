@@ -527,6 +527,10 @@ def main():
     params.put("LongitudinalControl", "0")
   if params.get("LimitSetSpeed") is None:
     params.put("LimitSetSpeed", "0")
+  if params.get("GeoFence") is None:
+    params.put("GeoFence", "")
+  if params.get("UploadWebsite") is None:
+    params.put("UploadWebsite", "")
 
   # is this chffrplus?
   if os.getenv("PASSIVE") is not None:
