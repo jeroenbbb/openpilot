@@ -52,7 +52,11 @@ print (d[0].y)
 print ("Geopy distance in meters")
 coords_1 = (52.0, 4.0)
 coords_2 = (53.0, 4.0)
+print (geopy.distance.distance(coords_1, coords_2).m)
 
+print ("Geopy distance in meters")
+coords_1 = (52.0, 4.0)
+coords_2 = (52.0, 5.0)
 print (geopy.distance.distance(coords_1, coords_2).m)
 
 # the area in square degrees, usefull?
