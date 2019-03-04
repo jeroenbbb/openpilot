@@ -11,7 +11,7 @@
 from shapely.geometry import Polygon, Point, mapping, shape
 from shapely.ops import nearest_points
 import json
-mport geopy.distance
+import geopy.distance
 
 
 
