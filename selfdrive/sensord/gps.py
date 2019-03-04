@@ -23,6 +23,8 @@ if __name__ == "__main__":
 
 import time
 import zmq
+# float64 types are used in gps message
+from numpy import float64
 
 # gps3 uses gpsd
 from gps3 import gps3
@@ -77,7 +79,7 @@ for new_data in gpsd_socket:
     else:
         # noting received
         print ("Nothing" + str(count))
-        latitude = float(5)
+        latitude = float64(5)
     
     sleep(0.5)
     count = count + 1
