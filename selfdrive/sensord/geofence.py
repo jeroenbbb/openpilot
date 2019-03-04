@@ -10,7 +10,7 @@
 #import shapely
 from shapely.geometry import Polygon
 
-print shapely.__version__
+print (shapely.__version__)
 
 # read geofence from parameter file
 # bloemendaal = 52.3992479,4.630414
