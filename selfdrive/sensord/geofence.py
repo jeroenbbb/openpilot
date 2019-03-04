@@ -11,9 +11,6 @@
 from shapely.geometry import Polygon, mapping, shape
 import json
 
-
->>> print(json.dumps(mapping(s)))
-
 #print (shapely.__version__)
 
 # read geofence from parameter file
@@ -23,6 +20,7 @@ import json
 
 geojson = {"type": "Polygon", "coordinates": [  [[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]   ]  }
 s = shape(json.loads(geojson))
+print(json.dumps(mapping(s)))
 
 # the area in square degrees, usefull?
 # area_sdeg = polygon.area
