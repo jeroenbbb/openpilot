@@ -24,18 +24,18 @@ if speedups.available:
 #polygon = Polygon(points)
 
 geojson = '{"type": "Polygon", "coordinates": [  [[52, 4.7], [52, 5], [53, 5], [53, 4.7], [52, 4.7]]   ]  }'
-geojson2 = {"type": "Polygon", "coordinates": [  [[52, 4.7], [52, 5], [53, 5], [53, 4.7], [52, 4.7]]   ]  }
+geojson2 = {"type": "Polygon", "coordinates": [  [[53, 4], [53, 5], [54, 5], [54, 4], [53, 4]]   ]  }
 s = shape(json.loads(geojson))
 s2 = shape(geojson2)
 print(json.dumps(mapping(s)))
 
-d = Point(52.3992479,4.630414).distance(s)
+d = Point(52.0, 4.0).distance(s)
 print (d)
 
-d = Point(52.3992479,4.630414).distance(s2)
+d = Point(52.0 ,4.0).distance(s2)
 print (d)
 
-d = nearest_points(Point(52.3992479,4.630414), s2)
+d = nearest_points(Point(52.0,4.0), s2)
 print (d[0])
 print (d[1])
 print (d[0].x)
