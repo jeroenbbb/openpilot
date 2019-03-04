@@ -17,6 +17,7 @@ pip3 install reverse_geocoder
 pip3 install psutil
 pip3 install pyusb
 pip3 install gps3
+pip3 install shapely
 pip3 install numpy --upgrade
 
 packages are installed in 
