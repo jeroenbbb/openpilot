@@ -7,7 +7,7 @@
 # 
 # see also https://stackoverflow.com/questions/16942697/geojson-circles-supported-or-not
 
-#import shapely
+import shapely
 from shapely.geometry import Polygon
 
 print (shapely.__version__)
