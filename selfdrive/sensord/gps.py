@@ -64,6 +64,7 @@ count = 0
 # set message stuff
 context = zmq.Context()
 gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
+msg = messaging.new_message()
     
 for new_data in gpsd_socket:
     if new_data:
