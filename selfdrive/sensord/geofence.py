@@ -58,7 +58,8 @@ print (is_geofence_enabled)
 if geofence == '':
   is_geofence_enabled = False
 
-geofence = {"xxxx/34"}
+#geofence = {"xxxx/34"}
+geofence = {"type": "Polygon", "coordinates": [  [[52, 5], [52, 6], [53, 6], [53, 5], [52, 5]]   ]  }
 if is_geofence_enabled:
   #try:
   geofence_shape = shape(geofence)
