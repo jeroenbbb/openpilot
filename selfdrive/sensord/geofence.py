@@ -121,7 +121,7 @@ while True:
         print ("Geopy distance in meters")
         coords_1 = (52.0, 4.0)
         coords_2 = (52.0, 5.0)
-        coords_1 = ( d[0] )
+        coords_1 = ( d[0].x, d[0].y )
         print (geopy.distance.distance(coords_1, coords_2).m)
 
         # check if position is within the fence
