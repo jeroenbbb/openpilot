@@ -91,7 +91,7 @@ while is_geofence_enabled:
     d = Point(52.0, 4.0).distance(geofence_shape)
 
     # calculate the nearest point between 
-    d = nearest_points(Point(52.0,4.0), s3)
+    d = nearest_points(Point(lat,lon), geofence_shape)
     print (d[0])
     print (d[1])
     print (d[0].x)
