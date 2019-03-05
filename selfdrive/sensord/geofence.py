@@ -63,14 +63,14 @@ def read_geofence():
     if is_geofence_enabled:
         try:
         # convert the string into a dict and create a shape in shapely
-        geofence_dict = json.loads(geofence)
-        geofence_shape = shape(geofence_dict)
-    except AttributeError:
-        is_geofence_enabled = False
-        cloudlog.info('GeoJSON from param file could not be converted into a shape')
-    except JSONDecodeError:
-        is_geofence_enabled = False
-        cloudlog.info('Incorrect GeoJSON found in param file')
+            geofence_dict = json.loads(geofence)
+            geofence_shape = shape(geofence_dict)
+        except AttributeError:
+            is_geofence_enabled = False
+            cloudlog.info('GeoJSON from param file could not be converted into a shape')
+        except JSONDecodeError:
+            is_geofence_enabled = False
+            cloudlog.info('Incorrect GeoJSON found in param file')
 
     return is_geofence_enabled, geofence_shape
         
