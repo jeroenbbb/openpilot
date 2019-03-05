@@ -52,7 +52,7 @@ params = Params()
 geofence = params.get("GeoFence")
 is_geofence_enabled = params.get("IsGeofenceEnabled") == '1'
 
-print (str(params.get("IsFcwEnabled")))
+print (params.get("IsFcwEnabled").decode())
 print (is_geofence_enabled)
 
 if geofence == '':
