@@ -53,6 +53,12 @@ def list_usb_devices():
             print ("  deviceClass: " + str(dev.dev.bDeviceClass))
             print ("  dev: " + str(dev.dev))
             
+def make_some_dummy_data ():
+    latitude = float(52.3992479) + random.random(-0.1, 0.1)
+    longitude = float(4.630414) + random.random(-0.1, 0.1)
+    speed = float(5) + random.random()    
+    accuracy = float(2) + random.random(1,10)
+    return latitude, longitude, speed, accuracy
 # -------------------------------
 list_usb_devices()
 
@@ -72,17 +78,15 @@ for new_data in gpsd_socket:
     if new_data:
         data_stream.unpack(new_data)
         latitude = data_stream.TPV['lat']
+        longitude = data_stream.TPV['lon']
         print('Altitude = ',data_stream.TPV['alt'])
         print('Latitude = ',latitude)
         if not isinstance(latitude, float): 
-            latitude=float(5)
+            latitude, longitude, speed, accuracy = make_some_dummy_data ()
     else:
         # noting received, send some dummy data
         print ("Nothing" + str(count))
-        latitude = float(52.3992479) + random.random(-0.1, 0.1)
-        longitude = float(4.630414) + random.random(-0.1, 0.1)
-        speed = float(5) + random.random()
-        
+        latitude, longitude, speed, accuracy = make_some_dummy_data ()
     
     sleep(0.5)
     count = count + 1
