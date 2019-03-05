@@ -16,6 +16,11 @@
 # if current-point and future-point are outside the fence, geofence = red
 # the gps accurancy is taken into account
 
+# is separate prcoess because it is slow: display 
+# import reverse_geocoder as rg
+# coordinates = (51.5214588,-0.1729636),(9.936033, 76.259952),(37.38605,-122.08385)
+# results = rg.search(coordinates) # default mode = 2
+
 import sys
 from shapely.geometry import Polygon, Point, mapping, shape
 from shapely.ops import nearest_points
@@ -30,6 +35,7 @@ import selfdrive.messaging as messaging
 from selfdrive.services import service_list
 from common.params import Params
 from selfdrive.swaglog import cloudlog
+from common import realtime
 
 from shapely import speedups
 if speedups.available:
@@ -75,54 +81,51 @@ def read_geofence():
     return is_geofence_enabled, geofence_shape
         
 
-# main loop
+#------ main routine --------
 is_geofence_enabled, geofence_shape = read_geofence()
-while is_geofence_enabled:
-    # get gps position from zmq
-    lat = 52.3992479
-    lon = 4.630414
-    speed = 5
-    bearing = 270
+context = zmq.Context()
+gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
+start_time = int(realtime.sec_since_boot())
+print (start_time)
 
-    context = zmq.Context()
-    gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
-    msg = messaging.recv_sock(gps_sock, wait=False)
+# loop forever
+while True:
+    while is_geofence_enabled:
+        # get gps position from zmq
+        lat = 52.3992479
+        lon = 4.630414
+        speed = 5
+        bearing = 270
 
+        msg = messaging.recv_sock(gps_sock, wait=True)
 
-    # calculate distance between current position and geofence(s)
-    d = Point(52.0, 4.0).distance(geofence_shape)
+        # calculate distance between current position and geofence(s)
+        d = Point(52.0, 4.0).distance(geofence_shape)
 
-    # calculate the nearest point between 
-    d = nearest_points(Point(lat,lon), geofence_shape)
-    print (d[0])
-    print (d[1])
-    print (d[0].x)
-    print (d[0].y)
+        # calculate the nearest point between 
+        d = nearest_points(Point(lat,lon), geofence_shape)
+        print (d[0])
+        print (d[1])
+        print (d[0].x)
+        print (d[0].y)
 
-    print ("Geopy distance in meters")
-    coords_1 = (52.0, 4.0)
-    coords_2 = (53.0, 4.0)
-    print (geopy.distance.distance(coords_1, coords_2).m)
+        print ("Geopy distance in meters")
+        coords_1 = (52.0, 4.0)
+        coords_2 = (53.0, 4.0)
+        print (geopy.distance.distance(coords_1, coords_2).m)
 
-    print ("Geopy distance in meters")
-    coords_1 = (52.0, 4.0)
-    coords_2 = (52.0, 5.0)
-    print (geopy.distance.distance(coords_1, coords_2).m)
+        print ("Geopy distance in meters")
+        coords_1 = (52.0, 4.0)
+        coords_2 = (52.0, 5.0)
+        print (geopy.distance.distance(coords_1, coords_2).m)
 
-# the area in square degrees, usefull?
-# area_sdeg = polygon.area
+        # check if position is within the fence
 
+        # predict next position using bearing and speed
 
-# check if position is within the fence
+        # and check the predicted position
 
-
-# predict next position using bearing and speed
-
-# and check the predicted position
-
-# and send results to zmq
-
-# is separate prcoess because it is slow: display 
-# import reverse_geocoder as rg
-# coordinates = (51.5214588,-0.1729636),(9.936033, 76.259952),(37.38605,-122.08385)
-# results = rg.search(coordinates) # default mode = 2
+        # and send results to zmq
+        
+    # check the params file every 5 mins because it might have been changed
+    is_geofence_enabled, geofence_shape = read_geofence()
