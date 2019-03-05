@@ -64,41 +64,41 @@ if is_geofence_enabled:
 
 print (is_geofence_enabled)
 
+while is_geofence_enabled:
+    # get gps position from zmq
+    lat = 52.3992479
+    lon = 4.630414
+    speed = 5
+    bearing = 270
 
-# read gps stuff from zmq
-context = zmq.Context()
-gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
-msg = messaging.recv_sock(gps_sock, wait=False)
+    context = zmq.Context()
+    gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
+    msg = messaging.recv_sock(gps_sock, wait=False)
 
 
-# calculate distance between current position and geofence(s)
-d = Point(52.0, 4.0).distance(geofence_shape)
+    # calculate distance between current position and geofence(s)
+    d = Point(52.0, 4.0).distance(geofence_shape)
 
-# calculate the nearest point between 
-d = nearest_points(Point(52.0,4.0), s3)
-print (d[0])
-print (d[1])
-print (d[0].x)
-print (d[0].y)
+    # calculate the nearest point between 
+    d = nearest_points(Point(52.0,4.0), s3)
+    print (d[0])
+    print (d[1])
+    print (d[0].x)
+    print (d[0].y)
 
-print ("Geopy distance in meters")
-coords_1 = (52.0, 4.0)
-coords_2 = (53.0, 4.0)
-print (geopy.distance.distance(coords_1, coords_2).m)
+    print ("Geopy distance in meters")
+    coords_1 = (52.0, 4.0)
+    coords_2 = (53.0, 4.0)
+    print (geopy.distance.distance(coords_1, coords_2).m)
 
-print ("Geopy distance in meters")
-coords_1 = (52.0, 4.0)
-coords_2 = (52.0, 5.0)
-print (geopy.distance.distance(coords_1, coords_2).m)
+    print ("Geopy distance in meters")
+    coords_1 = (52.0, 4.0)
+    coords_2 = (52.0, 5.0)
+    print (geopy.distance.distance(coords_1, coords_2).m)
 
 # the area in square degrees, usefull?
 # area_sdeg = polygon.area
 
-# get gps position from zmq
-lat = 52.3992479
-lon = 4.630414
-speed = 5
-bearing = 270
 
 # check if position is within the fence
 
