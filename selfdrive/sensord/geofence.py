@@ -98,6 +98,7 @@ while True:
         bearing = 270
 
         msg = messaging.recv_sock(gps_sock, wait=True)
+        lat = msg.gpsLocationExternal.latitude
 
         # calculate distance between current position and geofence(s)
         d = Point(52.0, 4.0).distance(geofence_shape)
