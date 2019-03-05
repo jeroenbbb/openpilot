@@ -2,24 +2,28 @@
 # and send result on zmq
 # https://shapely.readthedocs.io/en/latest/manual.html#introduction
 # IsGeofenceEnabled (0/1) and the GeoFence data are stored in params
-# a geofence is stored in geojson format  OR kml file??
-# for example:
-# 
+# a geofence is stored in geojson format
 # see also https://stackoverflow.com/questions/16942697/geojson-circles-supported-or-not
+#
+# this program reads the geofences from tha param file and the gps location from zmq
+# it uses shapely to find the nearest point and distance
+# if the distance=0, the gps location is in the fence
+#   using the bearing and speed, the next point after 1 second is estimated and again checked against the fence
+# else it uses geopy to calculate the distance between the 2 points
+# if current-point and future-point are within the fence, geofence = green
+# if current-point is in the fence but future point not, geofence = orange
+# if current-point and future-point are outside the fence, geofence = red
+# the gps accurancy is taken into account
 
-#import shapely
+
 from shapely.geometry import Polygon, Point, mapping, shape
 from shapely.ops import nearest_points
 import json
 import geopy.distance
 
-
-
 from shapely import speedups
 if speedups.available:
   speedups.enabled
-
-#print (shapely.__version__)
 
 # read geofence from parameter file
 # bloemendaal = 52.3992479,4.630414
