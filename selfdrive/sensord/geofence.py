@@ -21,32 +21,59 @@ from shapely.ops import nearest_points
 import json
 import geopy.distance
 
+if __name__ == "__main__":
+    sys.path.append("/home/pi/openpilot")
+
+import selfdrive.messaging as messaging
+from selfdrive.services import service_list
+from common.params import Params
+from selfdrive.swaglog import cloudlog
+
 from shapely import speedups
 if speedups.available:
   speedups.enabled
 
-# read geofence from parameter file
+
 # bloemendaal = 52.3992479,4.630414
 #points = [(34.093523, -118.274893), (34.091414, -118.275887), (34.092082, -118.278062), (34.093867, -118.276609), (34.093523, -118.274893)]
 #polygon = Polygon(points)
 
-geojson = '{"type": "Polygon", "coordinates": [  [[52, 4.7], [52, 5], [53, 5], [53, 4.7], [52, 4.7]]   ]  }'
-geojson2 = {"type": "Polygon", "coordinates": [  [[53, 4], [53, 5], [54, 5], [54, 4], [53, 4]]   ]  }
-geojson3 = {"type": "Polygon", "coordinates": [  [[52, 5], [52, 6], [53, 6], [53, 5], [52, 5]]   ]  }
-s = shape(json.loads(geojson))
-s2 = shape(geojson2)
-s3 = shape(geojson3)
-print(json.dumps(mapping(s)))
+#geojson = '{"type": "Polygon", "coordinates": [  [[52, 4.7], [52, 5], [53, 5], [53, 4.7], [52, 4.7]]   ]  }'
+#geojson2 = {"type": "Polygon", "coordinates": [  [[53, 4], [53, 5], [54, 5], [54, 4], [53, 4]]   ]  }
+#geojson3 = {"type": "Polygon", "coordinates": [  [[52, 5], [52, 6], [53, 6], [53, 5], [52, 5]]   ]  }
+#s = shape(json.loads(geojson))
+#s2 = shape(geojson2)
 
-d = Point(52.0, 4.0).distance(s)
-print (d)
+#print(json.dumps(mapping(s)))
 
-d = Point(52.0 ,4.0).distance(s2)
-print (d)
+# read geofence from parameter file
+params = Params()
+geofence = params.get("GeoFence")
+is_geofence_enabled = params.get("IsGeofenceEnabled") == '1'
 
-d = Point(52.0 ,4.0).distance(s3)
-print (d)
+if geofence == '':
+  is_geofence_enabled = False
+  
+if is_geofence_enabled:
+  try:
+    geofence_shape = shape(geofence)
+  except TopologicalError:
+    is_geofence_enabled = False
+    cloudlog.info('Incorrect GeoJSON found in param file')
 
+print (is_geofence_enabled)
+
+
+# read gps stuff from zmq
+context = zmq.Context()
+gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
+msg = messaging.recv_sock(gps_sock, wait=False)
+
+
+# calculate distance between current position and geofence(s)
+d = Point(52.0, 4.0).distance(geofence_shape)
+
+# calculate the nearest point between 
 d = nearest_points(Point(52.0,4.0), s3)
 print (d[0])
 print (d[1])
