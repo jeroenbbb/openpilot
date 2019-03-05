@@ -24,6 +24,7 @@ import geopy.distance
 if __name__ == "__main__":
     sys.path.append("/home/pi/openpilot")
 
+import zmq
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
 from common.params import Params
