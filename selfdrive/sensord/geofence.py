@@ -50,7 +50,7 @@ if speedups.available:
 # read geofence from parameter file
 params = Params()
 geofence = params.get("GeoFence")
-is_geofence_enabled = params.get("IsGeofenceEnabled") == '1'
+is_geofence_enabled = params.get("IsGeofenceEnabled").decode() == '1'
 
 print (params.get("IsFcwEnabled").decode())
 print (is_geofence_enabled)
