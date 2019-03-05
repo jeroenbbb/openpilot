@@ -98,13 +98,16 @@ while True:
         bearing = 270
 
         msg = messaging.recv_sock(gps_sock, wait=True)
-        lat = msg.gpsLocationExternal.latitude
+        latitude  = msg.gpsLocationExternal.latitude
+        longitude = msg.gpsLocationExternal.longitude
+        speed     = msg.gpsLocationExternal.speed
+        accuracy  = msg.gpsLocationExternal.accuracy
 
         # calculate distance between current position and geofence(s)
-        d = Point(52.0, 4.0).distance(geofence_shape)
+        d = Point(latitude, longitude).distance(geofence_shape)
 
         # calculate the nearest point between 
-        d = nearest_points(Point(lat,lon), geofence_shape)
+        d = nearest_points(Point(latitude,longitude), geofence_shape)
         print (d[0])
         print (d[1])
         print (d[0].x)
