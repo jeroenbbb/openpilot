@@ -23,6 +23,7 @@ if __name__ == "__main__":
 
 import time
 import zmq
+import random
 
 # gps3 uses gpsd
 from gps3 import gps3
@@ -76,15 +77,19 @@ for new_data in gpsd_socket:
         if not isinstance(latitude, float): 
             latitude=float(5)
     else:
-        # noting received
+        # noting received, send some dummy data
         print ("Nothing" + str(count))
-        latitude = float(5)
+        latitude = float(52.3992479) + random.random(-0.1, 0.1)
+        longitude = float(4.630414) + random.random(-0.1, 0.1)
+        speed = float(5) + random.random()
+        
     
     sleep(0.5)
     count = count + 1
     
     # send message
     msg.gpsLocationExternal.latitude = latitude
+    msg.gpsLocationExternal.longitude = longitude
     msg.gpsLocationExternal.source = "external"
     gps_sock.send(msg.to_bytes())
     
