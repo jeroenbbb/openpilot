@@ -108,20 +108,10 @@ while True:
 
         # calculate the nearest point between 
         d = nearest_points(Point(latitude,longitude), geofence_shape)
-        print (d[0])
-        print (d[1])
-        print (d[0].x)
-        print (d[0].y)
 
         print ("Geopy distance in meters")
-        coords_1 = (52.0, 4.0)
-        coords_2 = (53.0, 4.0)
-        print (geopy.distance.distance(coords_1, coords_2).m)
-
-        print ("Geopy distance in meters")
-        coords_1 = (52.0, 4.0)
-        coords_2 = (52.0, 5.0)
         coords_1 = ( d[0].x, d[0].y )
+        coords_2 = ( d[1].x, d[1].y )
         print (geopy.distance.distance(coords_1, coords_2).m)
 
         # check if position is within the fence
