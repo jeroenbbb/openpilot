@@ -61,11 +61,13 @@ if geofence == '':
 #geofence = {"xxxx/34"}
 geofence = {"type": "Polygon", "coordinates": [  [[52, 5], [52, 6], [53, 6], [53, 5], [52, 5]]   ]  }
 if is_geofence_enabled:
-  #try:
-  geofence_shape = shape(geofence)
-  #except AttributeError:
-  is_geofence_enabled = False
-  cloudlog.info('Incorrect GeoJSON found in param file')
+  try:
+    # convert the string into a dict and create a shape in shapely
+    geofence_dict = json.loads(geofence)
+    geofence_shape = shape(geofence)
+  except AttributeError, JSONDecodeError:
+    is_geofence_enabled = False
+    cloudlog.info('Incorrect GeoJSON found in param file')
 
 print (is_geofence_enabled)
 
