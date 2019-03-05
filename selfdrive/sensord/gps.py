@@ -96,4 +96,5 @@ for new_data in gpsd_socket:
     msg.gpsLocationExternal.longitude = longitude
     msg.gpsLocationExternal.source = "external"
     gps_sock.send(msg.to_bytes())
+    print ("Message sent: " + str(latitude) + " " + str(longitude))
     
