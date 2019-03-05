@@ -59,11 +59,11 @@ if geofence == '':
   is_geofence_enabled = False
   
 if is_geofence_enabled:
-  try:
-    geofence_shape = shape(geofence)
-  except TopologicalError:
-    is_geofence_enabled = False
-    cloudlog.info('Incorrect GeoJSON found in param file')
+  #try:
+  geofence_shape = shape(geofence)
+  #except TopologicalError:
+  is_geofence_enabled = False
+  cloudlog.info('Incorrect GeoJSON found in param file')
 
 print (is_geofence_enabled)
 
