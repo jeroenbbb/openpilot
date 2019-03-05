@@ -15,7 +15,7 @@
 # if current-point and future-point are outside the fence, geofence = red
 # the gps accurancy is taken into account
 
-
+import sys
 from shapely.geometry import Polygon, Point, mapping, shape
 from shapely.ops import nearest_points
 import json
