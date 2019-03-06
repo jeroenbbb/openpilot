@@ -54,10 +54,10 @@ def list_usb_devices():
             print ("  dev: " + str(dev.dev))
             
 def make_some_dummy_data ():
-    latitude = float(52.3992479) + random.uniform(-0.1, 0.1)
-    longitude = float(4.630414) + random.uniform(-0.1, 0.1)
-    latitude = float(52) + random.uniform(-0.1, 0.1)
-    longitude = float(5) + random.uniform(-0.1, 0.1)
+    latitude = float(52.3992479) + random.uniform(-0.01, 0.01)
+    longitude = float(4.630414) + random.uniform(-0.01, 0.01)
+    latitude = float(52) + random.uniform(-0.01, 0.01)
+    longitude = float(5) + random.uniform(-0.01, 0.01)
     speed = float(5) + random.random()    
     accuracy = float(2) + random.uniform(1,10)
     bearing = float(0) + random.uniform(1,360)
