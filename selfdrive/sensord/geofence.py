@@ -113,8 +113,8 @@ while True:
 
         # and calculate the distance
         if distance != 0:
-            coords_1 = ( d[0].x, d[0].y )
-            coords_2 = ( d[1].x, d[1].y )
+            coords_1 = ( nearest_point[0].x, nearest_point[0].y )
+            coords_2 = ( nearest_point[1].x, nearest_point[1].y )
             distance = geopy.distance.distance(coords_1, coords_2).m
         
         print ("Geopy distance in meters: " + str(distance))
