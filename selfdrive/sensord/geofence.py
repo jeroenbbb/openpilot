@@ -123,4 +123,6 @@ while True:
         # and send results to zmq
         
     # check the params file every 5 mins because it might have been changed
-    is_geofence_enabled, geofence_shape = read_geofence()
+    if start_time < int(realtime.sec_since_boot()) + 300:
+        is_geofence_enabled, geofence_shape = read_geofence()
+        start_time = int(realtime.sec_since_boot())
