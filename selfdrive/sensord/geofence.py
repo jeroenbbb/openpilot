@@ -79,7 +79,16 @@ def read_geofence():
             cloudlog.info('Incorrect GeoJSON found in param file')
 
     return is_geofence_enabled, geofence_shape
-        
+
+def read_gps():
+    msg = messaging.recv_sock(gps_sock, wait=True)
+    latitude  = msg.gpsLocationExternal.latitude
+    longitude = msg.gpsLocationExternal.longitude
+    speed     = msg.gpsLocationExternal.speed
+    bearing   = msg.gpsLocationExternal.bearing
+    accuracy  = msg.gpsLocationExternal.accuracy
+    return latitude, longitude, speed, bearing, accuracy
+    
 
 #------ main routine --------
 is_geofence_enabled, geofence_shape = read_geofence()
@@ -91,30 +100,24 @@ print (start_time)
 # loop forever
 while True:
     while is_geofence_enabled:
+        
         # get gps position from zmq
-        lat = 52.3992479
-        lon = 4.630414
-        speed = 5
-        bearing = 270
-
-        msg = messaging.recv_sock(gps_sock, wait=True)
-        latitude  = msg.gpsLocationExternal.latitude
-        longitude = msg.gpsLocationExternal.longitude
-        speed     = msg.gpsLocationExternal.speed
-        accuracy  = msg.gpsLocationExternal.accuracy
+        latitude, longitude, speed, bearing, accuracy = read_gps()
 
         # calculate distance between current position and geofence(s)
-        d = Point(latitude, longitude).distance(geofence_shape)
+        # distance = 0 means within the fence
+        distance = Point(latitude, longitude).distance(geofence_shape)
 
-        # calculate the nearest point between 
-        d = nearest_points(Point(latitude,longitude), geofence_shape)
+        # calculate the nearest point between
+        nearest_point = nearest_points(Point(latitude,longitude), geofence_shape)
 
-        print ("Geopy distance in meters")
-        coords_1 = ( d[0].x, d[0].y )
-        coords_2 = ( d[1].x, d[1].y )
-        print (geopy.distance.distance(coords_1, coords_2).m)
-
-        # check if position is within the fence
+        # and calculate the distance
+        if distance != 0:
+            coords_1 = ( d[0].x, d[0].y )
+            coords_2 = ( d[1].x, d[1].y )
+            distance = geopy.distance.distance(coords_1, coords_2).m
+        
+        print ("Geopy distance in meters: " + str(distance))
 
         # predict next position using bearing and speed
 
@@ -123,6 +126,6 @@ while True:
         # and send results to zmq
         
     # check the params file every 5 mins because it might have been changed
-    if start_time < int(realtime.sec_since_boot()) + 300:
+    if start_time < int(realtime.sec_since_boot()) - 300:
         is_geofence_enabled, geofence_shape = read_geofence()
         start_time = int(realtime.sec_since_boot())
