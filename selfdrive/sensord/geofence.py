@@ -87,6 +87,10 @@ def read_gps():
     speed     = msg.gpsLocationExternal.speed
     bearing   = msg.gpsLocationExternal.bearing
     accuracy  = msg.gpsLocationExternal.accuracy
+    
+    #bearing should be in degrees
+    #speed in m/s
+    
     return latitude, longitude, speed, bearing, accuracy
     
 
@@ -120,7 +124,12 @@ while True:
 
         # predict next position using bearing and speed
         origin = geopy.Point(latitude, longitude)
-        next_point = geopy.distance.distance(meters=1).destination(origin,180)
+        future_point = geopy.distance.distance(meters=speed).destination(origin,bearing)
+        
+        # calculate distance between future position and geofence(s)
+        # distance = 0 means within the fence
+        future_distance = Point(future_point.latitude, future_point.longitude).distance(geofence_shape)
+        print (furure_distance)
 
         # and check the predicted position
 
