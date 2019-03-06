@@ -95,7 +95,6 @@ is_geofence_enabled, geofence_shape = read_geofence()
 context = zmq.Context()
 gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
 start_time = int(realtime.sec_since_boot())
-print (start_time)
 
 # loop forever
 while True:
@@ -120,6 +119,8 @@ while True:
         print ("Geopy distance in meters: " + str(distance))
 
         # predict next position using bearing and speed
+        origin = geopy.Point(latitude, longitude)
+        next_point = geopy.distance.distance(kilometers=1).destination(origin,180)
 
         # and check the predicted position
 
@@ -129,3 +130,4 @@ while True:
     if start_time < int(realtime.sec_since_boot()) - 300:
         is_geofence_enabled, geofence_shape = read_geofence()
         start_time = int(realtime.sec_since_boot())
+        print ("Re-read geofence from param")
