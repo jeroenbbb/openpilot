@@ -58,7 +58,8 @@ def make_some_dummy_data ():
     longitude = float(4.630414) + random.uniform(-0.1, 0.1)
     speed = float(5) + random.random()    
     accuracy = float(2) + random.uniform(1,10)
-    return latitude, longitude, speed, accuracy
+    bearing = float(0) + random.uniform(1,360)
+    return latitude, longitude, speed, accuracy, bearing
 # -------------------------------
 list_usb_devices()
 
@@ -82,11 +83,11 @@ for new_data in gpsd_socket:
         print('Altitude = ',data_stream.TPV['alt'])
         print('Latitude = ',latitude)
         if not isinstance(latitude, float): 
-            latitude, longitude, speed, accuracy = make_some_dummy_data ()
+            latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
     else:
         # noting received, send some dummy data
         print ("Nothing" + str(count))
-        latitude, longitude, speed, accuracy = make_some_dummy_data ()
+        latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
     
     sleep(0.5)
     count = count + 1
@@ -94,6 +95,9 @@ for new_data in gpsd_socket:
     # send message
     msg.gpsLocationExternal.latitude = latitude
     msg.gpsLocationExternal.longitude = longitude
+    msg.gpsLocationExternal.speed = speed
+    msg.gpsLocationExternal.bearing = bearing
+    msg.gpsLocationExternal.accuracy = accuracy
     msg.gpsLocationExternal.source = "external"
     gps_sock.send(msg.to_bytes())
     print ("Message sent: " + str(latitude) + " " + str(longitude))
