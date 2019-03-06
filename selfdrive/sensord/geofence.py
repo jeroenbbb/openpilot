@@ -136,7 +136,14 @@ while True:
         future_distance = calculate_distance(future_point.latitude, future_point.longitude, geofence_shape)
 
         # and define geofence results
-        
+        result = "red"
+        if distance == 0 and future_distance == 0:
+            result = "green"
+        if distance == 0 and future_distance > 0:
+            result = "orange"
+        if distance > future_distance:
+            result = "orange"
+        print (result)
 
         # and send results to zmq
         
