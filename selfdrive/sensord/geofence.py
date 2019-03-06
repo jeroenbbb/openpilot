@@ -129,7 +129,7 @@ while True:
         # calculate distance between future position and geofence(s)
         # distance = 0 means within the fence
         future_distance = Point(future_point.latitude, future_point.longitude).distance(geofence_shape)
-        print (furure_distance)
+        print (future_distance)
 
         # and check the predicted position
 
