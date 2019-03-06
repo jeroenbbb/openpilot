@@ -120,7 +120,7 @@ while True:
 
         # predict next position using bearing and speed
         origin = geopy.Point(latitude, longitude)
-        next_point = geopy.distance.distance(kilometers=1).destination(origin,180)
+        next_point = geopy.distance.distance(meters=1).destination(origin,180)
 
         # and check the predicted position
 
