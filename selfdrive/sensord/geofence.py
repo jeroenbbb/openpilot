@@ -4,7 +4,8 @@
 # this program reads the geofences from the param file and the gps location from zmq
 #   IsGeofenceEnabled (0/1) and the GeoFence data are stored in params
 #   a geofence is stored in geojson format
-#   the zmq message = gpsLocationExternal
+#   the zmq message with GPS data = gpsLocationExternal
+#   the zmq message for the result is NavigationMessage
 
 # it uses shapely to find the nearest point and distance
 #   see https://shapely.readthedocs.io/en/latest/manual.html#introduction
@@ -116,6 +117,7 @@ def calculate_distance(latitude, longitude, geofence_shape):
 is_geofence_enabled, geofence_shape = read_geofence()
 context = zmq.Context()
 gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
+msg_sock = messaging.sub_sock(context, service_list['NavigationMessage'].port)
 start_time = int(realtime.sec_since_boot())
 
 # loop forever
@@ -145,7 +147,13 @@ while True:
             result = "orange"
         print (result)
 
-        # and send results to zmq
+        # and send results to zmq using NavigationMessage
+        # type= 1
+        # messageId = 1
+        # data = geofence + result
+        msg.NavigationMessage.data = "geofence " + result
+        msg_sock.send(msg.to_bytes())
+
         
     # check the params file every 5 mins because it might have been changed
     if start_time < int(realtime.sec_since_boot()) - 300:
