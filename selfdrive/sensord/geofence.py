@@ -126,20 +126,6 @@ while True:
         latitude, longitude, speed, bearing, accuracy = read_gps()
 
         # calculate distance between current position and geofence(s)
-        # distance = 0 means within the fence
-        distance = Point(latitude, longitude).distance(geofence_shape)
-
-        # calculate the nearest point between
-        nearest_point = nearest_points(Point(latitude,longitude), geofence_shape)
-
-        # and calculate the distance
-        if distance != 0:
-            coords_1 = ( nearest_point[0].x, nearest_point[0].y )
-            coords_2 = ( nearest_point[1].x, nearest_point[1].y )
-            distance = geopy.distance.distance(coords_1, coords_2).m
-        
-        print ("Geopy distance in meters: " + str(distance))
-        
         distance = calculate_distance(latitude, longitude, geofence_shape)
 
         # predict next position using bearing and speed
@@ -147,11 +133,10 @@ while True:
         future_point = geopy.distance.distance(meters=speed).destination(origin,bearing)
         
         # calculate distance between future position and geofence(s)
-        # distance = 0 means within the fence
-        future_distance = Point(future_point.latitude, future_point.longitude).distance(geofence_shape)
-        print (future_distance)
+        future_distance = calculate_distance(future_point.latitude, future_point.longitude, geofence_shape)
 
-        # and check the predicted position
+        # and define geofence results
+        
 
         # and send results to zmq
         
