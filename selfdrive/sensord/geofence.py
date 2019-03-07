@@ -140,21 +140,27 @@ while True:
         # calculate distance between future position and geofence(s)
         future_distance = calculate_distance(future_point.latitude, future_point.longitude, geofence_shape)
 
-        # and define geofence results
-        result = "red"
+        # and define geofence results as an navUpdate instruction (see log.capnp)
+        # slowdownLeavingGeofence
+        # returnOutsideGeofence
+        # continueTowardsGeofence
+        # insideGeofence
+        
+        instruction = "returnOutsideGeofence"
         if distance == 0 and future_distance == 0:
-            result = "green"
+            instruction = "insideGeofence"
         if distance == 0 and future_distance > 0:
-            result = "orange"
+            instruction = "slowdownLeavingGeofence"
         if distance > future_distance:
-            result = "orange"
-        print (result)
+            instruction = "continueTowardsGeofence"
+        print (instruction)
 
         # and send results to zmq using NavigationMessage
         # type= 1
         # messageId = 1
         # data = geofence + result
         nav_update_segments[0].distance = 1
+        nav_update_segments[0].continueTowardsGeofence = instruction
         #msg.navUpdate.segments[0].from = 1
         msg.navUpdate.isNavigating = True
         #msg.navUpdate.to = 
