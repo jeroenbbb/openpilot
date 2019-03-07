@@ -63,6 +63,7 @@ keys = {
   "IsUploadVideoOverCellularEnabled": TxType.PERSISTENT,
   "IsDriverMonitoringEnabled": TxType.PERSISTENT,
   "IsGeofenceEnabled": TxType.PERSISTENT,
+  "IsPandaAbsent": TxType.PERSISTENT,
   "SpeedLimitOffset": TxType.PERSISTENT,
 # written: visiond
 # read:    visiond, controlsd
