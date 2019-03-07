@@ -52,7 +52,7 @@ def isotp_recv_subaddr(panda, addr, bus, sendaddr, subaddr):
     tlen = ord(msg[1]) & 0xf
     dat = msg[2:]
   else:
-    print msg.encode("hex")
+    print (msg.encode("hex"))
     assert False
 
   return dat[0:tlen]
