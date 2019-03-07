@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 import os
 import time
+from sys import exit
+from common.params import Params
+
+is_panda_absent = params.get("IsPandaAbsent").decode() == '1'
 
 def ensure_st_up_to_date():
   from panda import Panda, PandaDFU, BASEDIR
@@ -11,8 +15,12 @@ def ensure_st_up_to_date():
   panda = None
   panda_dfu = None
   should_flash_recover = False
+  
+  if is_panda_absent:
+    exit(0)
 
-  while 1:
+  while not is_panda_absent:
+    
     # break on normal mode Panda
     panda_list = Panda.list()
     if len(panda_list) > 0:
@@ -25,7 +33,7 @@ def ensure_st_up_to_date():
       panda_dfu = PandaDFU(panda_dfu[0])
       panda_dfu.recover()
       
-    print ("waiting for board...")
+    print ("waiting for board in panda.python.update.py ...")
     time.sleep(1)
 
   if panda.bootstub or not panda.get_version().startswith(repo_version):
