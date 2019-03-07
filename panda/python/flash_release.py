@@ -4,7 +4,8 @@ import sys
 import time
 import requests
 import json
-import StringIO
+# StringIO is gone in python 3
+from io StringIO
 
 def flash_release(path=None, st_serial=None):
   from panda import Panda, PandaDFU, ESPROM, CesantaFlasher
