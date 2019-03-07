@@ -196,6 +196,7 @@ def nativelauncher(pargs, cwd):
 
 def start_managed_process(name):
   if name in running or name not in managed_processes:
+    cloudlog.info("name not in managed processes: %s" % name)
     return
   proc = managed_processes[name]
   if isinstance(proc, str):
