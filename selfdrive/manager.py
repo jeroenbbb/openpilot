@@ -319,7 +319,7 @@ def system(cmd):
       output=e.output[-1024:],
       returncode=e.returncode)
 
-
+#--- manager thread --------------------------------------------
 def manager_thread():
   # now loop
   context = zmq.Context()
@@ -385,7 +385,7 @@ def manager_thread():
         pandad_running = True
       if p == "boardd":
         pandad_running = True
-    cloudlog.debug ("Pandad and boardd: " + str(pandad_running) + str(board_running) )  
+    cloudlog.debug ("Pandad and boardd: " + str(pandad_running) + str(board_running + running[p] ) )  
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
