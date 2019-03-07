@@ -345,6 +345,7 @@ def manager_thread():
   system("am start -n ai.comma.plus.frame/.MainActivity")
 
   if os.getenv("NOBOARD") is None:
+    cloudlog.info("start pandad and boardd")
     start_managed_process("pandad")
 
   params = Params()
