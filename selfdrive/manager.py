@@ -376,8 +376,16 @@ def manager_thread():
         kill_managed_process(p)
 
     # check the status of all processes, did any of them die?
+    pandad_runing = false
+    board_running = false
+    
     for p in running:
       cloudlog.debug("   Running %s %s" % (p, running[p]))
+      if p == "pandad":
+        pandad_running = True
+      if p == "boardd":
+        pandad_running = True
+    cloudlog.debug ("Pandad and boardd: " + pandad_running + board_running )  
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
