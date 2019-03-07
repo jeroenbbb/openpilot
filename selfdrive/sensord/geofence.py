@@ -120,7 +120,7 @@ gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
 msg_sock = messaging.pub_sock(context, service_list['navUpdate'].port)
 msg = messaging.new_message()
 msg.init('navUpdate')
-msg.navUpdate.init('segments',1)
+nav_update_segments = msg.navUpdate.init('segments',1)
 start_time = int(realtime.sec_since_boot())
 
 # loop forever
@@ -154,6 +154,7 @@ while True:
         # type= 1
         # messageId = 1
         # data = geofence + result
+        nav_update_segments[0].from = 1
         msg.navUpdate.segments[0].from = 1
         msg.navUpdate.isNavigating = True
         #msg.navUpdate.to = 
