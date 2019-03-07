@@ -23,6 +23,7 @@
 # results = rg.search(coordinates) # default mode = 2
 
 import sys
+from time import sleep
 from shapely.geometry import Polygon, Point, mapping, shape
 from shapely.ops import nearest_points
 import json
@@ -125,7 +126,7 @@ start_time = int(realtime.sec_since_boot())
 
 # loop forever
 while True:
-    while is_geofence_enabled:
+    if is_geofence_enabled:
         
         # get gps position from zmq
         latitude, longitude, speed, bearing, accuracy = read_gps()
@@ -159,7 +160,7 @@ while True:
         # type= 1
         # messageId = 1
         # data = geofence + result
-        nav_update_segments[0].distance = 1
+        nav_update_segments[0].distance = distance
         nav_update_segments[0].instruction = instruction
         #msg.navUpdate.segments[0].from = 1
         msg.navUpdate.isNavigating = True
@@ -167,9 +168,12 @@ while True:
         #"geofence " + result
         msg_sock.send(msg.to_bytes())
 
+    else:
+        sleep(60)
+   
+        # check the params file every 5 mins because it might have been changed
+        if start_time < int(realtime.sec_since_boot()) - 300:
+            is_geofence_enabled, geofence_shape = read_geofence()
+            start_time = int(realtime.sec_since_boot())
+            print ("Re-read geofence from param")
         
-    # check the params file every 5 mins because it might have been changed
-    if start_time < int(realtime.sec_since_boot()) - 300:
-        is_geofence_enabled, geofence_shape = read_geofence()
-        start_time = int(realtime.sec_since_boot())
-        print ("Re-read geofence from param")
