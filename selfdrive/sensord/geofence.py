@@ -120,7 +120,7 @@ gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
 msg_sock = messaging.pub_sock(context, service_list['navUpdate'].port)
 msg = messaging.new_message()
 msg.init('navUpdate')
-msg.navUpdate.init('Segment')
+msg.navUpdate.init('segments')
 start_time = int(realtime.sec_since_boot())
 
 # loop forever
