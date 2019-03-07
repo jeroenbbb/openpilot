@@ -153,7 +153,7 @@ while True:
         # type= 1
         # messageId = 1
         # data = geofence + result
-        msg.navUpdate.segments.from.lat = 1
+        msg.navUpdate.segments.lat = 1
         msg.navUpdate.isNavigating = True
         #msg.navUpdate.to = 
         #"geofence " + result
