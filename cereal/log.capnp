@@ -702,6 +702,9 @@ struct NavUpdate {
       exitRight @17;
       unkn18 @18;
       uturn @19;
+      slowdownLeavingGeofence@20;
+      returnOutsideGeofence@21;
+      continueTowardsGeofence@22;
       # ...
     }
   }
