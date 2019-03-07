@@ -39,7 +39,7 @@ from selfdrive.services import service_list
 # service_list['gpsLocationExternal'].port
 
 
-
+#TODO changes this into import usb1
 def list_usb_devices():
     busses = usb.busses()
     for bus in busses:
