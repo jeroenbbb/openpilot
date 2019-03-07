@@ -376,8 +376,8 @@ def manager_thread():
         kill_managed_process(p)
 
     # check the status of all processes, did any of them die?
-    pandad_runing = false
-    board_running = false
+    pandad_runing = False
+    board_running = False
     
     for p in running:
       cloudlog.debug("   Running %s %s" % (p, running[p]))
