@@ -8,7 +8,7 @@ import usb1
 import os
 import time
 import traceback
-from dfu import PandaDFU
+from panda.python.dfu import PandaDFU
 from esptool import ESPROM, CesantaFlasher
 from flash_release import flash_release
 from update import ensure_st_up_to_date
