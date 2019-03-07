@@ -9,11 +9,11 @@ import os
 import time
 import traceback
 from panda.python.dfu import PandaDFU
-from esptool import ESPROM, CesantaFlasher
-from flash_release import flash_release
-from update import ensure_st_up_to_date
-from serial import PandaSerial
-from isotp import isotp_send, isotp_recv
+from panda.python.esptool import ESPROM, CesantaFlasher
+from panda.python.flash_release import flash_release
+from panda.python.update import ensure_st_up_to_date
+from panda.python.serial import PandaSerial
+from panda.python.isotp import isotp_send, isotp_recv
 
 __version__ = '0.0.8'
 
