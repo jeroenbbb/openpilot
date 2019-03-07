@@ -4,6 +4,8 @@ import time
 from sys import exit
 from common.params import Params
 
+params = Params()
+
 is_panda_absent = params.get("IsPandaAbsent").decode() == '1'
 
 def ensure_st_up_to_date():
@@ -17,6 +19,7 @@ def ensure_st_up_to_date():
   should_flash_recover = False
   
   if is_panda_absent:
+    print ("No Panda available")
     exit(0)
 
   while not is_panda_absent:
