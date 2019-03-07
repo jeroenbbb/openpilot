@@ -160,7 +160,7 @@ while True:
         # type= 1
         # messageId = 1
         # data = geofence + result
-        nav_update_segments[0].distance = distance
+        nav_update_segments[0].distance = int(distance)
         nav_update_segments[0].instruction = instruction
         #msg.navUpdate.segments[0].from = 1
         msg.navUpdate.isNavigating = True
