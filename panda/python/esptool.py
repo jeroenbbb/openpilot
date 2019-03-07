@@ -48,7 +48,7 @@ class FakePort(object):
 
   @baudrate.setter
   def baudrate(self, x):
-    print "set baud to", x
+    print ("set baud to", x)
     self.panda.set_uart_baud(1, x)
 
   def write(self, buf):
