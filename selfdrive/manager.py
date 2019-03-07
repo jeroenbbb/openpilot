@@ -385,7 +385,7 @@ def manager_thread():
         pandad_running = True
       if p == "boardd":
         pandad_running = True
-    cloudlog.debug ("Pandad and boardd: " + pandad_running + board_running )  
+    cloudlog.debug ("Pandad and boardd: " + cstr(pandad_running) + cstr(board_running) )  
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
