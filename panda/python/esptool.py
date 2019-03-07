@@ -869,8 +869,8 @@ def dump_mem(esp, args):
         d = esp.read_reg(args.address + (i * 4))
         f.write(struct.pack('<I', d))
         if f.tell() % 1024 == 0:
-            print ('\r%d bytes read... (%d %%)' % (f.tell(),)
-                                                  f.tell() * 100 / args.size),
+            print ('\r%d bytes read... (%d %%)' % (f.tell(),
+                                                  f.tell() * 100 / args.size),)
         sys.stdout.flush()
     print ('Done!')
 
