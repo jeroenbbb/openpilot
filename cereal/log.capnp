@@ -705,6 +705,7 @@ struct NavUpdate {
       slowdownLeavingGeofence@20;
       returnOutsideGeofence@21;
       continueTowardsGeofence@22;
+      insideGeofence@23;
       # ...
     }
   }
