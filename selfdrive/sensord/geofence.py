@@ -117,7 +117,7 @@ def calculate_distance(latitude, longitude, geofence_shape):
 is_geofence_enabled, geofence_shape = read_geofence()
 context = zmq.Context()
 gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
-msg_sock = messaging.sub_sock(context, service_list['navUpdate'].port)
+msg_sock = messaging.pub_sock(context, service_list['navUpdate'].port)
 msg = messaging.new_message()
 msg.init('navUpdate')
 start_time = int(realtime.sec_since_boot())
