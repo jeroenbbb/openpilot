@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 import os
 import time
-from sys import exit
-from common.params import Params
 
-params = Params()
-
-is_panda_absent = params.get("IsPandaAbsent").decode() == '1'
 
 def ensure_st_up_to_date():
   from panda import Panda, PandaDFU, BASEDIR
@@ -18,11 +13,7 @@ def ensure_st_up_to_date():
   panda_dfu = None
   should_flash_recover = False
   
-  if is_panda_absent:
-    print ("No Panda available")
-    exit(0)
-
-  while not is_panda_absent:
+  while 1:
     
     # break on normal mode Panda
     panda_list = Panda.list()
