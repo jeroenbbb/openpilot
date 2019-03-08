@@ -382,7 +382,7 @@ def manager_thread():
     # exit code == None is process is still running
     if 'pandad' in running and 'boardd' not in running:
       if running['pandad'].exitcode == 0:
-        start_managed_process('boardd'):
+        start_managed_process('boardd')
     
     # check the status of all processes, did any of them die?
     for p in running:
