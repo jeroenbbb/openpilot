@@ -375,17 +375,15 @@ def manager_thread():
       for p in car_started_processes:
         kill_managed_process(p)
 
-    # check the status of all processes, did any of them die?
-    pandad_runing = False
-    board_running = False
     
+    # check if pandad has finished and boardd is not running yet
+    # pandad is updating the panda module and needs to be finished before we can start boardd
+    if 'pandad ' in running and 'boardd' not in running and running['pandad'].exitcode is not None:
+    cloudlog.debug ("Pandad and boardd: " + str(running['pandad'].exitcode)) )  
+    
+    # check the status of all processes, did any of them die?
     for p in running:
       cloudlog.debug("   Running %s %s" % (p, running[p]))
-      if p == "pandad":
-        pandad_running = True
-      if p == "boardd":
-        pandad_running = True
-    cloudlog.debug ("Pandad and boardd: " + str(pandad_running) + str(board_running + running[p] ) )  
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
