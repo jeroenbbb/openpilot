@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # simple boardd wrapper that updates the panda first
 import os
-from time import sleep
 from panda import ensure_st_up_to_date
 from common.params import Params
 
@@ -16,13 +15,11 @@ def main(gctx=None):
   else:
     ensure_st_up_to_date()
   
-  print ("Launch boardd")
-  sleep(60)
-
+  #print ("Launch boardd")
   #os.chdir("boardd")
   #os.execvp("./boardd", ["./boardd"])
   
-  # now done in manager, this is not the right place# but how to make it is launched after the update ??
+  # launch of boardd is now done in manager, this is not the right place
 
 if __name__ == "__main__":
   main()
