@@ -380,7 +380,7 @@ def manager_thread():
     # pandad is updating the panda module and needs to be finished before we can start boardd
     # a process gives exit code 0 if it ended correctly
     # exit code == None is process is still running
-    if 'pandad ' in running and 'boardd' not in running:
+    if 'pandad' in running and 'boardd' not in running:
       cloudlog.debug ("exit ok?")
       if running['pandad'].exitcode == 0:
         cloudlog.debug ("Pandad and boardd: " + str(running['pandad'].exitcode)) 
