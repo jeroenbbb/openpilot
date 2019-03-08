@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # simple boardd wrapper that updates the panda first
 import os
+from time import sleep
 from panda import ensure_st_up_to_date
 from common.params import Params
 
@@ -16,6 +17,7 @@ def main(gctx=None):
     ensure_st_up_to_date()
   
   print ("Launch boardd")
+  sleep(60)
 
   #os.chdir("boardd")
   #os.execvp("./boardd", ["./boardd"])
