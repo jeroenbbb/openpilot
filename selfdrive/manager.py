@@ -381,11 +381,8 @@ def manager_thread():
     # a process gives exit code 0 if it ended correctly
     # exit code == None is process is still running
     if 'pandad' in running and 'boardd' not in running:
-      cloudlog.debug ("exit ok?")
       if running['pandad'].exitcode == 0:
-        cloudlog.debug ("Pandad and boardd: " + str(running['pandad'].exitcode)) 
-    #cloudlog.debug ("Pandad and boardd: " + str(running['pandad'].exitcode)) 
-    #cloudlog.debug ("Pandad and boardd: " + str(running['thermald'].exitcode)) 
+        start_managed_process('boardd'):
     
     # check the status of all processes, did any of them die?
     for p in running:
