@@ -12,6 +12,7 @@ import zmq
 import time
 
 import selfdrive.messaging as messaging
+from common.params import Params
 from common.realtime import Ratekeeper
 from selfdrive.services import service_list
 from selfdrive.swaglog import cloudlog
@@ -201,6 +202,57 @@ def boardd_loop(rate=200):
 
     rk.keep_time()
 
+
+# *** main loop when panda is absent ***
+def boardd_no_panda_loop(rate=200):
+  rk = Ratekeeper(rate)
+  context = zmq.Context()
+
+  # no can connection available
+  # can_init()
+
+  # *** publishe health, skip can
+  #logcan = messaging.pub_sock(context, service_list['can'].port)
+  health_sock = messaging.pub_sock(context, service_list['health'].port)
+
+  # *** subscribes to can send
+  sendcan = messaging.sub_sock(context, service_list['sendcan'].port)
+
+  # drain sendcan to delete any stale messages from previous runs
+  # messaging.drain_sock(sendcan)
+
+  while 1:
+    # health packet @ 1hz
+    if (rk.frame%rate) == 0:
+      health = {"voltage": 14, "current": 1, "started": True}
+      msg = messaging.new_message()
+      msg.init('health')
+
+      # store the health to be logged
+      msg.health.voltage = health['voltage']
+      msg.health.current = health['current']
+      msg.health.started = health['started']
+      msg.health.controlsAllowed = True
+
+      health_sock.send(msg.to_bytes())
+
+    # recv @ 100hz
+    # can_msgs = can_recv()
+    can_msgs = {}
+
+    # publish to logger
+    # TODO: refactor for speed
+    if len(can_msgs) > 0:
+      dat = can_list_to_can_capnp(can_msgs)
+      logcan.send(dat.to_bytes())
+
+    # send can if we have a packet
+    tsc = messaging.recv_sock(sendcan)
+    if tsc is not None:
+      can_send_many(can_capnp_to_can_list(tsc.sendcan))
+
+    rk.keep_time()    
+    
 # *** main loop ***
 def boardd_proxy_loop(rate=200, address="192.168.2.251"):
   rk = Ratekeeper(rate)
@@ -239,12 +291,19 @@ def boardd_proxy_loop(rate=200, address="192.168.2.251"):
     rk.keep_time()
 
 def main(gctx=None):
+  # check if panda is present anyway
+  # when panda not present, we need the health message
+  params = Params()
+  is_panda_absent = params.get("IsPandaAbsent").decode() == '1'
+  
   if os.getenv("MOCK") is not None:
     boardd_mock_loop()
   elif os.getenv("PROXY") is not None:
     boardd_proxy_loop()
   elif os.getenv("BOARDTEST") is not None:
     boardd_test_loop()
+  elif is_panda_absent:
+    boardd_no_panda_loop()
   else:
     boardd_loop()
 
