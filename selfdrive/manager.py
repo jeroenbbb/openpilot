@@ -354,10 +354,10 @@ def manager_thread():
     start_managed_process("pandad")
 
   params = Params()
-  
 
   while 1:
-    # get health of board, log this in "thermal"
+
+    # read thermal msg to check cpu temperature and free space
     msg = messaging.recv_sock(thermal_sock, wait=True)
 
     # uploader is gated based on the phone temperature
@@ -369,6 +369,7 @@ def manager_thread():
     if msg.thermal.freeSpace < 0.05:
       logger_dead = True
 
+    # if thermal msg is available, start all managed processes
     if msg.thermal.started:
       for p in car_started_processes:
         if p == "loggerd" and logger_dead:
@@ -392,6 +393,7 @@ def manager_thread():
     # check the status of all processes, did any of them die?
     for p in running:
       cloudlog.debug("   Running %s %s" % (p, running[p]))
+      # and sent the status of all processes to zmq
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
