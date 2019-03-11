@@ -32,6 +32,7 @@ from time import sleep
 
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
+from selfdrive.swaglog import cloudlog
 
 # use message port number for GPS messages defined in 
 # use message structure GpsLocationData defined in log.capnp and gpsLocationExternal in Event message
@@ -88,7 +89,7 @@ for new_data in gpsd_socket:
             latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
     else:
         # noting received, send some dummy data
-        print ("Nothing" + str(count))
+        # print ("Nothing" + str(count))
         latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
     
     sleep(0.5)
@@ -102,5 +103,5 @@ for new_data in gpsd_socket:
     msg.gpsLocationExternal.accuracy = accuracy
     msg.gpsLocationExternal.source = "external"
     gps_sock.send(msg.to_bytes())
-    print ("Message sent: " + str(latitude) + " " + str(longitude))
+    cloudlog.info ("Message sent: " + str(latitude) + " " + str(longitude))
     
