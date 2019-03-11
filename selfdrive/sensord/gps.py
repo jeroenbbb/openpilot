@@ -81,7 +81,7 @@ gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
 msg = messaging.new_message()
 msg.init('gpsLocationExternal')
 
-def main():
+def main(gctx=None):
     for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
