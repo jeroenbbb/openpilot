@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # read gps data from a usb gps
 # using nmea and gpsd
 # http://doschman.blogspot.com/2013/01/parsing-nmea-sentences-from-gps-with.html
