@@ -53,6 +53,7 @@ def list_usb_devices():
             #print ("  devnum: " + str(dev.iManufacturer) + str(dev.devnum))
             #print ("  deviceClass: " + str(dev.dev.bDeviceClass))
             #print ("  dev: " + str(dev.dev))
+            a = 1
             
 def make_some_dummy_data ():
     latitude = float(52.3992479) + random.uniform(-0.001, 0.001)
