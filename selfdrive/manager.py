@@ -117,7 +117,7 @@ managed_processes = {
 #  "gpsd": ("selfdrive/sensord", ["./gpsd"]),
 #  gpsd replaced by gps.py
 # and geofgence added
-  "gpsd": "selfdrive.sensord.gps",
+#  "gpsd": "selfdrive.sensord.gps",
 # "geofence": "selfdrive.sensord.geofence",  
   "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
 #  "updated": "selfdrive.updated",
