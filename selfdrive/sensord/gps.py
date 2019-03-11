@@ -80,8 +80,6 @@ def main(gctx=None):
     # set message stuff
     context = zmq.Context()
     gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
-    msg = messaging.new_message()
-    msg.init('gpsLocationExternal')
 
     for new_data in gpsd_socket:
         if new_data:
@@ -101,6 +99,8 @@ def main(gctx=None):
         count = count + 1
     
         # send message
+        msg = messaging.new_message()
+        msg.init('gpsLocationExternal')
         msg.gpsLocationExternal.latitude = latitude
         msg.gpsLocationExternal.longitude = longitude
         msg.gpsLocationExternal.speed = speed
