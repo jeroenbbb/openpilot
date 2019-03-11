@@ -142,6 +142,7 @@ persistent_processes = [
   'uploader',
   'ui',
   'gpsd',
+  'geofence',
   'updated',
 ]
 
