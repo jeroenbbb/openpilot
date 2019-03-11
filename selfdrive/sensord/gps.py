@@ -69,19 +69,20 @@ def make_some_dummy_data ():
 # -------------------------------
 list_usb_devices()
 
-gpsd_socket = gps3.GPSDSocket()
-data_stream = gps3.DataStream()
-gpsd_socket.connect()
-gpsd_socket.watch()
-count = 0
-
-# set message stuff
-context = zmq.Context()
-gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
-msg = messaging.new_message()
-msg.init('gpsLocationExternal')
 
 def main(gctx=None):
+    gpsd_socket = gps3.GPSDSocket()
+    data_stream = gps3.DataStream()
+    gpsd_socket.connect()
+    gpsd_socket.watch()
+    count = 0
+
+    # set message stuff
+    context = zmq.Context()
+    gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
+    msg = messaging.new_message()
+    msg.init('gpsLocationExternal')
+
     for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
