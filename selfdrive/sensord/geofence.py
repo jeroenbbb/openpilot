@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # check geofence vs gps position
 # and send result on zmq
 #
@@ -115,61 +117,62 @@ def calculate_distance(latitude, longitude, geofence_shape):
 
     
 #------ main routine --------
-is_geofence_enabled, geofence_shape = read_geofence()
-context = zmq.Context()
-gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
-msg_sock = messaging.pub_sock(context, service_list['navUpdate'].port)
-msg = messaging.new_message()
-msg.init('navUpdate')
-nav_update_segments = msg.navUpdate.init('segments',1)
-start_time = int(realtime.sec_since_boot())
+def main(gctx=None):
+    is_geofence_enabled, geofence_shape = read_geofence()
+    context = zmq.Context()
+    gps_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port)
+    msg_sock = messaging.pub_sock(context, service_list['navUpdate'].port)
+    start_time = int(realtime.sec_since_boot())
 
-# loop forever
-while True:
-    if is_geofence_enabled:
+    # loop forever
+    while True:
+        if is_geofence_enabled:
         
-        # get gps position from zmq
-        latitude, longitude, speed, bearing, accuracy = read_gps()
+            # get gps position from zmq
+            latitude, longitude, speed, bearing, accuracy = read_gps()
 
-        # calculate distance between current position and geofence(s)
-        distance = calculate_distance(latitude, longitude, geofence_shape)
+            # calculate distance between current position and geofence(s)
+            distance = calculate_distance(latitude, longitude, geofence_shape)
 
-        # predict next position using bearing and speed
-        origin = geopy.Point(latitude, longitude)
-        future_point = geopy.distance.distance(meters=speed).destination(origin,bearing)
+            # predict next position using bearing and speed
+            origin = geopy.Point(latitude, longitude)
+            future_point = geopy.distance.distance(meters=speed).destination(origin,bearing)
         
-        # calculate distance between future position and geofence(s)
-        future_distance = calculate_distance(future_point.latitude, future_point.longitude, geofence_shape)
+            # calculate distance between future position and geofence(s)
+            future_distance = calculate_distance(future_point.latitude, future_point.longitude, geofence_shape)
 
-        # and define geofence results as an navUpdate instruction (see log.capnp)
-        # slowdownLeavingGeofence
-        # returnOutsideGeofence
-        # continueTowardsGeofence
-        # insideGeofence
+            # and define geofence results as an navUpdate instruction (see log.capnp)
+            # slowdownLeavingGeofence
+            # returnOutsideGeofence
+            # continueTowardsGeofence
+            # insideGeofence
         
-        instruction = "returnOutsideGeofence"
-        if distance == 0 and future_distance == 0:
-            instruction = "insideGeofence"
-        if distance == 0 and future_distance > 0:
-            instruction = "slowdownLeavingGeofence"
-        if distance > future_distance:
-            instruction = "continueTowardsGeofence"
-        print (instruction)
+            instruction = "returnOutsideGeofence"
+            if distance == 0 and future_distance == 0:
+                instruction = "insideGeofence"
+            if distance == 0 and future_distance > 0:
+                instruction = "slowdownLeavingGeofence"
+            if distance > future_distance:
+                instruction = "continueTowardsGeofence"
+            print (instruction)
 
-        # and send results to zmq using NavigationMessage
-        # type= 1
-        # messageId = 1
-        # data = geofence + result
-        nav_update_segments[0].distance = int(distance)
-        nav_update_segments[0].instruction = instruction
-        #msg.navUpdate.segments[0].from = 1
-        msg.navUpdate.isNavigating = True
-        #msg.navUpdate.to = 
-        #"geofence " + result
-        msg_sock.send(msg.to_bytes())
+            # and send results to zmq using NavigationMessage
+            # type= 1
+            # messageId = 1
+            # data = geofence + result
+            msg = messaging.new_message()
+            msg.init('navUpdate')
+            nav_update_segments = msg.navUpdate.init('segments',1)
+            nav_update_segments[0].distance = int(distance)
+            nav_update_segments[0].instruction = instruction
+            #msg.navUpdate.segments[0].from = 1
+            msg.navUpdate.isNavigating = True
+            #msg.navUpdate.to = 
+            #"geofence " + result
+            msg_sock.send(msg.to_bytes())
 
-    else:
-        sleep(60)
+        else:
+            sleep(60)
    
         # check the params file every 5 mins because it might have been changed
         if start_time < int(realtime.sec_since_boot()) - 300:
@@ -177,3 +180,5 @@ while True:
             start_time = int(realtime.sec_since_boot())
             print ("Re-read geofence from param")
         
+if __name__ == "__main__":
+  main()
