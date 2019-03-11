@@ -80,17 +80,23 @@ testJoystick: [8056, false]
 # 8080 is reserved for slave testing daemon
 # 8762 is reserved for logserver
 
+# thermal
+#   publishes thermal
+
 # manager -- base process to manage starting and stopping of all others
-#   subscribes: health
-#   publishes:  thermal
+#   subscribes: thermal
+#   publishes:  info about running processes , which message ???
 
 # **** processes that communicate with the outside world ****
 
 # boardd -- communicates with the car
-#   subscribes: sendcan
-#   publishes:  can, health, ubloxRaw
+#   subscribes: can, sendcan, ubloxRaw
+#   publishes:  can, sendcan, health
 
-# sensord -- publishes the IMU and GPS
+# gps.py
+#   publishes gpsLocationExternal
+
+# sensord -- publishes the IMU (motion) and GPS
 #   publishes:  sensorEvents, gpsNMEA
 
 # visiond -- talks to the cameras, runs the model, saves the videos
@@ -131,7 +137,12 @@ testJoystick: [8056, false]
 # logcatd -- fetches logcat info from android
 #   publishes:  androidLog
 
-# proclogd -- fetches process information
+# proclogd -- fetches process information like cpu, mem, cache
 #   publishes: procLog
 
 # tombstoned -- reports native crashes
+
+# geofence 
+#   publishes navUpdate
+#   subscribes gpsLocationExternal
+
