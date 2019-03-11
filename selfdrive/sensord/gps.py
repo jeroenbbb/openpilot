@@ -47,12 +47,12 @@ def list_usb_devices():
         print (vars(bus))
         devices = bus.devices
         for dev in devices:
-            print ("Device:", dev.filename)
-            print ("  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
-            print ("  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
-            print ("  devnum: " + str(dev.iManufacturer) + str(dev.devnum))
-            print ("  deviceClass: " + str(dev.dev.bDeviceClass))
-            print ("  dev: " + str(dev.dev))
+            #print ("Device:", dev.filename)
+            #print ("  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
+            #print ("  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
+            #print ("  devnum: " + str(dev.iManufacturer) + str(dev.devnum))
+            #print ("  deviceClass: " + str(dev.dev.bDeviceClass))
+            #print ("  dev: " + str(dev.dev))
             
 def make_some_dummy_data ():
     latitude = float(52.3992479) + random.uniform(-0.001, 0.001)
@@ -103,5 +103,5 @@ for new_data in gpsd_socket:
     msg.gpsLocationExternal.accuracy = accuracy
     msg.gpsLocationExternal.source = "external"
     gps_sock.send(msg.to_bytes())
-    cloudlog.info ("Message sent: " + str(latitude) + " " + str(longitude))
+    #cloudlog.info ("Message sent: " + str(latitude) + " " + str(longitude))
     
