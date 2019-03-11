@@ -84,7 +84,7 @@ def read_geofence():
 
     return is_geofence_enabled, geofence_shape
 
-def read_gps():
+def read_gps(gps_sock):
     msg = messaging.recv_sock(gps_sock, wait=True)
     latitude  = msg.gpsLocationExternal.latitude
     longitude = msg.gpsLocationExternal.longitude
@@ -129,7 +129,7 @@ def main(gctx=None):
         if is_geofence_enabled:
         
             # get gps position from zmq
-            latitude, longitude, speed, bearing, accuracy = read_gps()
+            latitude, longitude, speed, bearing, accuracy = read_gps(gps_sock)
 
             # calculate distance between current position and geofence(s)
             distance = calculate_distance(latitude, longitude, geofence_shape)
