@@ -34,7 +34,7 @@ from time import sleep
 
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
-from selfdrive.swaglog import cloudlog
+#from selfdrive.swaglog import cloudlog
 
 # use message port number for GPS messages defined in 
 # use message structure GpsLocationData defined in log.capnp and gpsLocationExternal in Event message
