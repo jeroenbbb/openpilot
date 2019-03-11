@@ -80,31 +80,35 @@ context = zmq.Context()
 gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
 msg = messaging.new_message()
 msg.init('gpsLocationExternal')
-    
-for new_data in gpsd_socket:
-    if new_data:
-        data_stream.unpack(new_data)
-        latitude = data_stream.TPV['lat']
-        longitude = data_stream.TPV['lon']
-        print('Altitude = ',data_stream.TPV['alt'])
-        print('Latitude = ',latitude)
-        if not isinstance(latitude, float): 
+
+def main():
+    for new_data in gpsd_socket:
+        if new_data:
+            data_stream.unpack(new_data)
+            latitude = data_stream.TPV['lat']
+            longitude = data_stream.TPV['lon']
+            print('Altitude = ',data_stream.TPV['alt'])
+            print('Latitude = ',latitude)
+            if not isinstance(latitude, float): 
+                latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
+        else:
+            # noting received, send some dummy data
+            # print ("Nothing" + str(count))
             latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
-    else:
-        # noting received, send some dummy data
-        # print ("Nothing" + str(count))
-        latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
     
-    sleep(0.5)
-    count = count + 1
+        sleep(0.5)
+        count = count + 1
     
-    # send message
-    msg.gpsLocationExternal.latitude = latitude
-    msg.gpsLocationExternal.longitude = longitude
-    msg.gpsLocationExternal.speed = speed
-    msg.gpsLocationExternal.bearing = bearing
-    msg.gpsLocationExternal.accuracy = accuracy
-    msg.gpsLocationExternal.source = "external"
-    gps_sock.send(msg.to_bytes())
-    #cloudlog.info ("Message sent: " + str(latitude) + " " + str(longitude))
-    
+        # send message
+        msg.gpsLocationExternal.latitude = latitude
+        msg.gpsLocationExternal.longitude = longitude
+        msg.gpsLocationExternal.speed = speed
+        msg.gpsLocationExternal.bearing = bearing
+        msg.gpsLocationExternal.accuracy = accuracy
+        msg.gpsLocationExternal.source = "external"
+        gps_sock.send(msg.to_bytes())
+        #cloudlog.info ("Message sent: " + str(latitude) + " " + str(longitude))
+
+        
+if __name__ == "__main__":
+  main()    
