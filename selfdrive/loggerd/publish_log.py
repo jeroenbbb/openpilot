@@ -47,7 +47,7 @@ def main(gxrs=None):
                 msg = messaging.recv_sock(service_sock[count], wait=False)
             count = count + 1
         
-        time.sleep(1)
+        time.sleep(5)
 
 if __name__ == "__main__":
     main()
