@@ -43,7 +43,7 @@ def main(gctx=None):
         polld = poller.poll(timeout=1000)
         print ("2")
         for sock, mode in polld:
-            msg = sock.recv()
+            #msg = sock.recv()
             msg = sock.recv_multipart()
             print (str(msg))
         # find the correct socket
