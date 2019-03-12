@@ -6,8 +6,9 @@ import selfdrive.messaging as messaging
 
 # this program reads all messages from ipc (Inter Process Comm).
 # IPC is using a file to transfer messages, /tmp/logmessage
+# the messages are sent by selfdrive.swaglog.py
 # logmessage is used by loggerd, swaglog.c, swaglog.py, sensord
-# all ipc messages are forwarded to zmq
+# all ipc messages are forwarded to zmq by logmessaged.py
 # severe stuff (more than info) are sent to logentries which is a central cloudbased logging database
 # logentries is skipped in this version
 
