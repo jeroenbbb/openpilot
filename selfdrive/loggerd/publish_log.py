@@ -45,8 +45,9 @@ def main(gctx=None):
         print ("1")
         polld = poller.poll(timeout=1000)
         print ("2")
-        for sock in polld:
+        for sock, mode in polld:
             print (str(sock))
+            print (mode)
             msg = sock.recv()
             #msg = sock.recv_multipart()
             print (str(msg))
