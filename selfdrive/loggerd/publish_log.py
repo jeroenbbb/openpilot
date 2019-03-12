@@ -31,11 +31,19 @@ def main(gctx=None):
         service_sock.append(messaging.sub_sock(context, service_list[service].port))
         # count = count + 1
 
-    # loop through all services to listen to the socks
+    # define poller to listen to all sockets
     poller = zmq.Poller()
     for i in range(0,count):
         poller.register( service_sock[i],  zmq.POLLIN )
-    
+
+    # poll all incoming messages
+    while True:
+        socks = dict( poller.poll() )
+        # find the correct socket
+        if socket in socks and socks[socket] == zmq.POLLIN:
+            msg = socket.recv_multipart()
+        
+    # loop through all services to listen to the socks    
     while True:
         count = 0
         for service in service_list:
