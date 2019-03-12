@@ -47,8 +47,8 @@ def main(gctx=None):
         print ("2")
         for sock in polld:
             print ("3")
-            #msg = sock.recv()
-            msg = sock.recv_multipart()
+            msg = sock.recv()
+            #msg = sock.recv_multipart()
             print (str(msg))
         # find the correct socket
         #if socket in socks and socks[socket] == zmq.POLLIN:
