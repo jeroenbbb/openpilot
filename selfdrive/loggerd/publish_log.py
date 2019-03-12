@@ -39,7 +39,9 @@ def main(gctx=None):
     # poll all incoming messages
     while True:
         #socks = dict( poller.poll())
+        print ("1")
         polld = poller.poll(timeout=1000)
+        print ("2")
         for sock, mode in polld:
             msg = sock.recv()
             msg = sock.recv_multipart()
