@@ -38,10 +38,15 @@ def main(gctx=None):
 
     # poll all incoming messages
     while True:
-        socks = dict( poller.poll() )
+        #socks = dict( poller.poll())
+        polld = poller.poll(timeout=1000)
+        for sock, mode in polld:
+            msg = sock.recv()
+            msg = sock.recv_multipart()
+            print (str(msg))
         # find the correct socket
-        if socket in socks and socks[socket] == zmq.POLLIN:
-            msg = socket.recv_multipart()
+        #if socket in socks and socks[socket] == zmq.POLLIN:
+        #    msg = socket.recv_multipart()
         
     # loop through all services to listen to the socks    
     while True:
