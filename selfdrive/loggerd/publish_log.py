@@ -33,7 +33,8 @@ def main(gctx=None):
 
     # loop through all services to listen to the socks
     poller = zmq.Poller()
-    poller.register( service_sock[1],  zmq.POLLIN )
+    for i in range(0,count):
+        poller.register( service_sock[i],  zmq.POLLIN )
     
     while True:
         count = 0
