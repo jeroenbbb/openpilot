@@ -50,7 +50,9 @@ def main(gctx=None):
             #print (mode)
             msg = sock.recv()
             #msg = sock.recv_multipart()
-            print (msg.decode("unicode"))
+            print (str(msg))
+            print (msg.decode("ascii"))
+
         # find the correct socket
         #if socket in socks and socks[socket] == zmq.POLLIN:
         #    msg = socket.recv_multipart()
