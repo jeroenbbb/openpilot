@@ -18,7 +18,7 @@ for service in service_list:
     print (service_list[service].port)
     
 
-def main(gxrs=None):
+def main(gctx=None):
 
     context = zmq.Context()
     service_sock =  []
@@ -27,11 +27,12 @@ def main(gxrs=None):
     # loop through all services to define socks
     for service in service_list:
         print (service)
-        print (service_list[service].port)
+        # print (service_list[service].port)
         service_sock.append(messaging.sub_sock(context, service_list[service].port))
         # count = count + 1
 
     # loop through all services to listen to the socks
+    poller = zmq.Poller()
 
     while True:
         count = 0
