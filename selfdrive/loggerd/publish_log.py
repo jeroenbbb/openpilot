@@ -18,7 +18,7 @@ for service in service_list:
     print (service_list[service].port)
     
 
-def listen_to_all():
+def main(gxrs=None):
 
     context = zmq.Context()
     service_sock =  []
@@ -36,16 +36,18 @@ def listen_to_all():
     while True:
         count = 0
         for service in service_list:
+            # read all messages form this socket
             msg = messaging.recv_sock(service_sock[count], wait=False)
-            if msg is not None:
+            while msg is not None:
                 if isinstance(msg, str):
                     print (service + "=" + msg)
                 else:
                     print ("message received from " + service + " " + str(msg))
                     #type(msg)
+                msg = messaging.recv_sock(service_sock[count], wait=False)
             count = count + 1
         
         time.sleep(1)
 
 if __name__ == "__main__":
-    listen_to_all()
+    main()
