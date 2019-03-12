@@ -23,18 +23,21 @@ def main(gctx=None):
     context = zmq.Context()
     service_sock =  []
     count = 0
-        
+    poller = zmq.Poller()
+    
     # loop through all services to define socks
     for service in service_list:
         print (service)
-        # print (service_list[service].port)
-        service_sock.append(messaging.sub_sock(context, service_list[service].port))
+        print (service_list[service].port)
+        port = service_list[service].port
+        # service_sock.append(messaging.sub_sock(context, service_list[service].port))
+        sock = messaging.sub_sock(context, port, poller)
         # count = count + 1
 
     # define poller to listen to all sockets
-    poller = zmq.Poller()
-    for i in range(0,count):
-        poller.register( service_sock[i],  zmq.POLLIN )
+    
+    #for i in range(0,count):
+    #    poller.register( service_sock[i],  zmq.POLLIN )
 
     # poll all incoming messages
     while True:
@@ -42,7 +45,7 @@ def main(gctx=None):
         print ("1")
         polld = poller.poll(timeout=1000)
         print ("2")
-        for sock, mode in polld:
+        for sock in polld:
             print ("3")
             #msg = sock.recv()
             msg = sock.recv_multipart()
