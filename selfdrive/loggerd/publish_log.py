@@ -11,6 +11,7 @@ if __name__ == "__main__":
 
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
+from cereal import log
 
 # display all services
 for service in service_list:
@@ -51,7 +52,9 @@ def main(gctx=None):
             msg = sock.recv()
             #msg = sock.recv_multipart()
             print (str(msg))
-            print (msg.decode("ascii"))
+            #print (msg.decode("ascii"))
+            evt = log.Event.from_bytes(msg)
+            print (evt)
 
         # find the correct socket
         #if socket in socks and socks[socket] == zmq.POLLIN:
