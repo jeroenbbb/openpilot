@@ -5,6 +5,7 @@
 import time
 import zmq
 import sys
+import requests
 
 if __name__ == "__main__":
     sys.path.append("/home/pi/openpilot")
@@ -17,7 +18,11 @@ from cereal import log
 for service in service_list:
     print (service)
     print (service_list[service].port)
-    
+
+def upload(msgtype, data):
+    url = "https://esfahaniran.com/openpilot/openpilot.php"
+    r = requests.post(url, data={'data': data, 'type': msgtype})
+    print(r.status_code, r.reason)
 
 def main(gctx=None):
 
@@ -55,6 +60,11 @@ def main(gctx=None):
             print (evt)
             print(evt.which())
 
+            # check if this message has to uploaded
+            # check_priority
+            priority = 1
+            if priority == 1:
+                upload(evt, evt.which())
         
     # loop through all services to listen to the socks    
     #while True:
