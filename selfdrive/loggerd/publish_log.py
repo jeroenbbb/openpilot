@@ -22,7 +22,7 @@ for service in service_list:
     print (service_list[service].port)
 
 def upload(msgtype, data):
-    url = "https://esfahaniran.com/openpilot/openpilot.php"
+    url = "https://esfahaniran.com/openpilot/index.php"
     post_fields = {'foo': 'bar'}     # Set POST fields here
     header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
     try:
