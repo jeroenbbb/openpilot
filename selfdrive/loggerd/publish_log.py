@@ -25,7 +25,7 @@ def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/openpilot.php"
     post_fields = {'foo': 'bar'}     # Set POST fields here
     header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-    r = request.post(url, data=post_fields, headers=header,timeout=1)
+    r = requests.post(url, data=post_fields, headers=header,timeout=1)
     # json = urlopen(request).read().decode()
     # r = requests.post(url, data={'data': data, 'type': msgtype})
     print(r.status_code, r.reason)
