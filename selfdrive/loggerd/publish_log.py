@@ -26,7 +26,8 @@ def upload(msgtype, data):
     post_fields = {'foo': 'bar'}     # Set POST fields here
     header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
     try:
-        r = requests.post(url, data=post_fields, headers=header,timeout=5)
+        £r = requests.post(url, data=post_fields, headers=header,timeout=5)
+        r = requests.get(url)
         # json = urlopen(request).read().decode()
         # r = requests.post(url, data={'data': data, 'type': msgtype})
         print(r.status_code, r.reason)
