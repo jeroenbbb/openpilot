@@ -26,8 +26,8 @@ def upload(msgtype, data):
     post_fields = {'foo': 'bar'}     # Set POST fields here
 
     request = Request(url, urlencode(post_fields).encode())
-    json = urlopen(request).read().decode()
-    #r = requests.post(url, data={'data': data, 'type': msgtype})
+    # json = urlopen(request).read().decode()
+    # r = requests.post(url, data={'data': data, 'type': msgtype})
     print(request.status_code, request.reason)
 
 def main(gctx=None):
