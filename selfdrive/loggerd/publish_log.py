@@ -25,10 +25,13 @@ def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/openpilot.php"
     post_fields = {'foo': 'bar'}     # Set POST fields here
     header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-    r = requests.post(url, data=post_fields, headers=header,timeout=1)
-    # json = urlopen(request).read().decode()
-    # r = requests.post(url, data={'data': data, 'type': msgtype})
-    print(r.status_code, r.reason)
+    try:
+        r = requests.post(url, data=post_fields, headers=header,timeout=10)
+        # json = urlopen(request).read().decode()
+        # r = requests.post(url, data={'data': data, 'type': msgtype})
+        print(r.status_code, r.reason)
+     except ConnectTimeout:
+        print ("Timeout, no upload")
 
 def main(gctx=None):
 
