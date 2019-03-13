@@ -45,6 +45,7 @@ def main(gctx=None):
     #    poller.register( service_sock[i],  zmq.POLLIN )
 
     # poll all incoming messages
+    priority = 1
     while True:
 
         polld = poller.poll(timeout=1000)
@@ -62,9 +63,10 @@ def main(gctx=None):
 
             # check if this message has to uploaded
             # check_priority
-            priority = 1
+            
             if priority == 1:
                 upload(evt, evt.which())
+                priority = 0
         
     # loop through all services to listen to the socks    
     #while True:
