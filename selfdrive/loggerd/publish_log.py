@@ -5,7 +5,9 @@
 import time
 import zmq
 import sys
-import requests
+#import requests
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 if __name__ == "__main__":
     sys.path.append("/home/pi/openpilot")
@@ -21,8 +23,12 @@ for service in service_list:
 
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/openpilot.php"
-    r = requests.post(url, data={'data': data, 'type': msgtype})
-    print(r.status_code, r.reason)
+    post_fields = {'foo': 'bar'}     # Set POST fields here
+
+    request = Request(url, urlencode(post_fields).encode())
+    json = urlopen(request).read().decode()
+    #r = requests.post(url, data={'data': data, 'type': msgtype})
+    print(request.status_code, request.reason)
 
 def main(gctx=None):
 
