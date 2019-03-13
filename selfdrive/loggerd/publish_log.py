@@ -22,9 +22,9 @@ for service in service_list:
 def main(gctx=None):
 
     context = zmq.Context()
+    poller = zmq.Poller()    
     service_sock =  []
     count = 0
-    poller = zmq.Poller()
     
     # loop through all services to define socks
     for service in service_list:
@@ -36,46 +36,42 @@ def main(gctx=None):
         # count = count + 1
 
     # define poller to listen to all sockets
-    
-    #for i in range(0,count):
+    # for i in range(0,count):
     #    poller.register( service_sock[i],  zmq.POLLIN )
 
     # poll all incoming messages
     while True:
-        #socks = dict( poller.poll())
-        print ("1")
+
         polld = poller.poll(timeout=1000)
-        print ("2")
+
         for sock, mode in polld:
             #print (str(sock))
             #print (mode)
             msg = sock.recv()
-            #msg = sock.recv_multipart()
-            print (str(msg))
-            #print (msg.decode("ascii"))
+            # msg = sock.recv_multipart()
+            # print (str(msg))
+            # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
             print (evt)
+            print(evt.which())
 
-        # find the correct socket
-        #if socket in socks and socks[socket] == zmq.POLLIN:
-        #    msg = socket.recv_multipart()
         
     # loop through all services to listen to the socks    
-    while True:
-        count = 0
-        for service in service_list:
-            # read all messages form this socket
-            msg = messaging.recv_sock(service_sock[count], wait=False)
-            while msg is not None:
-                if isinstance(msg, str):
-                    print (service + "=" + msg)
-                else:
-                    print ("message received from " + service + " " + str(msg))
-                    #type(msg)
-                msg = messaging.recv_sock(service_sock[count], wait=False)
-            count = count + 1
+    #while True:
+    #    count = 0
+    #    for service in service_list:
+    #        # read all messages form this socket
+    #        msg = messaging.recv_sock(service_sock[count], wait=False)
+    #        while msg is not None:
+    #            if isinstance(msg, str):
+    #                print (service + "=" + msg)
+    #            else:
+    #                print ("message received from " + service + " " + str(msg))
+    #                #type(msg)
+    #            msg = messaging.recv_sock(service_sock[count], wait=False)
+    #        count = count + 1
         
-        time.sleep(5)
+    #    time.sleep(5)
 
 if __name__ == "__main__":
     main()
