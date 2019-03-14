@@ -23,7 +23,7 @@ for service in service_list:
 
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
-    post_fields = {'foo': 'bar'}     # Set POST fields here
+    post_fields = {'type': msgtype}
     header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
     try:
         # = requests.post(url, data=post_fields, headers=header,timeout=5)
