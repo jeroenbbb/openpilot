@@ -31,6 +31,7 @@ def upload(msgtype, data):
         # json = urlopen(request).read().decode()
         # r = requests.post(url, data={'data': data, 'type': msgtype})
         print(r.status_code, r.reason)
+        print(r.text)
     except:
         print ("Timeout, no upload")
 
