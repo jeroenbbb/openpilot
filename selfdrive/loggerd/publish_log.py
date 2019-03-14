@@ -69,14 +69,14 @@ def main(gctx=None):
             # print (str(msg))
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
-            print (evt)
+            print(evt)
             print(evt.which())
 
             # check if this message has to uploaded
             # check_priority
             
             if priority == 1:
-                upload(evt, evt.which())
+                upload(evt.which(), evt)
                 priority = 0
         
     # loop through all services to listen to the socks    
