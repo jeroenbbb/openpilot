@@ -23,11 +23,11 @@ for service in service_list:
 
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
-    post_fields = {'type': msgtype}
+    post_fields = {'type': 'msgtype'}
     header = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
     try:
         # = requests.post(url, data=post_fields, headers=header,timeout=5)
-        r = requests.get(url,timeout=5)
+        r = requests.post(url, data=post_fields, timeout=5)
         # json = urlopen(request).read().decode()
         # r = requests.post(url, data={'data': data, 'type': msgtype})
         print(r.status_code, r.reason)
