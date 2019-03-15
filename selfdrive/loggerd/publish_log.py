@@ -111,13 +111,11 @@ def main(gctx=None):
             # print (str(msg))
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
-            upload_required, field1, field2 = define_priority(evt)
-            print(evt)
             print(evt.which())
-
-            # check if this message has to uploaded
-            # check_priority
-            
+            # check if the message has to be uploaded or not 
+            upload_required, field1, field2 = define_priority(evt)
+            #print(evt)
+ 
             if priority == 10:
                 upload(evt.which(), evt)
                 priority = 0
