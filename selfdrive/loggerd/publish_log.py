@@ -68,7 +68,7 @@ def define_priority(evnt):
         time_since_last_upload = 1000
     print (time_since_last_upload)
     if type in prio:
-        if prio[type] > time_since_last_upload:
+        if prio[type] < time_since_last_upload:
             # priority of message type is higher than the last upload
             # so a next upload is required
             print ("Upload required")
