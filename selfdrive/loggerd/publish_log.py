@@ -42,7 +42,7 @@ def define_priority(evnt):
     field1 = ""
     field2 = ""
     priority = 0
-    if evnt.which() == 'liveLocation':
+    if evnt.which() == 'gpsLocationExternal':
         # get gps locations 
         field1 = evnt.latitude
         print (field1)
