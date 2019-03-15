@@ -67,10 +67,10 @@ def define_priority(evnt):
         
     # check time since last upload
     if evnt.which() in last_upload:
-        time_since_last_upload = last_upload[type] - evnt.logMonoTime
+        time_since_last_upload = (last_upload[type] - evnt.logMonoTime) / 1000000000
     else:
-        time_since_last_update = 1000
-    print (time_since_last_update)
+        time_since_last_upload = 1000
+    print (time_since_last_upload)
     if type in prio:
         priority = prio[type]
     else:
