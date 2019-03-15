@@ -44,7 +44,7 @@ def define_priority(evnt):
     priority = 0
     if evnt.which() == 'gpsLocationExternal':
         # get gps locations 
-        field1 = evnt.gpsLocation.latitude
+        field1 = evnt.gpsLocationExternal.latitude
         print (field1)
         priority = 1
     #last_update[evnt.which()] = now
