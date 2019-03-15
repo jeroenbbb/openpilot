@@ -35,6 +35,21 @@ def upload(msgtype, data):
     except:
         print ("Timeout, no upload")
 
+# check priority, not every message has to be uploaded every time
+# and some special fields can be extracted from the message
+# see cereal/log.capnp - struct Event for all possible messages
+def define_priority(evnt):
+    field1 = ""
+    field2 = ""
+    priority = 0
+    if evnt.which() == 'liveLocation':
+        # get gps locations 
+        field1 = evnt.latitude
+        print (field1)
+        priority = 1
+    #last_update[evnt.which()] = now
+    return priority, field1, field2
+
 def main(gctx=None):
 
     context = zmq.Context()
@@ -69,13 +84,14 @@ def main(gctx=None):
             # print (str(msg))
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
+            priority, field1, field2 = check_priority(evt)
             print(evt)
             print(evt.which())
 
             # check if this message has to uploaded
             # check_priority
             
-            if priority == 1:
+            if priority == 10:
                 upload(evt.which(), evt)
                 priority = 0
         
