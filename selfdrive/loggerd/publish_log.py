@@ -57,7 +57,8 @@ def define_priority(evnt):
     field1 = ""
     field2 = ""
     priority = 0
-    if evnt.which() == 'gpsLocationExternal':
+    type = evnt.which()
+    if type == 'gpsLocationExternal':
         # get gps locations 
         field1 = evnt.gpsLocationExternal.latitude
         field2 = evnt.gpsLocationExternal.longitude
@@ -66,12 +67,16 @@ def define_priority(evnt):
         
     # check time since last upload
     if evnt.which() in last_upload:
-        time_since_last_upload = last_upload[evnt.which()] - evnt.logMonoTime
+        time_since_last_upload = last_upload[type] - evnt.logMonoTime
     else:
         time_since_last_update = 1000
     print (time_since_last_update)
-    print(prio[evnt.which()])
-    last_upload[evnt.which()] = evnt.logMonoTime
+    if type in prio:
+        priority = prio[type]
+    else:
+        priority = 0
+    print(priority)
+    last_upload[type] = evnt.logMonoTime
     return priority, field1, field2
 
 def main(gctx=None):
