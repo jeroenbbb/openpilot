@@ -47,6 +47,7 @@ def define_priority(evnt):
         field1 = evnt.gpsLocationExternal.latitude
         field2 = evnt.gpsLocationExternal.longitude
         print (field1)
+        print (evnt.logMonoTime)
         priority = 1
     #last_update[evnt.which()] = now
     return priority, field1, field2
