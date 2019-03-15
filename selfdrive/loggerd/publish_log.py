@@ -21,12 +21,14 @@ for service in service_list:
     print (service)
     print (service_list[service].port)
 
-# set priorities for evenry message
-# name, number of seconds between 2 uploads, monotime of last upload
-prio = {
+# set upload time interval for every message
+# name, number of seconds between 2 uploads
+upload_interval = {
     "gpsLocationExternal": 5,
     "navUpdate": 30,
-    "logMessage": 120
+    "logMessage": 120,
+    "health": 300,
+    "thermal": 300
 }
 
 # define list for all last uploads
@@ -49,7 +51,8 @@ def upload(msgtype, data):
 # check priority, not every message has to be uploaded every time
 # and some special fields can be extracted from the message
 # see cereal/log.capnp - struct Event for all possible messages
-def define_priority(evnt):
+
+def define_upload_required(evnt):
     
     field1 = ""
     field2 = ""
@@ -61,14 +64,14 @@ def define_priority(evnt):
         field1 = evnt.gpsLocationExternal.latitude
         field2 = evnt.gpsLocationExternal.longitude
         
-    # check time since last upload
-    if evnt.which() in last_upload:
+    # check time in sec since last upload
+    if type in last_upload:
         time_since_last_upload = (evnt.logMonoTime - last_upload[type]) / 1000000000
     else:
         time_since_last_upload = 1000
-    print (time_since_last_upload)
-    if type in prio:
-        if prio[type] < time_since_last_upload:
+    # print (time_since_last_upload)
+    if type in upload_interval:
+        if upload_interval[type] < time_since_last_upload:
             # priority of message type is higher than the last upload
             # so a next upload is required
             print ("Upload required")
@@ -113,7 +116,7 @@ def main(gctx=None):
             evt = log.Event.from_bytes(msg)
             print(evt.which())
             # check if the message has to be uploaded or not 
-            upload_required, field1, field2 = define_priority(evt)
+            upload_required, field1, field2 = define_upload_required(evt)
             #print(evt)
  
             if priority == 10:
