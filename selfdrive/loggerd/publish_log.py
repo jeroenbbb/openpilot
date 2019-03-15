@@ -29,7 +29,7 @@ prio = {
     "logMessage": 120
 }
 
-@ define list for all last uploads
+# define list for all last uploads
 last_upload = {}
 
 print ("xxxxxxxxxxxxxxx")
