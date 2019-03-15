@@ -28,7 +28,9 @@ prio = {
     "navUpdate": {30,0},
     "logMessage": {120,0}
 }
-    
+
+print (prio["navUpdate"][0])
+
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
     post_fields = {'type': msgtype, 'data': data}
