@@ -29,6 +29,9 @@ prio = {
     "logMessage": 120
 }
 
+@ define list for all last uploads
+last_upload = {}
+
 print ("xxxxxxxxxxxxxxx")
 print (prio['navUpdate'])
 print ("xxxxxxxxxxxxxxx")
@@ -59,9 +62,14 @@ def define_priority(evnt):
         field1 = evnt.gpsLocationExternal.latitude
         field2 = evnt.gpsLocationExternal.longitude
         print (field1)
-        print (evnt.logMonoTime)
         priority = 1
-    #last_update[evnt.which()] = now
+        
+    # check time since last upload
+    if evnt.which() in last_upload:
+        time_since_last_upload = last_upload[evnt.which()] - evnt.logMonoTime
+    else:
+        time_since_last_update = 1000
+    last_upload[evnt.which()] = evnt.logMonoTime
     return priority, field1, field2
 
 def main(gctx=None):
