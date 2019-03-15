@@ -71,6 +71,7 @@ def define_priority(evnt):
         if prio[type] > time_since_last_upload:
             # priority of message type is higher than the last upload
             # so a next upload is required
+            print {"Upload required"}
             upload_required = True
             last_upload[type] = evnt.logMonoTime
 
