@@ -84,7 +84,7 @@ def main(gctx=None):
             # print (str(msg))
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
-            priority, field1, field2 = check_priority(evt)
+            priority, field1, field2 = define(evt)
             print(evt)
             print(evt.which())
 
