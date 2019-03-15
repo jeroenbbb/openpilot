@@ -29,7 +29,7 @@ prio = {
     "logMessage": {120,0}
 }
 
-print (prio["navUpdate"][0])
+print (prio["navUpdate"])
 
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
