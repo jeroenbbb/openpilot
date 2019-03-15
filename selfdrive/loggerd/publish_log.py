@@ -24,9 +24,9 @@ for service in service_list:
 # set priorities for evenry message
 # name, number of seconds between 2 uploads, monotime of last upload
 prio = {
-    "gpsLocationExternal": {5,0},
-    "navUpdate": {30,0},
-    "logMessage": {120,0}
+    "gpsLocationExternal": 5,
+    "navUpdate": 30,
+    "logMessage": 120
 }
 
 print (prio["navUpdate"])
