@@ -69,6 +69,8 @@ def define_priority(evnt):
         time_since_last_upload = last_upload[evnt.which()] - evnt.logMonoTime
     else:
         time_since_last_update = 1000
+    print (time_since_last_update)
+    print(prio[evnt.which()])
     last_upload[evnt.which()] = evnt.logMonoTime
     return priority, field1, field2
 
