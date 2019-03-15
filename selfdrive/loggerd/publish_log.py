@@ -21,6 +21,14 @@ for service in service_list:
     print (service)
     print (service_list[service].port)
 
+# set priorities for evenry message
+# name, number of seconds between 2 uploads, monotime of last upload
+prio = {
+    "gpsLocationExternal": {5,0},
+    "navUpdate": {30,0},
+    "logMessage": {120,0}
+}
+    
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
     post_fields = {'type': msgtype, 'data': data}
