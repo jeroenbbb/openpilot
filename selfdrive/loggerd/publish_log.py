@@ -50,30 +50,31 @@ def upload(msgtype, data):
 # and some special fields can be extracted from the message
 # see cereal/log.capnp - struct Event for all possible messages
 def define_priority(evnt):
+    
     field1 = ""
     field2 = ""
-    priority = 0
+    upload_required = False
+    
     type = evnt.which()
     if type == 'gpsLocationExternal':
         # get gps locations 
         field1 = evnt.gpsLocationExternal.latitude
         field2 = evnt.gpsLocationExternal.longitude
-        print (field1)
-        priority = 1
         
     # check time since last upload
     if evnt.which() in last_upload:
-        time_since_last_upload = (c - evnt.logMonoTime) / 1000000000
+        time_since_last_upload = (evnt.logMonoTime - last_upload[type]) / 1000000000
     else:
         time_since_last_upload = 1000
     print (time_since_last_upload)
     if type in prio:
-        priority = prio[type]
-    else:
-        priority = 0
-    print(priority)
-    last_upload[type] = evnt.logMonoTime
-    return priority, field1, field2
+        if prio[type] > time_since_last_upload:
+            # priority of message type is higher than the last upload
+            # so a next upload is required
+            upload_required = True
+            last_upload[type] = evnt.logMonoTime
+
+    return upload_required, field1, field2
 
 def main(gctx=None):
 
@@ -109,7 +110,7 @@ def main(gctx=None):
             # print (str(msg))
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
-            priority, field1, field2 = define_priority(evt)
+            upload_required, field1, field2 = define_priority(evt)
             print(evt)
             print(evt.which())
 
