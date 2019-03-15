@@ -32,10 +32,6 @@ prio = {
 # define list for all last uploads
 last_upload = {}
 
-print ("xxxxxxxxxxxxxxx")
-print (prio['navUpdate'])
-print ("xxxxxxxxxxxxxxx")
-
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
     post_fields = {'type': msgtype, 'data': data}
@@ -67,7 +63,7 @@ def define_priority(evnt):
         
     # check time since last upload
     if evnt.which() in last_upload:
-        time_since_last_upload = (last_upload[type] - evnt.logMonoTime) / 1000000000
+        time_since_last_upload = (c - evnt.logMonoTime) / 1000000000
     else:
         time_since_last_upload = 1000
     print (time_since_last_upload)
