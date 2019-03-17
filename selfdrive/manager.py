@@ -121,7 +121,7 @@ managed_processes = {
 # and geofgence added
    "gpsd": "selfdrive.sensord.gps",
    "geofence": "selfdrive.sensord.geofence",  
-@  "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
+#  "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
 #  "updated": "selfdrive.updated",
 }
 android_packages = ("ai.comma.plus.offroad", "ai.comma.plus.frame")
