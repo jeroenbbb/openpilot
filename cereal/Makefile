@@ -1,4 +1,5 @@
 # check http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info on makefile
+# arm needs other files: https://opensuse.pkgs.org/42.3/packman/capnproto-0.7.0-2.2.armv7hl.rpm.html
 # started from manager.py, make -j4 in cereal dir
 # required command on Rpi: (only c++ stuff is needed)
 
