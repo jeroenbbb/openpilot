@@ -257,6 +257,10 @@ def thermald_thread():
     fan_speed = handle_fan(max_cpu_temp, bat_temp, fan_speed)
     msg.thermal.fanSpeed = fan_speed
 
+    # check if cpu temp is not in centigrades
+    if max_cpu_temp > 1000:
+      max_cpu_temp = max_cpu_temp / 100.
+    
     # thermal logic with hysterisis
     if max_cpu_temp > 107. or bat_temp >= 63.:
       # onroad not allowed
