@@ -292,7 +292,9 @@ def thermald_thread():
     completed_training = params.get("CompletedTrainingVersion") == training_version
 
     should_start = ignition
-
+    print ("should start: ")
+    print (should_start)
+    
     # have we seen a panda?
     passive = (params.get("Passive") == "1")
 
