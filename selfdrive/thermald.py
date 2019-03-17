@@ -200,7 +200,7 @@ def thermald_thread():
   count = 0
 
   off_ts = None
-  started_ts = None
+  started_ts = None                             # start time in seconds
   ignition_seen = False
   started_seen = False
   passive_starter = LocationStarter()
@@ -295,8 +295,6 @@ def thermald_thread():
     completed_training = params.get("CompletedTrainingVersion").decode() == training_version
 
     should_start = ignition
-    print ("should start: ")
-    print (should_start)
     
     # have we seen a panda?
     passive = (params.get("Passive").decode() == "1")
@@ -324,6 +322,7 @@ def thermald_thread():
     if thermal_status >= ThermalStatus.danger:
       # TODO: Add a better warning when this is happening
       should_start = False
+      print ("Thermal status/ temperature too high" + str(max_cpu_temp))
 
     if should_start:
       off_ts = None
