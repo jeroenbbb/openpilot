@@ -291,8 +291,8 @@ def thermald_thread():
       ignition = True
 
     do_uninstall = params.get("DoUninstall") == "1"
-    accepted_terms = params.get("HasAcceptedTerms") == "1"
-    completed_training = params.get("CompletedTrainingVersion") == training_version
+    accepted_terms = params.get("HasAcceptedTerms").decode() == "1"
+    completed_training = params.get("CompletedTrainingVersion").decode() == training_version
 
     should_start = ignition
     print ("should start: ")
