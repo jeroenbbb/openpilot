@@ -252,14 +252,15 @@ def thermald_thread():
     # TODO: add car battery voltage check
     max_cpu_temp = max(msg.thermal.cpu0, msg.thermal.cpu1,
                        msg.thermal.cpu2, msg.thermal.cpu3) / 10.0
+
+    # check if cpu temp is not in milligrades
+    if max_cpu_temp > 1000:
+      max_cpu_temp = max_cpu_temp / 100.
+      
     max_comp_temp = max(max_cpu_temp, msg.thermal.mem / 10., msg.thermal.gpu / 10.)
     bat_temp = msg.thermal.bat/1000.
     fan_speed = handle_fan(max_cpu_temp, bat_temp, fan_speed)
     msg.thermal.fanSpeed = fan_speed
-
-    # check if cpu temp is not in centigrades
-    if max_cpu_temp > 1000:
-      max_cpu_temp = max_cpu_temp / 100.
     
     # thermal logic with hysterisis
     if max_cpu_temp > 107. or bat_temp >= 63.:
