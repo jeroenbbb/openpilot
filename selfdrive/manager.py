@@ -95,6 +95,8 @@ from selfdrive.loggerd.config import ROOT
 cloudlog.info('Cloudlog info level is activated')
 
 # comment out anything you don't want to run
+# compilation in orb is an issue ...
+
 managed_processes = {
   "thermald": "selfdrive.thermald",
 #  "uploader": "selfdrive.loggerd.uploader",
@@ -119,7 +121,7 @@ managed_processes = {
 # and geofgence added
    "gpsd": "selfdrive.sensord.gps",
    "geofence": "selfdrive.sensord.geofence",  
-  "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
+@  "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
 #  "updated": "selfdrive.updated",
 }
 android_packages = ("ai.comma.plus.offroad", "ai.comma.plus.frame")
