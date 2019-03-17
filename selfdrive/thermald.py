@@ -299,7 +299,7 @@ def thermald_thread():
     print (should_start)
     
     # have we seen a panda?
-    passive = (params.get("Passive") == "1")
+    passive = (params.get("Passive").decode() == "1")
 
     # start on gps movement if we haven't seen ignition and are in passive mode
     should_start = should_start or (not (ignition_seen and health) # seen ignition and panda is connected
@@ -316,7 +316,7 @@ def thermald_thread():
     should_start = should_start and accepted_terms and (passive or completed_training) and (not do_uninstall)
 
     print ("should start: ")
-    print (params.get("HasAcceptedTerms"))
+    print (should_start, accepted_terms, passive)
 
 
     # if any CPU gets above 107 or the battery gets above 63, kill all processes
