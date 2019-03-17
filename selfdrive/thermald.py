@@ -316,7 +316,7 @@ def thermald_thread():
     should_start = should_start and accepted_terms and (passive or completed_training) and (not do_uninstall)
 
     print ("should start: ")
-    print (accepted_terms)
+    print (params.get("HasAcceptedTerms"))
 
 
     # if any CPU gets above 107 or the battery gets above 63, kill all processes
