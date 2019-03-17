@@ -312,6 +312,9 @@ def thermald_thread():
     # confirm we have completed training and aren't uninstalling
     should_start = should_start and accepted_terms and (passive or completed_training) and (not do_uninstall)
 
+    print ("should start: ")
+    print (should_start)
+
     # if any CPU gets above 107 or the battery gets above 63, kill all processes
     # controls will warn with CPU above 95 or battery above 60
     if thermal_status >= ThermalStatus.danger:
