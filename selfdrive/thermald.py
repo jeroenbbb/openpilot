@@ -278,6 +278,9 @@ def thermald_thread():
       thermal_status = ThermalStatus.green
 
     # **** starting logic ****
+    # a health message with started=true is required
+    #  or a voltage > 13.5 (meaning the engine is running)
+    # and 2% free disk space
 
     # start constellation of processes when the car starts
     ignition = health is not None and health.health.started
@@ -313,7 +316,8 @@ def thermald_thread():
     should_start = should_start and accepted_terms and (passive or completed_training) and (not do_uninstall)
 
     print ("should start: ")
-    print (should_start)
+    print (accepted_terms)
+
 
     # if any CPU gets above 107 or the battery gets above 63, kill all processes
     # controls will warn with CPU above 95 or battery above 60
