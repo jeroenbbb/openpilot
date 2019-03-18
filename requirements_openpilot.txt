@@ -52,7 +52,7 @@ sudo apt-get install libdc1394-22-dev libv4l-dev
 
 capnp C++ compiler stuff:
 ----------------------------
-https://capnproto.org/install.html
+https://capnproto.org/install.html, use the tarball 0.7.0 version (apt-get will give version 5 which is too old)
 https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
 https://solarianprogrammer.com/2018/04/22/raspberry-pi-raspbian-install-clang-compile-cpp-17-programs/
 
@@ -65,7 +65,12 @@ export PATH=/usr/local/gcc-8.1.0/bin:$PATH
 set chmod for directories for file creation rights
 chmod -R 0777 ./selfdrive/proclogd
 
+do not use this:
+-----------------
 sudo apt-get -y install capnproto
+
+general apt-get stuff:
+----------------------
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt autoremove
