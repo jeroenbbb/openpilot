@@ -159,14 +159,12 @@ def mapsd_thread():
   
   global last_gps
   
-  print ("Thread started indeed")
-  
   context = zmq.Context()
   gps_sock = messaging.sub_sock(context, service_list['gpsLocation'].port, conflate=True)
   gps_external_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port, conflate=True)
   map_data_sock = messaging.pub_sock(context, service_list['liveMapData'].port)
 
-  print ("Thread started indeed2")
+  print ("Waiting for internal or external GPS in mapsd thread")
   
   cur_way = None
   curvature_valid = False
@@ -174,12 +172,18 @@ def mapsd_thread():
   upcoming_curvature = 0.
   dist_to_turn = 0.
   road_points = None
+  gps_found = false
 
   while True:
-    gps = messaging.recv_one(gps_sock)
-    gps_ext = messaging.recv_one_or_none(gps_external_sock)
+
+    # wait for at least 1 GPS signal
+    while not gps_found:
+      gps = messaging.recv_one_or_none(gps_sock)
+      gps_ext = messaging.recv_one_or_none(gps_external_sock)
+      if gps_ext not None or gps not None:
+        gps_found = true
     
-    print ("Thread started indeed3")
+    print ("GPS found")
 
     if gps_ext is not None:
       gps = gps_ext.gpsLocationExternal
