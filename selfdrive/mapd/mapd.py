@@ -99,7 +99,7 @@ def query_thread():
   # all within a search box (e.g. 4 points or a circle)
   # the parm timeout used in OP is not valid
   # api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, timeout=10.)
-  api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, default_retry_timeout=10.)
+  api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, retry_timeout=10.)
 
   while True:
     time.sleep(1)
