@@ -178,6 +178,8 @@ def mapsd_thread():
   while True:
     gps = messaging.recv_one(gps_sock)
     gps_ext = messaging.recv_one_or_none(gps_external_sock)
+    
+    print ("Thread started indeed3")
 
     if gps_ext is not None:
       gps = gps_ext.gpsLocationExternal
