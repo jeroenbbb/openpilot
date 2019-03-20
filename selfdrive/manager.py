@@ -103,7 +103,7 @@ managed_processes = {
   "controlsd": "selfdrive.controls.controlsd",
   "radard": "selfdrive.controls.radard",
 #  "ubloxd": "selfdrive.locationd.ubloxd",
-  "mapd": "selfdrive.mapd.mapd",
+#  "mapd": "selfdrive.mapd.mapd",
   "loggerd": ("selfdrive/loggerd", ["./loggerd"]),
   "logmessaged": "selfdrive.logmessaged",
 #  "tombstoned": "selfdrive.tombstoned",
