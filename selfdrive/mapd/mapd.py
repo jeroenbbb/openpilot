@@ -97,9 +97,9 @@ def query_thread():
   
   # overpy.Overpass is an API to access openmaps data using nodes, ways and relations
   # all within a search box (e.g. 4 points or a circle)
-  # the parm timeout used in OP is not valid
+  # the parm timeout and headers used in OP are not valid
   # api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, timeout=10.)
-  api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, retry_timeout=10.)
+  api = overpy.Overpass(url=OVERPASS_API_URL, retry_timeout=10.)
 
   while True:
     time.sleep(1)
