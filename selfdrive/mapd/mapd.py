@@ -27,6 +27,11 @@ import numpy as np
 import overpy
 from collections import defaultdict
 
+
+if __name__ == "__main__":
+    sys.path.append("/home/pi/openpilot")
+
+
 from common.params import Params
 from common.transformations.coordinates import geodetic2ecef
 from selfdrive.services import service_list
