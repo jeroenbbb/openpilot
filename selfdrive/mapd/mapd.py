@@ -158,12 +158,16 @@ def mapsd_thread():
   # and send all results to zmq
   
   global last_gps
-
+  
+  print ("Thread started indeed")
+  
   context = zmq.Context()
   gps_sock = messaging.sub_sock(context, service_list['gpsLocation'].port, conflate=True)
   gps_external_sock = messaging.sub_sock(context, service_list['gpsLocationExternal'].port, conflate=True)
   map_data_sock = messaging.pub_sock(context, service_list['liveMapData'].port)
 
+  print ("Thread started indeed2")
+  
   cur_way = None
   curvature_valid = False
   curvature = None
@@ -305,6 +309,8 @@ def main(gctx=None):
   q_thread = threading.Thread(target=query_thread)
   q_thread.daemon = True
   q_thread.start()
+  
+  print ("Thread started")
 
   while True:
     time.sleep(0.1)
