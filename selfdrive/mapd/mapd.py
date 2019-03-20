@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# see https://towardsdatascience.com/loading-data-from-openstreetmap-with-python-and-the-overpass-api-513882a27fd0
+
 # Add phonelibs openblas to LD_LIBRARY_PATH if import fails
 try:
   from scipy import spatial
@@ -92,7 +94,12 @@ def build_way_query(lat, lon, radius=50):
 
 def query_thread():
   global last_query_result, last_query_pos, cache_valid
-  api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, timeout=10.)
+  
+  # overpy.Overpass is an API to access openmaps data using nodes, ways and relations
+  # all within a search box (e.g. 4 points or a circle)
+  # the parm timeout used in OP is not valid
+  # api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, timeout=10.)
+  api = overpy.Overpass(url=OVERPASS_API_URL, headers=OVERPASS_HEADERS, default_retry_timeout=10.)
 
   while True:
     time.sleep(1)
