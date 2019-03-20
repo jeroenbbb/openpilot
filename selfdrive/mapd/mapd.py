@@ -172,23 +172,27 @@ def mapsd_thread():
   upcoming_curvature = 0.
   dist_to_turn = 0.
   road_points = None
-  gps_found = False
+  
 
   while True:
 
     # wait for at least 1 GPS signal
+    gps_found = False
     while not gps_found:
       gps = messaging.recv_one_or_none(gps_sock)
       gps_ext = messaging.recv_one_or_none(gps_external_sock)
       if gps_ext is not None or gps is not None:
         gps_found = True
+      else
+        sleep(1)
     
-    print ("GPS found")
 
     if gps_ext is not None:
       gps = gps_ext.gpsLocationExternal
+      print ("External GPS found")
     else:
       gps = gps.gpsLocation
+      print ("GPS found")
 
     last_gps = gps
 
