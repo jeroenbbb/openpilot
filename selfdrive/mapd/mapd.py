@@ -180,7 +180,7 @@ def mapsd_thread():
     while not gps_found:
       gps = messaging.recv_one_or_none(gps_sock)
       gps_ext = messaging.recv_one_or_none(gps_external_sock)
-      if gps_ext not None or gps not None:
+      if gps_ext is not None or gps is not None:
         gps_found = true
     
     print ("GPS found")
