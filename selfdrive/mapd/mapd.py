@@ -215,6 +215,7 @@ def mapsd_thread():
       heading = gps.bearing
       speed = gps.speed
 
+      # find the closest road to the gps data = current way
       query_lock.acquire()
       cur_way = Way.closest(last_query_result, lat, lon, heading, cur_way)
       if cur_way is not None:
@@ -224,7 +225,9 @@ def mapsd_thread():
         xs = pnts[:, 0]
         ys = pnts[:, 1]
         print ("points=" + str(xs) + str(pnts))
-        road_points = map(float, xs), map(float, ys)
+        # map function in python3 no longer returns a list
+        #road_points = map(float, xs), map(float, ys)
+        road_points = list(map(float, xs), map(float, ys))
         print ("road points1 = " + str(road_points))
 
         if speed < 10:
