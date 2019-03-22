@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # see https://towardsdatascience.com/loading-data-from-openstreetmap-with-python-and-the-overpass-api-513882a27fd0
+# see https://wiki.openstreetmap.org/wiki/Template:Highways
 
 # Add phonelibs openblas to LD_LIBRARY_PATH if import fails
 try:
