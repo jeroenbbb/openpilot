@@ -81,7 +81,8 @@ def setup_thread_excepthook():
 
 
 def build_way_query(lat, lon, radius=50):
-  """Builds a query to find all highways within a given radius around a point"""
+  # Builds a query to find all highways within a given radius around a point
+  # changed so it also finds other roads and cycleway
   pos = "  (around:%f,%f,%f)" % (radius, lat, lon)
   q = """(
   way
@@ -217,11 +218,13 @@ def mapsd_thread():
       query_lock.acquire()
       cur_way = Way.closest(last_query_result, lat, lon, heading, cur_way)
       if cur_way is not None:
+        print ("cur_way=" + str(cur_way))
         pnts, curvature_valid = cur_way.get_lookahead(last_query_result, lat, lon, heading, MAPS_LOOKAHEAD_DISTANCE)
 
         xs = pnts[:, 0]
         ys = pnts[:, 1]
         road_points = map(float, xs), map(float, ys)
+        print ("road points1 = " + str(road_points))
 
         if speed < 10:
           curvature_valid = False
@@ -294,7 +297,7 @@ def mapsd_thread():
       if max_speed is not None:
         dat.liveMapData.speedLimitValid = True
         dat.liveMapData.speedLimit = max_speed
-        print ("speedlimit")
+        print ("speedlimit=" + str(max_speed))
 
       # Curvature
       dat.liveMapData.curvatureValid = curvature_valid
@@ -302,6 +305,8 @@ def mapsd_thread():
       dat.liveMapData.distToTurn = float(dist_to_turn)
       if road_points is not None:
         print (road_points)
+        # skip this bcoz it gives error now
+        # TODO fix this !!
         dat.liveMapData.roadX, dat.liveMapData.roadY = road_points
       if curvature is not None:
         dat.liveMapData.roadCurvatureX = map(float, dists)
