@@ -227,7 +227,7 @@ def mapsd_thread():
         print ("points=" + str(xs) + str(pnts))
         # map function in python3 no longer returns a list
         #road_points = map(float, xs), map(float, ys)
-        road_points = list(map(float, xs), map(float, ys))
+        road_points = list(map(float, xs)), list(map(float, ys))
         print ("road points1 = " + str(road_points))
 
         if speed < 10:
