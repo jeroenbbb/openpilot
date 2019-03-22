@@ -317,8 +317,11 @@ def mapsd_thread():
         # TODO fix this !!
         dat.liveMapData.roadX, dat.liveMapData.roadY = road_points
       if curvature is not None:
-        dat.liveMapData.roadCurvatureX = map(float, dists)
-        dat.liveMapData.roadCurvature = map(float, curvature)
+        # python3 map function doesnt generate a lsit
+        # dat.liveMapData.roadCurvatureX = map(float, dists)
+        # dat.liveMapData.roadCurvature = map(float, curvature)
+        dat.liveMapData.roadCurvatureX = list(map(float, dists))
+        dat.liveMapData.roadCurvature = list(map(float, curvature))
 
     dat.liveMapData.mapValid = map_valid
 
