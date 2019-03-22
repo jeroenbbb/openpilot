@@ -28,7 +28,8 @@ upload_interval = {
     "navUpdate": 30,
     "logMessage": 120,
     "health": 300,
-    "thermal": 30
+    "thermal": 30,
+    "liveMapData": 30
 }
 
 # define list for all last uploads
@@ -117,7 +118,7 @@ def main(gctx=None):
             print(evt.which())
             # check if the message has to be uploaded or not 
             upload_required, field1, field2 = define_upload_required(evt)
-            if evt.which() == 'thermal':
+            if evt.which() == 'liveMapData':
                 print(evt)
  
             if priority == 10:
