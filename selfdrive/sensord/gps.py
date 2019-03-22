@@ -107,6 +107,7 @@ def main(gctx=None):
         msg.gpsLocationExternal.bearing = bearing
         msg.gpsLocationExternal.accuracy = accuracy
         msg.gpsLocationExternal.source = "external"
+        msg.gpsLocationExternal.flags = 1
         gps_sock.send(msg.to_bytes())
         #cloudlog.info ("Message sent: " + str(latitude) + " " + str(longitude))
 
