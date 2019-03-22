@@ -224,6 +224,8 @@ def mapsd_thread():
       cur_way = Way.closest(last_query_result, lat, lon, heading, cur_way)
       if cur_way is not None:
         print ("cur_way=" + str(cur_way))
+        roadName = cur_way["name"]
+        print ("Road name=" + roadName)
         pnts, curvature_valid = cur_way.get_lookahead(last_query_result, lat, lon, heading, MAPS_LOOKAHEAD_DISTANCE)
 
         xs = pnts[:, 0]
