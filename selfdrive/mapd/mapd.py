@@ -183,7 +183,7 @@ def mapsd_thread():
       gps_ext = messaging.recv_one_or_none(gps_external_sock)
       if gps_ext is not None or gps is not None:
         gps_found = True
-      else
+      else:
         sleep(1)
     
 
