@@ -172,6 +172,8 @@ def mapsd_thread():
   upcoming_curvature = 0.
   dist_to_turn = 0.
   road_points = None
+  lat = 0
+  lon = 0
   
 
   while True:
