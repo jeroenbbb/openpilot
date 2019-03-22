@@ -212,6 +212,10 @@ def mapsd_thread():
       dist_to_turn = 0.
       road_points = None
       map_valid = False
+      roadName = ""
+      lanes = 0
+      surface = ""
+      highway = ""
     else:
       map_valid = True
       lat = gps.latitude
@@ -223,11 +227,10 @@ def mapsd_thread():
       query_lock.acquire()
       cur_way = Way.closest(last_query_result, lat, lon, heading, cur_way)
       if cur_way is not None:
+        # get all the details of the road
         print ("cur_way=" + str(cur_way))
-        roadName = cur_way.road_name
-        print ("Road name=" + roadName)
-        tags = cur_way.tags
-        road_name = (tags['name'])
+        roadName, lanes, surface, highway = cur_way.road_details
+
         pnts, curvature_valid = cur_way.get_lookahead(last_query_result, lat, lon, heading, MAPS_LOOKAHEAD_DISTANCE)
 
         xs = pnts[:, 0]
