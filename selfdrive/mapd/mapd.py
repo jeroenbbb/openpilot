@@ -184,7 +184,7 @@ def mapsd_thread():
       if gps_ext is not None or gps is not None:
         gps_found = True
       else:
-        sleep(1)
+        time.sleep(1)
     
 
     if gps_ext is not None:
