@@ -152,6 +152,22 @@ class Way:
       pass
 
     return max_speed
+  
+  
+  @property
+  def road_name(self):
+    """Extracts the road name from a way"""
+    if not self.way:
+      return None
+
+    tags = self.way.tags
+    road_name = ""
+
+    if 'name' in tags:
+      road_name = (tags['name'])
+
+    return road_name
+  
 
   def on_way(self, lat, lon, heading, points=None):
     if points is None:
