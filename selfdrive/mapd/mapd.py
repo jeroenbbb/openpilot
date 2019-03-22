@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# thsi progran reads current gps location, find the road in openmaps and caculates the curves ahead
+# it will publish the liveMapData message
+
 # see https://towardsdatascience.com/loading-data-from-openstreetmap-with-python-and-the-overpass-api-513882a27fd0
 # see https://wiki.openstreetmap.org/wiki/Template:Highways
 
@@ -225,13 +228,13 @@ def mapsd_thread():
 
         xs = pnts[:, 0]
         ys = pnts[:, 1]
-        print ("points=" + str(xs) + str(pnts))
         # map function in python3 no longer returns a list
         #road_points = map(float, xs), map(float, ys)
         road_points = list(map(float, xs)), list(map(float, ys))
-        print ("road points1 = " + str(road_points))
 
-        if speed < 10:
+        # minimum speed adjusted so we can use it in slower vehicles
+        if speed < 4:
+        #if speed < 10:
           curvature_valid = False
         if curvature_valid and pnts.shape[0] <= 3:
           curvature_valid = False
