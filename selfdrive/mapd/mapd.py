@@ -230,7 +230,7 @@ def mapsd_thread():
         # get all the details of the road
         print ("cur_way=" + str(cur_way))
         roadName, lanes, surface, highway = cur_way.road_details
-        print ("Road details" + cur_way.road_details)
+        print ("Road details" + str(cur_way.road_details))
         pnts, curvature_valid = cur_way.get_lookahead(last_query_result, lat, lon, heading, MAPS_LOOKAHEAD_DISTANCE)
 
         xs = pnts[:, 0]
