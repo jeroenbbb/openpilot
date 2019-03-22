@@ -6,6 +6,9 @@
 # see https://towardsdatascience.com/loading-data-from-openstreetmap-with-python-and-the-overpass-api-513882a27fd0
 # see https://wiki.openstreetmap.org/wiki/Template:Highways
 
+
+# TODO : extend message with fields for road details (name, highway type, lanes)
+
 # Add phonelibs openblas to LD_LIBRARY_PATH if import fails
 try:
   from scipy import spatial
@@ -294,8 +297,7 @@ def mapsd_thread():
 
       query_lock.release()
 
-    print ("GPS data " + str(fix_ok) + " " + str(lat) + " " + str(lon))
-
+    # now send the liveMapData message 
     dat = messaging.new_message()
     dat.init('liveMapData')
 
@@ -319,9 +321,6 @@ def mapsd_thread():
       dat.liveMapData.curvature = float(upcoming_curvature)
       dat.liveMapData.distToTurn = float(dist_to_turn)
       if road_points is not None:
-        print (road_points)
-        # skip this bcoz it gives error now
-        # TODO fix this !!
         dat.liveMapData.roadX, dat.liveMapData.roadY = road_points
       if curvature is not None:
         # python3 map function doesnt generate a lsit
