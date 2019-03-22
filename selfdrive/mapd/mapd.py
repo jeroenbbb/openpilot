@@ -223,7 +223,7 @@ def mapsd_thread():
 
         xs = pnts[:, 0]
         ys = pnts[:, 1]
-        print ("points=" + str(xs) + pnts)
+        print ("points=" + str(xs) + str(pnts))
         road_points = map(float, xs), map(float, ys)
         print ("road points1 = " + str(road_points))
 
