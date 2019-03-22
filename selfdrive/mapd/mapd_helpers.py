@@ -155,18 +155,30 @@ class Way:
   
   
   @property
-  def road_name(self):
+  def road_details(self):
     """Extracts the road name from a way"""
     if not self.way:
-      return None
+      return None, None, None, None
 
     tags = self.way.tags
     road_name = ""
+    lanes = 0
+    surface = ""
+    highway = ""
 
     if 'name' in tags:
       road_name = (tags['name'])
 
-    return road_name
+    if 'lanes' in tags:
+      lanes = (tags['lanes'])
+
+    if 'surface' in tags:
+      road_name = (tags['surface'])
+
+    if 'highway' in tags:
+      road_name = (tags['highway'])
+      
+    return roadName, lanes, surface, highway
   
 
   def on_way(self, lat, lon, heading, points=None):
