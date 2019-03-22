@@ -276,7 +276,7 @@ def mapsd_thread():
 
       query_lock.release()
 
-    print ("GPS data" + str(lat) + " " + str(lon))
+    print ("GPS data " + str(fix_ok) + str(lat) + " " + str(lon))
       
     dat = messaging.new_message()
     dat.init('liveMapData')
