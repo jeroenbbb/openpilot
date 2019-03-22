@@ -165,7 +165,8 @@ class Way:
     lanes = 0
     surface = ""
     highway = ""
-
+    ref = ""
+    
     if 'name' in tags:
       road_name = (tags['name'])
 
@@ -177,6 +178,9 @@ class Way:
 
     if 'highway' in tags:
       road_name = (tags['highway'])
+
+    if 'ref' in tags:
+      road_name = road_name + " (" + (tags['name']) + ")"
       
     return road_name, lanes, surface, highway
   
