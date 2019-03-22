@@ -276,28 +276,32 @@ def mapsd_thread():
 
       query_lock.release()
 
-    print ("GPS data " + str(fix_ok) + str(lat) + " " + str(lon))
-      
+    print ("GPS data " + str(fix_ok) + " " + str(lat) + " " + str(lon))
+
     dat = messaging.new_message()
     dat.init('liveMapData')
 
     if last_gps is not None:
       dat.liveMapData.lastGps = last_gps
+      print ("lastgps")
 
     if cur_way is not None:
       dat.liveMapData.wayId = cur_way.id
+      print ("curway")
 
       # Speed limit
       max_speed = cur_way.max_speed
       if max_speed is not None:
         dat.liveMapData.speedLimitValid = True
         dat.liveMapData.speedLimit = max_speed
+        print ("speedlimit")
 
       # Curvature
       dat.liveMapData.curvatureValid = curvature_valid
       dat.liveMapData.curvature = float(upcoming_curvature)
       dat.liveMapData.distToTurn = float(dist_to_turn)
       if road_points is not None:
+        print (road_points)
         dat.liveMapData.roadX, dat.liveMapData.roadY = road_points
       if curvature is not None:
         dat.liveMapData.roadCurvatureX = map(float, dists)
