@@ -311,7 +311,7 @@ def mapsd_thread():
         print (road_points)
         # skip this bcoz it gives error now
         # TODO fix this !!
-        # dat.liveMapData.roadX, dat.liveMapData.roadY = road_points
+        dat.liveMapData.roadX, dat.liveMapData.roadY = road_points
       if curvature is not None:
         dat.liveMapData.roadCurvatureX = map(float, dists)
         dat.liveMapData.roadCurvature = map(float, curvature)
