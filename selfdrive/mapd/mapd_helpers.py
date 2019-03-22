@@ -178,7 +178,7 @@ class Way:
     if 'highway' in tags:
       road_name = (tags['highway'])
       
-    return roadName, lanes, surface, highway
+    return road_name, lanes, surface, highway
   
 
   def on_way(self, lat, lon, heading, points=None):
