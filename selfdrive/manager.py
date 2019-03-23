@@ -397,7 +397,7 @@ def manager_thread():
     cloudMsg = "Running: "
     for p in running:
       cloudMsg = cloudMsg + " %s %s, " % (p, running[p])
-      // cloudlog.debug("   Running %s %s" % (p, running[p]))
+      # cloudlog.debug("   Running %s %s" % (p, running[p]))
     cloudlog.info(cloudMsg)
 
     # is this still needed?
