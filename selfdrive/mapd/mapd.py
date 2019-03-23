@@ -332,9 +332,9 @@ def mapsd_thread():
         dat.liveMapData.roadCurvature = list(map(float, curvature))
 
     dat.liveMapData.mapValid = map_valid
-
+    print ("1")
     map_data_sock.send(dat.to_bytes())
-
+    print ("2")
 
 def main(gctx=None):
   params = Params()
