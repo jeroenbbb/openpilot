@@ -97,11 +97,12 @@ def read_next_line(content, count_igc_line):
     lon = float(line[15:23]) / 100000
     alt = int(line[25:30])
     print (lat, lon, alt)
+    return lat, lon
 # -------------------------------
 list_usb_devices()
 read_igc_file()
 count_igc_line = 0
-read_next_line(read_igc_file(),0)
+
 
 def main(gctx=None):
     gpsd_socket = gps3.GPSDSocket()
@@ -123,6 +124,8 @@ def main(gctx=None):
             print('Latitude = ',latitude)
             if not isinstance(latitude, float): 
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
+                latitude, longitude = read_next_line(read_igc_file(),count_igc_line)
+                
         else:
             # noting received, send some dummy data
             # print ("Nothing" + str(count))
