@@ -127,6 +127,7 @@ def query_thread():
         if dist > 3000:
           cache_valid = False
 
+      print (last_gps.latitude, last_gps.longitude)
       q = build_way_query(last_gps.latitude, last_gps.longitude, radius=3000)
       try:
         new_result = api.query(q)
