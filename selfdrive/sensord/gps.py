@@ -81,7 +81,7 @@ def make_some_dummy_data ():
 
 def read_igc_file():
     print (BASEDIR)
-    with open(BASEDIR + "/openpilot/selfdrive/sensord/openpilot.igc") as f:
+    with open(BASEDIR + "/selfdrive/sensord/openpilot.igc") as f:
         content = f.readlines()
     return content
 
