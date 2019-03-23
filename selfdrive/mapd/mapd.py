@@ -117,6 +117,7 @@ def query_thread():
         continue
 
       if last_query_pos is not None:
+        print (last_gps.latitude, last_gps.longitude)
         cur_ecef = geodetic2ecef((last_gps.latitude, last_gps.longitude, last_gps.altitude))
         prev_ecef = geodetic2ecef((last_query_pos.latitude, last_query_pos.longitude, last_query_pos.altitude))
         dist = np.linalg.norm(cur_ecef - prev_ecef)
