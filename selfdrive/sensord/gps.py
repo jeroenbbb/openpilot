@@ -130,6 +130,7 @@ def main(gctx=None):
             # noting received, send some dummy data
             # print ("Nothing" + str(count))
             latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
+            latitude, longitude = read_next_line(read_igc_file(),count_igc_line)
     
         sleep(0.5)
         count = count + 1
