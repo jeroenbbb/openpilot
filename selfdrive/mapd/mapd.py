@@ -226,6 +226,8 @@ def mapsd_thread():
       heading = gps.bearing
       speed = gps.speed
 
+      print (lat, lon, heading, speed)
+      
       # find the closest road to the gps data = current way
       query_lock.acquire()
       cur_way = Way.closest(last_query_result, lat, lon, heading, cur_way)
