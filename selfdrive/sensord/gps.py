@@ -34,6 +34,7 @@ from time import sleep
 
 import selfdrive.messaging as messaging
 from selfdrive.services import service_list
+from common.basedir import BASEDIR
 #from selfdrive.swaglog import cloudlog
 
 # use message port number for GPS messages defined in 
@@ -79,7 +80,8 @@ def make_some_dummy_data ():
 # example: B1433005223946N00437387EA0000800007
 
 def read_igc_file():
-    with open("openpilot.igc") as f:
+    print (BASEDIR)
+    with open(BASEDIR + "/openpilot/selfdrive/sensord/openpilot.igc") as f:
         content = f.readlines()
     return content
 
