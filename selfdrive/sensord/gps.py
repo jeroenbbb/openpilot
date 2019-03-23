@@ -67,9 +67,20 @@ def make_some_dummy_data ():
     bearing = float(0) + random.uniform(1,360)
     return latitude, longitude, speed, accuracy, bearing
 
+# read all data from igc file into a list
+# B H H M M S S D D M M M M M N D D D M M M M M E V P P P P P G G G G G CR LF
+# Description Size Element Remarks
+# Time 6 bytes HHMMSS Valid characters 0-9
+# Latitude 8 bytes DDMMMMMN Valid characters N, S, 0-9
+# Longitude 9 bytes DDDMMMMME Valid characters E,W, 0-9
+# Fix valid 1 byte V A: valid, V:nav warning
+# Press Alt. 5 bytes PPPPP Valid characters -, 0-9
+# GPS Alt. 5 bytes GGGGG 
+# example: B1433005223946N00437387EA0000800007
+
 def read_igc_file():
     with open("openpilot.igc") as f:
-        content = f.readlines().rstrip()
+        content = f.readlines().replace('\n', '')
     return content
 
         
