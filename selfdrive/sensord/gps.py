@@ -66,8 +66,16 @@ def make_some_dummy_data ():
     accuracy = float(2) + random.uniform(1,10)
     bearing = float(0) + random.uniform(1,360)
     return latitude, longitude, speed, accuracy, bearing
+
+def read_igc_file():
+    with open("openpilot.igc") as f:
+        content = f.readlines().rstrip()
+    return content
+
+        
 # -------------------------------
 list_usb_devices()
+read_igc_file()
 
 
 def main(gctx=None):
