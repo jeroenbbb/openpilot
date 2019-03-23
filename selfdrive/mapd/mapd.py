@@ -219,7 +219,10 @@ def mapsd_thread():
       lanes = 0
       surface = ""
       highway = ""
+      
+      print ("none")
     else:
+      print ("valid")
       map_valid = True
       lat = gps.latitude
       lon = gps.longitude
