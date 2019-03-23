@@ -80,7 +80,7 @@ def make_some_dummy_data ():
 
 def read_igc_file():
     with open("openpilot.igc") as f:
-        content = f.readlines().replace('\n', '')
+        content = f.readlines()
     return content
 
         
