@@ -83,11 +83,23 @@ def read_igc_file():
         content = f.readlines()
     return content
 
-        
+# search next line that start with a B
+def read_next_line(content, count_igc_line):
+    while check_char != "B":
+        count_igc_line = count_igc_line + 1
+        if count_igc_line >= len(content):
+            count_igc_line = 1
+        line = content[count]
+        check_char = line[:1]
+    lat = line[ 8:14]
+    lon = line[15:20]
+    alt = line[21:25]
+    print (lat, lon, alt)
 # -------------------------------
 list_usb_devices()
 read_igc_file()
-
+count_igc_line = 0
+read_next_line(read_igc_file(),0)
 
 def main(gctx=None):
     gpsd_socket = gps3.GPSDSocket()
