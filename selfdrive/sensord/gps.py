@@ -93,9 +93,9 @@ def read_next_line(content, count_igc_line):
             count_igc_line = 1
         line = content[count_igc_line]
         check_char = line[:1]
-    lat = line[ 8:14]
-    lon = line[15:20]
-    alt = line[21:25]
+    lat = line[ 7:14]
+    lon = line[15:23]
+    alt = line[26:30]
     print (lat, lon, alt)
 # -------------------------------
 list_usb_devices()
