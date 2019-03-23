@@ -101,7 +101,6 @@ def read_next_line(content, count_igc_line):
 # -------------------------------
 list_usb_devices()
 read_igc_file()
-count_igc_line = 0
 
 
 def main(gctx=None):
@@ -110,6 +109,7 @@ def main(gctx=None):
     gpsd_socket.connect()
     gpsd_socket.watch()
     count = 0
+    count_igc_line = 0
 
     # set message stuff
     context = zmq.Context()
