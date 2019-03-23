@@ -393,9 +393,12 @@ def manager_thread():
         start_managed_process('boardd')
     
     # check the status of all processes, did any of them die?
+    # and minimize number of logmessages
+    cloudMsg = "Running: "
     for p in running:
-      cloudlog.debug("   Running %s %s" % (p, running[p]))
-      # and sent the status of all processes to zmq
+      cloudMsg = cloudMsg + " %s %s, " % (p, running[p])
+      // cloudlog.debug("   Running %s %s" % (p, running[p]))
+    cloudlog.info(cloudMsg)
 
     # is this still needed?
     if params.get("DoUninstall") == "1":
