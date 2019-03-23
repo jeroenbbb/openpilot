@@ -85,6 +85,7 @@ def read_igc_file():
 
 # search next line that start with a B
 def read_next_line(content, count_igc_line):
+    check_char = ""
     while check_char != "B":
         count_igc_line = count_igc_line + 1
         if count_igc_line >= len(content):
