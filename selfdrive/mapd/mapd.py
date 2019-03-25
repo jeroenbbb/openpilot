@@ -127,7 +127,7 @@ def query_thread():
         if dist > 3000:
           cache_valid = False
 
-      print (last_gps.latitude, last_gps.longitude)
+      # print (last_gps.latitude, last_gps.longitude)
       q = build_way_query(last_gps.latitude, last_gps.longitude, radius=3000)
       try:
         new_result = api.query(q)
@@ -150,6 +150,7 @@ def query_thread():
             print ("ways")
             print (n.lat, n.lon)
 
+        # if no nodes are found, the geodetic will generate an error
         nodes = np.asarray(nodes)
         nodes = geodetic2ecef(nodes)
         tree = spatial.cKDTree(nodes)
@@ -245,7 +246,7 @@ def mapsd_thread():
         # get all the details of the road
         print ("cur_way=" + str(cur_way))
         roadName, lanes, surface, highway = cur_way.road_details
-        print ("Road details" + str(cur_way.road_details))
+        # print ("Road details" + str(cur_way.road_details))
         pnts, curvature_valid = cur_way.get_lookahead(last_query_result, lat, lon, heading, MAPS_LOOKAHEAD_DISTANCE)
 
         xs = pnts[:, 0]
@@ -327,6 +328,12 @@ def mapsd_thread():
         dat.liveMapData.speedLimitValid = True
         dat.liveMapData.speedLimit = max_speed
         print ("speedlimit=" + str(max_speed))
+        
+      # Road details
+      dat.liveMapData.roadName = roadName
+      dat.liveMapData.lanes = lanes
+      dat.liveMapData.surface = surface
+      dat.liveMapData.highway = highway
 
       # Curvature
       dat.liveMapData.curvatureValid = curvature_valid
@@ -342,9 +349,7 @@ def mapsd_thread():
         dat.liveMapData.roadCurvature = list(map(float, curvature))
 
     dat.liveMapData.mapValid = map_valid
-    print ("1")
     map_data_sock.send(dat.to_bytes())
-    print ("2")
 
 def main(gctx=None):
   params = Params()
