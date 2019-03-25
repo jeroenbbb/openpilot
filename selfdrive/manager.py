@@ -1,4 +1,9 @@
 #!/usr/bin/env python3.5
+
+# manager will start all requird processes (Python, C, C++)
+# for testing see also https://medium.com/@comma_ai/open-sourcing-openpilot-development-tools-a5bc427867b6
+
+
 import os
 import sys
 import fcntl
