@@ -98,6 +98,12 @@ def read_next_line(content, count_igc_line):
     lat = float(line[ 7:14]) / 100000
     lon = float(line[15:23]) / 100000
     alt = int(line[25:30])
+    # convert lat, lon from minutes to decimals 
+    intPart, decimalPart = divmod(lat, 1)
+    lat = intPart + decimalPart/60*100
+    intPart, decimalPart = divmod(lon, 1)
+    lon = intPart + decimalPart/60*100
+    
     print (lat, lon, alt)
     return lat, lon, count_igc_line
 # -------------------------------
