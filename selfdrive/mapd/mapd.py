@@ -131,7 +131,7 @@ def query_thread():
       q = build_way_query(last_gps.latitude, last_gps.longitude, radius=3000)
       try:
         new_result = api.query(q)
-        print (q)
+        # print (q)
         
         # Build kd-tree
         nodes = []
@@ -141,14 +141,14 @@ def query_thread():
         for n in new_result.nodes:
           nodes.append((float(n.lat), float(n.lon), 0))
           real_nodes.append(n)
-          print ("nodes")
-          print (n.lat, n.lon)
+          # print ("nodes")
+          # print (n.lat, n.lon)
 
         for way in new_result.ways:
           for n in way.nodes:
             node_to_way[n.id].append(way)
-            print ("ways")
-            print (n.lat, n.lon)
+            # print ("ways")
+            # print (n.lat, n.lon)
 
         # if no nodes are found, the geodetic will generate an error
         nodes = np.asarray(nodes)
@@ -228,9 +228,9 @@ def mapsd_thread():
       surface = ""
       highway = ""
       
-      print ("none")
+      # print ("none")
     else:
-      print ("valid")
+      # print ("valid")
       map_valid = True
       lat = gps.latitude
       lon = gps.longitude
@@ -316,18 +316,18 @@ def mapsd_thread():
 
     if last_gps is not None:
       dat.liveMapData.lastGps = last_gps
-      print ("lastgps")
+      # print ("lastgps")
 
     if cur_way is not None:
       dat.liveMapData.wayId = cur_way.id
-      print ("curway")
+      # print ("curway")
 
       # Speed limit
       max_speed = cur_way.max_speed
       if max_speed is not None:
         dat.liveMapData.speedLimitValid = True
         dat.liveMapData.speedLimit = max_speed
-        print ("speedlimit=" + str(max_speed))
+        # print ("speedlimit=" + str(max_speed))
         
       # Road details
       dat.liveMapData.roadName = roadName
