@@ -156,6 +156,8 @@ def query_thread():
         query_lock.release()
 
       except Exception as e:
+        print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+
         print ("error hier")
         print (e)
         query_lock.acquire()
