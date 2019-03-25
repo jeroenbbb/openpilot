@@ -140,10 +140,14 @@ def query_thread():
         for n in new_result.nodes:
           nodes.append((float(n.lat), float(n.lon), 0))
           real_nodes.append(n)
+          print ("nodes")
+          print (n.lat, n.lon)
 
         for way in new_result.ways:
           for n in way.nodes:
             node_to_way[n.id].append(way)
+            print ("ways")
+            print (n.lat, n.lon)
 
         nodes = np.asarray(nodes)
         nodes = geodetic2ecef(nodes)
@@ -157,9 +161,6 @@ def query_thread():
 
       except Exception as e:
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
-
-        print ("error hier")
-        print (e)
         query_lock.acquire()
         last_query_result = None
         query_lock.release()
