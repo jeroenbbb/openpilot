@@ -131,7 +131,8 @@ def query_thread():
       q = build_way_query(last_gps.latitude, last_gps.longitude, radius=3000)
       try:
         new_result = api.query(q)
-
+        print (q)
+        
         # Build kd-tree
         nodes = []
         real_nodes = []
