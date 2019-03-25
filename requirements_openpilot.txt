@@ -18,6 +18,9 @@ pip3 install psutil
 pip3 install libusb1
 pip3 install pyusb
 pip3 install gps3
+
+pip3 install pandacan  (set pythonpath to /usr/local/lib/python3.5/dist-packages/panda to prevent importerror on dfu
+
 pip3 install numpy --upgrade
 
 packages are installed in 
