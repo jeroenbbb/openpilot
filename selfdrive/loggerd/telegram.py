@@ -35,6 +35,11 @@ def get_json_from_url(url):
     js = json.loads(content)
     return js
 
+def get_me():
+    url = URL + "getMe"
+    js = get_json_from_url(url)
+    return js
+
 
 def get_updates(offset=None):
     url = URL + "getUpdates"
@@ -74,12 +79,14 @@ def send_message(text, chat_id):
 
 def main():
     last_update_id = None
+    print (get_me())
     while True:
         updates = get_updates(last_update_id)
         if len(updates["result"]) > 0:
             last_update_id = get_last_update_id(updates) + 1
             echo_all(updates)
         time.sleep(0.5)
+        print ("Sleep")
 
 
 if __name__ == '__main__':
