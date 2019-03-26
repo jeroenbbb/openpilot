@@ -87,6 +87,10 @@ keys = {
 # written: manually
 # read : loggerd/publish_log.py
   "UploadWebsite": TxType.PERSISTENT,
+
+# written: manually
+# read : loggerd/telegram.py
+  "TelegramToken": TxType.PERSISTENT,
   
 }
 
