@@ -36,7 +36,7 @@ def get_json_from_url(url):
     return js
 
 def get_me():
-    url = URL + "/getMe"
+    url = URL + "getme"
     print (url)
     js = get_json_from_url(url)
     return js
