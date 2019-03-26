@@ -84,6 +84,7 @@ def main():
     print (get_me())
     while True:
         updates = get_updates(last_update_id)
+        print (updates)
         if len(updates["result"]) > 0:
             last_update_id = get_last_update_id(updates) + 1
             echo_all(updates)
