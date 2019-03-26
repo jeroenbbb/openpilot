@@ -100,7 +100,10 @@ from selfdrive.loggerd.config import ROOT
 cloudlog.info('Cloudlog info level is activated')
 
 # comment out anything you don't want to run
-# compilation in orb is an issue ...
+# compilation in orb is an issue because it uses screen functions and an include file that is not available in headless env
+# loggerd is compiled stuff so dont run it, its only logging anyway...
+# gpsd replaced by gps.py
+# and geofgence added
 
 managed_processes = {
   "thermald": "selfdrive.thermald",
@@ -109,7 +112,7 @@ managed_processes = {
   "radard": "selfdrive.controls.radard",
 #  "ubloxd": "selfdrive.locationd.ubloxd",
 #  "mapd": "selfdrive.mapd.mapd",
-  "loggerd": ("selfdrive/loggerd", ["./loggerd"]),
+#  "loggerd": ("selfdrive/loggerd", ["./loggerd"]),
   "logmessaged": "selfdrive.logmessaged",
 #  "tombstoned": "selfdrive.tombstoned",
 #  "logcatd": ("selfdrive/logcatd", ["./logcatd"]),
@@ -122,8 +125,6 @@ managed_processes = {
 #  "visiond": ("selfdrive/visiond", ["./visiond"]),
 #  "sensord": ("selfdrive/sensord", ["./sensord"]),
 #  "gpsd": ("selfdrive/sensord", ["./gpsd"]),
-#  gpsd replaced by gps.py
-# and geofgence added
    "gpsd": "selfdrive.sensord.gps",
    "geofence": "selfdrive.sensord.geofence",  
 #  "orbd": ("selfdrive/orbd", ["./orbd_wrapper.sh"]),
