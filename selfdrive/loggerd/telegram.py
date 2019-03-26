@@ -22,7 +22,7 @@ from common.params import Params
 params = Params()
 token = params.get("TelegramToken").decode()
 URL = "https://api.telegram.org/bot{}/".format(token)
-pritn (token)
+print (token)
 
 def get_url(url):
     response = requests.get(url)
