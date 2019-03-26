@@ -37,8 +37,8 @@ def get_json_from_url(url):
 
 def get_me():
     url = URL + "getme"
-    url = "https://api.telegram.org/bot" + token + "/getme"
-    print (url)
+    // url = "https://api.telegram.org/bot" + token + "/getme"
+    // print (url)
     js = get_json_from_url(url)
     return js
 
@@ -48,6 +48,8 @@ def get_updates(offset=None):
     if offset:
         url += "?offset={}".format(offset)
     js = get_json_from_url(url)
+    print ("JS=")
+    print (js)
     return js
 
 
