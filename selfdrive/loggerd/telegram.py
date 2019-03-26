@@ -7,7 +7,9 @@
 
 
 import sys
+import telepot
 from time import sleep
+
 
 if __name__ == "__main__":
     sys.path.append("/home/pi/openpilot")
@@ -17,3 +19,5 @@ from common.params import Params
 params = Params()
 token = params.get("TelegramToken").decode()
 
+TelegramBot = telepot.Bot(token)
+print (TelegramBot.getMe())
