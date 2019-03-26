@@ -1,9 +1,19 @@
-# Done! Congratulations on your new bot. 
-# You will find it at t.me/ScoozyBot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+# this program is a simple Telegram connection
+# it has to read actively if messages are sent to the bot because a hook is not possible
 
-# Use this token to access the HTTP API:
-
-# Keep your token secure and store it safely, it can be used by anyone to control your bot.
-
+# You will find it at t.me/ScoozyBot.
 # For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+# https://khashtamov.com/en/how-to-create-a-telegram-bot-using-python/
+
+
+import sys
+from time import sleep
+
+if __name__ == "__main__":
+    sys.path.append("/home/pi/openpilot")
+    
+from common.params import Params
+
+params = Params()
+token = params.get("TelegramToken").decode()
 
