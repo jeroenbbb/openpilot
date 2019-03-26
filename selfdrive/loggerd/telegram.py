@@ -37,6 +37,7 @@ def get_json_from_url(url):
 
 def get_me():
     url = URL + "getme"
+    url = "https://api.telegram.org/bot" + token + "/getme"
     print (url)
     js = get_json_from_url(url)
     return js
