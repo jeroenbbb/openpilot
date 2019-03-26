@@ -20,7 +20,7 @@ if __name__ == "__main__":
 from common.params import Params
 
 params = Params()
-token = params.get("TelegramToken").decode()
+token = params.get("TelegramToken").decode().strip()
 URL = "https://api.telegram.org/bot{}/".format(token)
 print (token)
 
