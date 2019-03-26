@@ -33,6 +33,10 @@ Shapely
 sudo apt-get install libgeos-dev
 pip3 install shapely
 
+Telegram:
+pip3 install telepot
+
+
  GPS
  -------------
  sudo apt-get install gpsd
