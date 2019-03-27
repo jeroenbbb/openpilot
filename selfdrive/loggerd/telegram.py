@@ -99,6 +99,7 @@ def main():
             echo_all(updates)
         time.sleep(0.5)
         print ("Sleep" + str(count))
+        count = count + 1
 
 
 if __name__ == '__main__':
