@@ -25,9 +25,14 @@ URL = "https://api.telegram.org/bot{}/".format(token)
 print (token)
 
 def get_url(url):
-    # this line hangs after 500 request so use timeout
-    response = requests.get(url, timeout=0.1)
-    content = response.content.decode("utf8")
+    
+    content = "{'result': [], 'ok': False"}"
+    try:
+        # this line hangs after 500 request so use timeout and try/except
+        response = requests.get(url, timeout=0.1)
+        content = response.content.decode("utf8")
+    except:
+        pass
     return content
 
 
