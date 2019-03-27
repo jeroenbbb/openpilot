@@ -88,6 +88,7 @@ def generate_answer(text, chat):
     return answer
     
 def main():
+    count = 0
     last_update_id = None
     print (get_me())
     while True:
@@ -97,7 +98,7 @@ def main():
             last_update_id = get_last_update_id(updates) + 1
             echo_all(updates)
         time.sleep(0.5)
-        print ("Sleep")
+        print ("Sleep" + str(count))
 
 
 if __name__ == '__main__':
