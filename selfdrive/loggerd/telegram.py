@@ -62,7 +62,7 @@ def get_last_update_id(updates):
     return max(update_ids)
 
 
-def echo_all(updates):
+def handle_answer(updates):
     for update in updates["result"]:
         text = update["message"]["text"]
         chatId = update["message"]["chat"]["id"]
@@ -78,10 +78,23 @@ def get_last_chat_id_and_text(updates):
     return (text, chat_id)
 
 
-def send_message(text, chat_id):
+#def send_message(text, chat_id):
+#    text = urllib.parse.quote_plus(text)
+#    url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
+#    get_url(url)
+    
+def send_message(text, chat_id, reply_markup=None):
     text = urllib.parse.quote_plus(text)
-    url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
-    get_url(url)
+    url = URL + "sendMessage?text={}&chat_id={}&parse_mode=Markdown".format(text, chat_id)
+    if reply_markup:
+        url += "&reply_markup={}".format(reply_markup)
+    get_url(url)    
+
+
+def build_keyboard(items):
+    keyboard = [[item] for item in items]
+    reply_markup = {"keyboard":keyboard, "one_time_keyboard": True}
+    return json.dumps(reply_markup)
 
 def generate_answer(text, chat):
     answer = "Sorry, begrijp ik niet"
@@ -102,7 +115,7 @@ def main():
         print (updates)
         if len(updates["result"]) > 0:
             last_update_id = get_last_update_id(updates) + 1
-            echo_all(updates)
+            handle_answer(updates)
         time.sleep(2)
         print ("Sleep" + str(count))
         count = count + 1
