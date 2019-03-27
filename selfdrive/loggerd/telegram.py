@@ -29,7 +29,7 @@ def get_url(url):
     content = "{\"result\": [], \"ok\": false}"
     try:
         # this line hangs after 500 request so use timeout and try/except
-        response = requests.get(url, timeout=0.1)
+        response = requests.get(url, timeout=0.5)
         content = response.content.decode("utf8")
     except:
         pass
