@@ -98,7 +98,7 @@ def build_keyboard(items):
 
 def generate_answer(text, chat):
     answer = "Sorry, begrijp ik niet"
-    text = text.lower
+    text = text.lower()
     
     if text == "/start":
         answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
