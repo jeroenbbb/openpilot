@@ -153,7 +153,7 @@ def main(gctx=None):
         updates = telegram.get_updates(last_update_id)
         print (updates)
         if len(updates["result"]) > 0:
-            last_update_id = get_last_update_id(updates) + 1
+            last_update_id = telegram.get_last_update_id(updates) + 1
             telegram.handle_answer(updates)
         #time.sleep(2)
         #print ("Sleep" + str(count))
