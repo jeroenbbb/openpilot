@@ -1,18 +1,20 @@
 # read all messages from zmq
 # and send them to a website using POST
 # the website may store and publish them
+# also respond to request from Telegram
+# telegram.py is listening to Telegram requests so the function is started in a thread
 
 import time
 import zmq
 import sys
 import requests
-#from urllib.parse import urlencode
-#from urllib.request import Request, urlopen
+import threading
 
 if __name__ == "__main__":
     sys.path.append("/home/pi/openpilot")
 
 import selfdrive.messaging as messaging
+import selfdrive.loggerd.telegram as telegram
 from selfdrive.services import service_list
 from cereal import log
 
