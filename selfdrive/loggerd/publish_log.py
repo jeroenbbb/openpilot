@@ -94,7 +94,6 @@ def telegramd_thread():
     
 def main(gctx=None):
 
-    global last_message
     context = zmq.Context()
     poller = zmq.Poller()    
     service_sock =  []
@@ -155,9 +154,9 @@ def main(gctx=None):
         print (updates)
         if len(updates["result"]) > 0:
             last_update_id = telegram.get_last_update_id(updates) + 1
-            telegram.handle_answer(updates)
-        #time.sleep(2)
-        #print ("Sleep" + str(count))
+            telegram.handle_answer(updates, last_message)
+        time.sleep(2)
+        print ("Sleep" + str(count))
         count = count + 1
         
     # loop through all services to listen to the socks    
