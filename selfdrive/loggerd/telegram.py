@@ -112,7 +112,7 @@ def generate_answer(text, chat, last_message=None):
         if last_message is not None:
             # send back the last message of the requested type
             print ("requesting ************************************ " + type)
-            print (last_message[logMessage])
+            print (last_message["logMessage"])
             if type in last_message:
                 answer = last_message[type]
             
