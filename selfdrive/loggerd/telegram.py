@@ -97,6 +97,8 @@ def build_keyboard(items):
     return json.dumps(reply_markup)
 
 def generate_answer(text, chat):
+    global last_message
+    
     answer = "Sorry, begrijp ik niet"
     text = text.lower()
     
