@@ -87,6 +87,16 @@ def define_upload_required(evnt):
 def telegramd_thread():
     telegram.main()
     
+def generate_answer(text, chat):
+    answer = "Sorry, begrijp ik niet"
+    if text == "/start":
+        answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
+
+    if text.find("waar") > -1:
+        answer = "Ik ben nu in de Platananlaan"
+    
+    return answer
+    
 def main(gctx=None):
 
     context = zmq.Context()
