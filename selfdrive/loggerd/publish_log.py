@@ -38,7 +38,8 @@ upload_interval = {
 last_upload = {}
 
 # define list to remeber last message so it can be communicated to Telegram
-global last_message = {}
+global last_message
+last_message = {}
 
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
