@@ -112,8 +112,9 @@ def generate_answer(text, chat, last_message=None):
         if last_message is not None:
             # send back the last message of the requested type
             print ("requesting ************************************ " + type)
+            print (last_message[logMessage])
             if type in last_message:
-                asnwer = last_message[type]
+                answer = last_message[type]
             
     if text2.find("waar") > -1:
         answer = "Ik ben nu in de Platananlaan"
