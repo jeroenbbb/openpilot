@@ -104,10 +104,10 @@ def generate_answer(text, chat):
         answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
 
     # user requests message content by typing message=xxxxx
-    if text.find("message=") == 1:
+    if text.find("message=") == 0:
 
         type = text[8:]
-        print ("requesting " + type)
+        print ("requesting ************************************ " + type)
 
         if last_message is not None:
             # send back the last message of the requested type
