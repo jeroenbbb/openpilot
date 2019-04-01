@@ -38,7 +38,6 @@ upload_interval = {
 last_upload = {}
 
 # define list to remeber last message so it can be communicated to Telegram
-global last_message
 last_message = {}
 
 def upload(msgtype, data):
@@ -89,6 +88,7 @@ def define_upload_required(evnt):
 
 
 def telegramd_thread():
+    global last_message
     telegram.main()
     
     
