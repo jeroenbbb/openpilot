@@ -103,7 +103,7 @@ def generate_answer(text, chat):
     if text == "/start":
         answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
 
-    if text.find("message="):
+    if text.find("message=") = 1:
 
         type = text[8:]
         print ("requesting " + type)
