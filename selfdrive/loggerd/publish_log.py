@@ -83,12 +83,21 @@ def define_upload_required(evnt):
 
     return upload_required, field1, field2
 
+
+def telegramd_thread():
+    telegram.main()
+    
 def main(gctx=None):
 
     context = zmq.Context()
     poller = zmq.Poller()    
     service_sock =  []
     count = 0
+    
+    # start telegram thread
+    telegram_thread = threading.Thread(target=telegramd_thread)
+    telegram_thread.daemon = True
+    telegram_thread.start()
     
     # loop through all services to define socks
     for service in service_list:
