@@ -4,6 +4,7 @@
 # You will find it at t.me/ScoozyBot.
 # For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 # https://khashtamov.com/en/how-to-create-a-telegram-bot-using-python/
+# https://www.codementor.io/garethdwyer/building-a-telegram-bot-using-python-part-1-goi5fncay
 
 
 import sys
@@ -114,7 +115,7 @@ def generate_answer(text, chat, last_message=None):
             print ("requesting ************************************ " + type)
             #print (last_message["logMessage"])
             if type in last_message:
-                answer = last_message[type]
+                answer = last_message[type].decode()
             
     if text2.find("waar") > -1:
         answer = "Ik ben nu in de Platananlaan"
