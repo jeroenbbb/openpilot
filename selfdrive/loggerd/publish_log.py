@@ -99,10 +99,14 @@ def main(gctx=None):
     service_sock =  []
     count = 0
     
-    # start telegram thread
-    telegram_thread = threading.Thread(target=telegramd_thread)
-    telegram_thread.daemon = True
-    telegram_thread.start()
+    # start telegram stuff
+    #telegram_thread = threading.Thread(target=telegramd_thread)
+    #telegram_thread.daemon = True
+    #telegram_thread.start()
+    count = 0
+    last_update_id = None
+    print (telegram.get_me())
+
     
     # loop through all services to define socks
     for service in service_list:
@@ -144,6 +148,16 @@ def main(gctx=None):
             if priority == 10:
                 upload(evt.which(), evt)
                 priority = 0
+                
+        # check if Telegram is asking something
+        updates = telegram.get_updates(last_update_id)
+        print (updates)
+        if len(updates["result"]) > 0:
+            last_update_id = get_last_update_id(updates) + 1
+            telegram.handle_answer(updates)
+        #time.sleep(2)
+        #print ("Sleep" + str(count))
+        count = count + 1
         
     # loop through all services to listen to the socks    
     #while True:
