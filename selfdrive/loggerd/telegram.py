@@ -22,7 +22,6 @@ from common.params import Params
 params = Params()
 token = params.get("TelegramToken").decode().strip()
 URL = "https://api.telegram.org/bot{}/".format(token)
-last_message = None
 
 def get_url(url):
     
@@ -96,8 +95,7 @@ def build_keyboard(items):
     reply_markup = {"keyboard":keyboard, "one_time_keyboard": True}
     return json.dumps(reply_markup)
 
-def generate_answer(text, chat):
-    global last_message
+def generate_answer(text, chat, last_message):
     
     answer = "Sorry, begrijp ik niet"
     text = text.lower()
