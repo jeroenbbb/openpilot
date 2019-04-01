@@ -37,6 +37,9 @@ upload_interval = {
 # define list for all last uploads
 last_upload = {}
 
+# define list to remeber last message so it can be communicated to Telegram
+global last_message = {}
+
 def upload(msgtype, data):
     url = "https://esfahaniran.com/openpilot/index.php"
     post_fields = {'type': msgtype, 'data': data}
@@ -87,15 +90,6 @@ def define_upload_required(evnt):
 def telegramd_thread():
     telegram.main()
     
-def generate_answer(text, chat):
-    answer = "Sorry, begrijp ik niet"
-    if text == "/start":
-        answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
-
-    if text.find("waar") > -1:
-        answer = "Ik ben nu in de Platananlaan"
-    
-    return answer
     
 def main(gctx=None):
 
@@ -137,6 +131,10 @@ def main(gctx=None):
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
             print(evt.which())
+            
+            # remember last message for every message type
+            last_message[evt.which()] = evt
+            
             # check if the message has to be uploaded or not 
             upload_required, field1, field2 = define_upload_required(evt)
             if evt.which() == 'liveMapData':
