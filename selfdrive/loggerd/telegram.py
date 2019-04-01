@@ -98,13 +98,13 @@ def build_keyboard(items):
 def generate_answer(text, chat, last_message=None):
     
     answer = "Sorry, begrijp ik niet"
-    text = text.lower()
+    text2 = text.lower()
     
-    if text == "/start":
+    if text2 == "/start":
         answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
 
     # user requests message content by typing message=xxxxx
-    if text.find("message=") == 0:
+    if text2.find("message=") == 0:
 
         type = text[8:]
         print ("requesting ************************************ " + type)
@@ -115,7 +115,7 @@ def generate_answer(text, chat, last_message=None):
             if type in last_message:
                 asnwer = last_message[type]
             
-    if text.find("waar") > -1:
+    if text2.find("waar") > -1:
         answer = "Ik ben nu in de Platananlaan"
     
     return answer
