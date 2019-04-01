@@ -94,6 +94,7 @@ def telegramd_thread():
     
 def main(gctx=None):
 
+    global last_message
     context = zmq.Context()
     poller = zmq.Poller()    
     service_sock =  []
