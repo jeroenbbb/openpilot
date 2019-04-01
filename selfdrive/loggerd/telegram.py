@@ -61,11 +61,11 @@ def get_last_update_id(updates):
     return max(update_ids)
 
 
-def handle_answer(updates):
+def handle_answer(updates, last_message=None):
     for update in updates["result"]:
         text = update["message"]["text"]
         chatId = update["message"]["chat"]["id"]
-        answer = generate_answer(text, chatId)
+        answer = generate_answer(text, chatId, last_message)
         send_message(answer, chatId)
 
 
