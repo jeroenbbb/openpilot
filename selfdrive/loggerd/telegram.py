@@ -104,24 +104,25 @@ def generate_answer(text, chat, last_message=None):
     if text2 == "/start":
         answer = "Welkom bij de ScoozyBot. Met deze bot kun je je Scoozy monitoren en opdrachten geven."
 
+    if text2.find("waar") > -1:
+        answer = "Ik ben nu in de Platananlaan"
+        # also try the gpsLocationExternal message
+        text2 = "message=gpsLocationExternal"
+        
     # user requests message content by typing message=xxxxx
     if text2.find("message=") == 0:
 
+        # take the part after message=
         type = text[8:]
-        print ("requesting ************************************ " + type)
 
         if last_message is not None:
             # send back the last message of the requested type
-            print ("requesting ************************************ " + type)
-            #print (last_message["logMessage"])
+            # print ("requesting ************************************ " + type)
+            # print (last_message["logMessage"])
             if type in last_message:
-                # this is an event generated from log/ capnp
-                # TODO so we need to convert into something nice
+                # this is an event generated from log/ capnp that has been converted into a nice text
                 answer = last_message[type]
-            
-    if text2.find("waar") > -1:
-        answer = "Ik ben nu in de Platananlaan"
-    
+
     return answer
     
 def main():
