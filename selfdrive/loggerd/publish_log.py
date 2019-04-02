@@ -93,7 +93,7 @@ def convert_message(evt):
     
     if which == "navUpdate":
         hlp = evt.navUpdate.segments
-        output = hlp[0].instruction.value()
+        output = hlp[0].instruction.returnOutsideGeofence
         print ("**************")
         print (output)
 
