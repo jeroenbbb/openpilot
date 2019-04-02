@@ -138,7 +138,7 @@ def main(gctx=None):
             print(evt.which())
             
             # remember last message for every message type
-            last_message[evt.which()] = print(evt)
+            last_message[evt.which()] = print(evt, flush=False)
             
             # check if the message has to be uploaded or not 
             upload_required, field1, field2 = define_upload_required(evt)
