@@ -100,8 +100,8 @@ def convert_message(evt):
 
     if which == "gpsLocationExternal":
         output = str(evt.gpsLocationExternal.latitude) +  " " + str(evt.gpsLocationExternal.longitude)
-        output = output + "<a href=https://maps.google.com/?q=" + str(evt.gpsLocationExternal.latitude) 
-        output = output + "," + str(evt.gpsLocationExternal.longitude) + ">Google maps</a>"
+        output = output + "(https://maps.google.com/?q=" + str(evt.gpsLocationExternal.latitude) 
+        output = output + "," + str(evt.gpsLocationExternal.longitude) + ")"
 
     return output
         
