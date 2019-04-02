@@ -96,10 +96,6 @@ def convert_message(evt):
         output = str(hlp[0].instruction) + ", distance="
         output = output + str(hlp[0].distance) + " meters"
 
-        print ("**************")
-        print(evt)
-        print (output)
-
     if which == "logMessage":
         output = evt.logMessage
 
