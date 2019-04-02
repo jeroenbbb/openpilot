@@ -107,6 +107,7 @@ def generate_answer(text, chat, last_message=None):
     if text2.find("waar") > -1:
         answer = "Ik ben nu in de Platananlaan"
         # also try the gpsLocationExternal message
+        text  = "message=gpsLocationExternal"
         text2 = "message=gpsLocationExternal"
         
     # user requests message content by typing message=xxxxx
