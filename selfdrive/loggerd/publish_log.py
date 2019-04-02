@@ -99,8 +99,9 @@ def convert_message(evt):
         output = evt.logMessage
 
     if which == "gpsLocationExternal":
+        lat = str(round(evt.gpsLocationExternal.latitude,5))
         output = str(evt.gpsLocationExternal.latitude) +  " " + str(evt.gpsLocationExternal.longitude)
-        output = output + "(https://maps.google.com/?q=" + str(evt.gpsLocationExternal.latitude) 
+        output = output + "(https://maps.google.com/?q=" + lat 
         output = output + "," + str(evt.gpsLocationExternal.longitude) + ")"
 
     return output
