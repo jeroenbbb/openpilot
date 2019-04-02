@@ -93,7 +93,7 @@ def convert_message(evt):
     
     if which == "navUpdate":
         hlp = evt.navUpdate.segments
-        output = hlp[0].instruction.which()
+        output = hlp[0].instruction.todict()
         print ("**************")
         print (output)
 
