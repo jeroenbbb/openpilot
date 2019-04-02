@@ -95,6 +95,7 @@ def convert_message(evt):
         hlp = evt.navUpdate.segments
         output = str(hlp[0].instruction)
         output = str(hlp[0].distance)
+        output = str(evt)
         print ("**************")
         print(evt)
         print (output)
