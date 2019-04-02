@@ -139,7 +139,7 @@ def main(gctx=None):
             
             # remember last message for every message type
             hlp = print(evt, flush=False)
-            last_message[evt.which()] = hlp.decode()
+            last_message[evt.which()] = str(hlp)
             
             # check if the message has to be uploaded or not 
             upload_required, field1, field2 = define_upload_required(evt)
