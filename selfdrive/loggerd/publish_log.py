@@ -89,13 +89,13 @@ def define_upload_required(evnt):
 def convert_message(evt):
     # convert all messages into readible output
     which = evt.which()
-    output = ""
+    output = str(evt)
     
     if which == "navUpdate":
         hlp = evt.navUpdate.segments
-        output = str(hlp[0].instruction)
-        output = output + str(hlp[0].distance)
-        output = output + str(evt)
+        output = str(hlp[0].instruction) + "", distance="
+        output = output + str(hlp[0].distance) + " meters"
+
         print ("**************")
         print(evt)
         print (output)
