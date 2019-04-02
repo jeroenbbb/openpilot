@@ -98,7 +98,7 @@ def convert_message(evt):
         output = evt.logMessage
 
     if which == "gpsLocationExternal":
-        output = evnt.gpsLocationExternal.latitude +  " " + evnt.gpsLocationExternal.longitude        
+        output = evt.gpsLocationExternal.latitude +  " " + evnt.gpsLocationExternal.longitude        
 
     return output
         
