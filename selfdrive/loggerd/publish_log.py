@@ -92,7 +92,8 @@ def convert_message(evt):
     output = ""
     
     if which == "navUpdate":
-        output = evt.navUpdate.segments.instruction
+        hlp = evt.navUpdate.segments
+        # output = hlp[0].instruction
 
     if which == "logMessage":
         output = evt.logMessage
