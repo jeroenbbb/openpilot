@@ -92,7 +92,7 @@ def convert_message(evt):
     output = ""
     
     if which == "navUpdate":
-        output = evt.navUpdate.lat
+        output = evt.navUpdate.LatLng.lat
 
     if which == "logMessage":
         output = evt.logMessage
