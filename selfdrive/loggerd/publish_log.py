@@ -95,7 +95,7 @@ def convert_message(evt):
         output = evt.lat
 
     if which == "logMessage":
-        output = evt.msg
+        output = evt.logMessage
         
     return output
         
