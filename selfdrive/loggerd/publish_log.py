@@ -92,11 +92,14 @@ def convert_message(evt):
     output = ""
     
     if which == "navUpdate":
-        output = evt.lat
+        output = evt.navUpdate.lat
 
     if which == "logMessage":
         output = evt.logMessage
-        
+
+    if which == "gpsLocationExternal":
+        output = evnt.gpsLocationExternal.latitude +  " " + evnt.gpsLocationExternal.longitude        
+
     return output
         
 
