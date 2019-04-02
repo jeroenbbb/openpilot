@@ -86,12 +86,20 @@ def define_upload_required(evnt):
 
     return upload_required, field1, field2
 
+def convert_message(evt):
+    # convert all messages into readible output
+    which = evt.which()
+    output = ""
+    
+    if which == "navUpdate":
+        output = evt.LatLng.lat
 
-def telegramd_thread():
-    global last_message
-    telegram.main()
-    
-    
+    if which == "logMessage":
+        output = evt.msg
+        
+    return output
+        
+
 def main(gctx=None):
 
     context = zmq.Context()
@@ -100,9 +108,6 @@ def main(gctx=None):
     count = 0
     
     # start telegram stuff
-    #telegram_thread = threading.Thread(target=telegramd_thread)
-    #telegram_thread.daemon = True
-    #telegram_thread.start()
     count = 0
     last_update_id = None
     print (telegram.get_me())
@@ -138,8 +143,7 @@ def main(gctx=None):
             print(evt.which())
             
             # remember last message for every message type
-            hlp = print(evt, flush=False)
-            last_message[evt.which()] = str(hlp)
+            last_message[evt.which()] = convert_message(evt)
             
             # check if the message has to be uploaded or not 
             upload_required, field1, field2 = define_upload_required(evt)
