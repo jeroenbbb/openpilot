@@ -2,7 +2,8 @@
 # and send them to a website using POST
 # the website may store and publish them
 # also respond to request from Telegram
-# telegram.py is listening to Telegram requests so the function is started in a thread
+# telegram.py is listening to Telegram requests and sending responses
+#   the Telegram functions are used in the main loop
 
 import time
 import zmq
