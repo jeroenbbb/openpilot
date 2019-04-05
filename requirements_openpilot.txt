@@ -16,6 +16,7 @@ pip3 install overpy
 pip3 install reverse_geocoder
 pip3 install psutil
 pip3 install libusb1
+# pyusb is replaced by libusb1
 pip3 install pyusb
 pip3 install gps3
 
@@ -33,7 +34,7 @@ Shapely
 sudo apt-get install libgeos-dev
 pip3 install shapely
 
-Telegram:
+Telegram, NOT required:
 pip3 install telepot
 
 
