@@ -163,6 +163,7 @@ def main(gctx=None):
             longitude = data_stream.TPV['lon']
 
             print('Altitude = ',data_stream.TPV['alt'])
+            print('Speed = ',data_stream.TPV['speed'])
             print('Latitude = ',latitude)
             print('Lon = ',longitude)
             if not gps_found:
