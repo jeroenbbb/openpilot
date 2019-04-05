@@ -16,6 +16,7 @@
 # https://stackoverflow.com/questions/6146131/python-gps-module-reading-latest-gps-data#6146351
 # https://github.com/MartijnBraam/gpsd-py3
 # http://catb.org/gpsd/
+# http://www.catb.org/gpsd/gpsd_json.html  to show all avaiable fields in the gpsd interface
 # http://ozzmaker.com/using-python-with-a-gps-receiver-on-a-raspberry-pi/
 
 # USB device numers:
@@ -163,9 +164,10 @@ def main(gctx=None):
             longitude = data_stream.TPV['lon']
             speed     = data_stream.TPV['speed']
             bearing   = data_stream.TPV['track']
+            test      = data_stream.ATT['pitch']
             
             print('Altitude = ',data_stream.TPV['alt'])
-            print (bearing)
+            print (bearing, test)
             
             if not gps_found:
                 if isinstance(latitude, float):
