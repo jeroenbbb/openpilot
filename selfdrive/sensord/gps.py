@@ -45,6 +45,7 @@ from common.basedir import BASEDIR
 
 #TODO changes this into import usb1
 def list_usb_devices():
+    print ("List USB devices:")
     busses = usb.busses()
     for bus in busses:
         print (vars(bus))
