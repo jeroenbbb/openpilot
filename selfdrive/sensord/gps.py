@@ -159,13 +159,13 @@ def main(gctx=None):
     for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
-            latitude = data_stream.TPV['lat']
+            latitude  = data_stream.TPV['lat']
             longitude = data_stream.TPV['lon']
-
+            speed     = data_stream.TPV['speed']
+            bearing   = data_stream.TPV['bearing']
+            
             print('Altitude = ',data_stream.TPV['alt'])
-            print('Speed = ',data_stream.TPV['speed'])
-            print('Latitude = ',latitude)
-            print('Lon = ',longitude)
+            
             if not gps_found:
                 if isinstance(latitude, float):
                     gps_found = True
