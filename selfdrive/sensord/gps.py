@@ -170,12 +170,13 @@ def main(gctx=None):
             print (isinstance(latitude, float))
             
             if not isinstance(latitude, float): 
+                print ("mm")
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
                 
         else:
             # noting received, send some dummy data
-            # print ("Nothing" + str(count))
+            print ("Nothing" + str(count))
             latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
             latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
     
