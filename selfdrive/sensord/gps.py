@@ -88,7 +88,7 @@ def make_some_dummy_data ():
 # example: B1433005223946N00437387EA0000800007
 
 def read_igc_file():
-    print (BASEDIR)
+    # print (BASEDIR)
     with open(BASEDIR + "/selfdrive/sensord/openpilot.igc") as f:
         content = f.readlines()
     return content
@@ -116,14 +116,17 @@ def read_next_line(content, count_igc_line):
     return lat, lon, count_igc_line
 # -------------------------------
 list_usb_devices()
-read_igc_file()
+igc_content = read_igc_file()
 
 
 def main(gctx=None):
+
+    # set gpsd stuff
     gpsd_socket = gps3.GPSDSocket()
     data_stream = gps3.DataStream()
     gpsd_socket.connect()
     gpsd_socket.watch()
+    
     count = 0
     count_igc_line = 0
 
@@ -140,13 +143,13 @@ def main(gctx=None):
             print('Latitude = ',latitude)
             if not isinstance(latitude, float): 
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
-                latitude, longitude, count_igc_line = read_next_line(read_igc_file(),count_igc_line)
+                latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
                 
         else:
             # noting received, send some dummy data
             # print ("Nothing" + str(count))
             latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
-            latitude, longitude, count_igc_line = read_next_line(read_igc_file(),count_igc_line)
+            latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
     
         sleep(0.5)
         count = count + 1
