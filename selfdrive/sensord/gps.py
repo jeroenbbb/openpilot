@@ -167,7 +167,7 @@ def main(gctx=None):
             print('Lon = ',longitude)
             if not gps_found:
                 if isinstance(latitude, float):
-                    gps_found = true
+                    gps_found = True
             
             if not isinstance(latitude, float): 
                 # this should not occur
