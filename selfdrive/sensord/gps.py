@@ -18,6 +18,17 @@
 # http://catb.org/gpsd/
 # http://ozzmaker.com/using-python-with-a-gps-receiver-on-a-raspberry-pi/
 
+# USB device numers:
+# 1546  U-Blox AG
+#	01a4  Antaris 4
+#	01a5  [u-blox 5]
+#	01a6  [u-blox 6]
+#	01a7  [u-blox 7]
+#	01a8  [u-blox 8]
+
+# 8086 = Intel
+
+
 import sys
 
 if __name__ == "__main__":
@@ -50,8 +61,21 @@ def list_usb_devices():
         for device in context.getDeviceIterator(skip_on_error=True):
             print('ID %04x:%04x' % (device.getVendorID(), device.getProductID()), '->'.join(str(x) for x in ['Bus %03i' % (device.getBusNumber(), )] + device.getPortNumberList()), 'Device', device.getDeviceAddress())
 
+    context = usb1.USBContext()
+    #context.setDebug(9)
 
-def list_usb_devices2():
+    for device in context.getDeviceList(skip_on_error=True):
+        if device.getVendorID() == 0xbbaa and device.getProductID() == 0xddcc:
+            
+            handle = device.open()
+            handle.claimInterface(0)
+            # handle.controlWrite(0x40, 0xdc, SAFETY_ALLOUTPUT, 0, b'')
+
+    dat = handle.controlRead(usb1.TYPE_VENDOR | usb1.RECIPIENT_DEVICE, 0xd2, 0, 0, 0x10)
+    print (dat)
+
+# old versdion based on pyusb    
+def list_usb_devices_old():
     print ("List USB devices:")
     busses = usb.busses()
     for bus in busses:
