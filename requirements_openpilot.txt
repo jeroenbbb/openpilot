@@ -1,4 +1,4 @@
-# This are the packages installed on the RPi
+# Packages installed on the RPi:
 
 git clone git://github.com/jeroenbbb/openpilot
 
