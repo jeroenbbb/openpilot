@@ -105,7 +105,7 @@ def convert_message(evt):
         lon     = str(round(evt.gpsLocationExternal.longitude,5))
         speed   = str(round(evt.gpsLocationExternal.speed,3))
         bearing = str(round(evt.gpsLocationExternal.bearing,0))
-        output = lat +  " " + lon +  " " + speed + " km/u " + bearing
+        output = lat +  " " + lon +  " " + speed + " m/s " + bearing
         output = output + " (https://maps.google.com/?q=" + lat 
         output = output + "," + lon + ")"
 
