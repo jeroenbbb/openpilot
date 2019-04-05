@@ -71,8 +71,8 @@ def list_usb_devices():
             handle.claimInterface(0)
             # handle.controlWrite(0x40, 0xdc, SAFETY_ALLOUTPUT, 0, b'')
 
-    dat = handle.controlRead(usb1.TYPE_VENDOR | usb1.RECIPIENT_DEVICE, 0xd2, 0, 0, 0x10)
-    print (dat)
+    #dat = handle.controlRead(usb1.TYPE_VENDOR | usb1.RECIPIENT_DEVICE, 0xd2, 0, 0, 0x10)
+    #print (dat)
 
 # old versdion based on pyusb    
 def list_usb_devices_old():
