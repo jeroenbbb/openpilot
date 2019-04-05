@@ -164,7 +164,7 @@ def main(gctx=None):
             longitude = data_stream.TPV['lon']
             speed     = data_stream.TPV['speed']
             bearing   = data_stream.TPV['track']
-            test      = data_stream.ATT
+            test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
             print (bearing, test)
