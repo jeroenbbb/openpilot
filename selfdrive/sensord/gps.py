@@ -165,6 +165,7 @@ def main(gctx=None):
             bearing   = data_stream.TPV['track']
             
             print('Altitude = ',data_stream.TPV['alt'])
+            print (bearing)
             
             if not gps_found:
                 if isinstance(latitude, float):
