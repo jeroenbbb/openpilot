@@ -40,7 +40,8 @@ pip3 install telepot
 
  GPS
  -------------
- sudo apt-get install gpsd
+ sudo apt-get install gpsd gpsd-clients
+ and run xgps to check installation and gps hardware
 
 cv2/ cv3/ opencv:
 --------------------
