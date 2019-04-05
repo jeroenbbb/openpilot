@@ -163,8 +163,12 @@ def main(gctx=None):
             data_stream.unpack(new_data)
             latitude = data_stream.TPV['lat']
             longitude = data_stream.TPV['lon']
+
             print('Altitude = ',data_stream.TPV['alt'])
             print('Latitude = ',latitude)
+            print('Lon = ',longitude)
+            print (isinstance(latitude, float))
+            
             if not isinstance(latitude, float): 
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
