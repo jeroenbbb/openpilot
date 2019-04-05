@@ -29,7 +29,7 @@ import random
 
 # gps3 uses gpsd
 from gps3 import gps3
-import usb
+import usb1
 from time import sleep
 
 import selfdrive.messaging as messaging
@@ -44,7 +44,14 @@ from common.basedir import BASEDIR
 
 
 #TODO changes this into import usb1
+
 def list_usb_devices():
+    with usb1.USBContext() as context:
+        for device in context.getDeviceIterator(skip_on_error=True):
+            print('ID %04x:%04x' % (device.getVendorID(), device.getProductID()), '->'.join(str(x) for x in ['Bus %03i' % (device.getBusNumber(), )] + device.getPortNumberList()), 'Device', device.getDeviceAddress())
+
+
+def list_usb_devices2():
     print ("List USB devices:")
     busses = usb.busses()
     for bus in busses:
