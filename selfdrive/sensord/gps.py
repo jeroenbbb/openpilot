@@ -53,9 +53,6 @@ from common.basedir import BASEDIR
 # service_list['gpsNMEA'].port                    # consist of a long string of NMEa data
 # service_list['gpsLocationExternal'].port
 
-
-#TODO changes this into import usb1
-
 def list_usb_devices():
     with usb1.USBContext() as context:
         for device in context.getDeviceIterator(skip_on_error=True):
@@ -152,6 +149,7 @@ def main(gctx=None):
     gpsd_socket.watch()
     
     count = 0
+    gps_found = False
     count_igc_line = 0
 
     # set message stuff
@@ -167,18 +165,22 @@ def main(gctx=None):
             print('Altitude = ',data_stream.TPV['alt'])
             print('Latitude = ',latitude)
             print('Lon = ',longitude)
-            print (isinstance(latitude, float))
+            if not gps_found:
+                if isinstance(latitude, float):
+                    gps_found = true
             
             if not isinstance(latitude, float): 
-                print ("mm")
+                # this should not occur
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
                 
         else:
             # noting received, send some dummy data
             print ("Nothing" + str(count))
-            latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
-            latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
+            if not gps_found:
+                # generate some dummy data for testing
+                latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
+                latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
     
         sleep(0.5)
         count = count + 1
