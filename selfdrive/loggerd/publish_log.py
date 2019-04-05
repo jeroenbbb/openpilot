@@ -101,8 +101,10 @@ def convert_message(evt):
         output = evt.logMessage
 
     if which == "gpsLocationExternal":
-        lat = str(round(evt.gpsLocationExternal.latitude,5))
-        lon = str(round(evt.gpsLocationExternal.longitude,5))
+        lat     = str(round(evt.gpsLocationExternal.latitude,5))
+        lon     = str(round(evt.gpsLocationExternal.longitude,5))
+        speed   = str(round(evt.gpsLocationExternal.speed,3))
+        bearing = str(round(evt.gpsLocationExternal.bearing,0))
         output = lat +  " " + lon
         output = output + " (https://maps.google.com/?q=" + lat 
         output = output + "," + lon + ")"
