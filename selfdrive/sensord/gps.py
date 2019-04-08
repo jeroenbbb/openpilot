@@ -166,7 +166,8 @@ def main(gctx=None):
             speed     = data_stream.TPV['speed']
             bearing   = data_stream.TPV['track']
             time_stamp= data_stream.TPV['time']
-            
+            accuracy  = data_stream.TPV['ecefpAcc']
+            # accuracy gives error in position in meters
             # convert iso8601 timestamp into millisec since 1970
             # time stamp = n/a or might have a different layout resulting in an error
             try:
@@ -175,8 +176,7 @@ def main(gctx=None):
             except:
                 time_stamp = 0
             
-            # och = datetime.datetime.utcfromtimestamp(0)
-            # me_stamp = (time_stamp - epoch).total_secondss() * 1000
+            
             test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
@@ -211,6 +211,7 @@ def main(gctx=None):
         msg.gpsLocationExternal.bearing = bearing
         msg.gpsLocationExternal.accuracy = accuracy
         msg.gpsLocationExternal.timestamp = time_stamp
+        msg.gpsLocationExternal.accuracy = accuracy
         msg.gpsLocationExternal.source = "external"
         msg.gpsLocationExternal.flags = 1
         gps_sock.send(msg.to_bytes())
