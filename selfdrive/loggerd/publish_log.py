@@ -146,7 +146,7 @@ def main(gctx=None):
 
     while True:
         sock_found = False
-        polld = poller.poll(timeout=1000)
+        polld = poller.poll(timeout=100)
 
         for sock, mode in polld:
             sock_found = True
