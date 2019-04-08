@@ -170,7 +170,7 @@ def main(gctx=None):
             # convert iso8601 timestamp into millisec since 1970
             # check if time stamp != n/a
             if len(time_stamp) > 10:
-                time_stamp = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S")
+                time_stamp = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S/%f")
                 time_stamp = datetime.timestamp(time_stamp)
             else:
                 time_stamp = 0
