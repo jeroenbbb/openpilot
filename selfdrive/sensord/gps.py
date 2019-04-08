@@ -172,7 +172,7 @@ def main(gctx=None):
             if len(time_stamp) > 10:
                 time_stamp = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%z")
                 time_stamp = datetime.timestamp(time_stamp)
-            else
+            else:
                 time_stamp = 0
             
             # och = datetime.datetime.utcfromtimestamp(0)
