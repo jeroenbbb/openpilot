@@ -168,8 +168,8 @@ def main(gctx=None):
             time_stamp= data_stream.TPV['time']
             
             # convert iso8601 timestamp into millisec since 1970
-            time_stamp = datetime.datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%z")
-            time_stamp = datetime.datetime.timestamp(time_stamp)
+            time_stamp = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%z")
+            time_stamp = datetime.timestamp(time_stamp)
             
             # och = datetime.datetime.utcfromtimestamp(0)
             # me_stamp = (time_stamp - epoch).total_secondss() * 1000
