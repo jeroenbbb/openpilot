@@ -38,6 +38,7 @@ if __name__ == "__main__":
 import time
 import zmq
 import random
+import datetime
 
 # gps3 uses gpsd
 from gps3 import gps3
@@ -165,7 +166,10 @@ def main(gctx=None):
             speed     = data_stream.TPV['speed']
             bearing   = data_stream.TPV['track']
             time_stamp= data_stream.TPV['time']
-            
+            # convert iso8601 timestamp into millisec since 1970
+            time_stamp = datetime.fromisoformat(time_stamp)
+            epoch = datetime.datetime.utcfromtimestamp(0)
+            time_stamp = (time_stamp - epoch).total_secondss() * 1000
             test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
