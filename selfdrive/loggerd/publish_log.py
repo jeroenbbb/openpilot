@@ -105,7 +105,7 @@ def convert_message(evt):
         lon     = str(round(evt.gpsLocationExternal.longitude,5))
         speed   = str(round(evt.gpsLocationExternal.speed,3))
         bearing = str(round(evt.gpsLocationExternal.bearing,0))
-        time_stamp = time.strftime('%Y-%m-%dT%H:%M:%S.%f', time.gmtime(evt.gpsLocationExternal.timestamp))
+        time_stamp = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(evt.gpsLocationExternal.timestamp))
         output = lat +  " " + lon +  " " + speed + " m/s " + bearing + " " + time_stamp
         output = output + " (https://maps.google.com/?q=" + lat 
         output = output + "," + lon + ")"
