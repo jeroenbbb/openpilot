@@ -164,10 +164,12 @@ def main(gctx=None):
             longitude = data_stream.TPV['lon']
             speed     = data_stream.TPV['speed']
             bearing   = data_stream.TPV['track']
+            time_stamp= data_stream.TPV['time']
+            
             test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
-            print (bearing)
+            print (bearing, time_stamp)
             
             if not gps_found:
                 if isinstance(latitude, float):
