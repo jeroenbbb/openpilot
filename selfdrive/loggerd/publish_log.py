@@ -151,7 +151,8 @@ def main(gctx=None):
         
         for sock in polld:
             sock_found = True
-        
+            sock2 = sock
+            
         # for sock, mode in polld:
         #if sock in polld:
         #    sock_found = True
@@ -163,7 +164,7 @@ def main(gctx=None):
         while sock_found:
             #print (str(sock))
             #print (mode)
-            msg = sock.recv()
+            msg = sock2.recv()
             # msg = sock.recv_multipart()
             # print (str(msg))
             # print (msg.decode("ascii"))
