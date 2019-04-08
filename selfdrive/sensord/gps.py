@@ -168,11 +168,11 @@ def main(gctx=None):
             time_stamp= data_stream.TPV['time']
             
             # convert iso8601 timestamp into millisec since 1970
-            # check if time stamp != n/a
-            if len(time_stamp) > 10:
+            # time stamp = n/a or might have a different layout resulting in an error
+            try:
                 time_stamp = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%fZ")
                 time_stamp = datetime.timestamp(time_stamp)
-            else:
+            except:
                 time_stamp = 0
             
             # och = datetime.datetime.utcfromtimestamp(0)
@@ -210,6 +210,7 @@ def main(gctx=None):
         msg.gpsLocationExternal.speed = speed
         msg.gpsLocationExternal.bearing = bearing
         msg.gpsLocationExternal.accuracy = accuracy
+        msg.gpsLocationExternal.timestamp = time_stamp
         msg.gpsLocationExternal.source = "external"
         msg.gpsLocationExternal.flags = 1
         gps_sock.send(msg.to_bytes())
