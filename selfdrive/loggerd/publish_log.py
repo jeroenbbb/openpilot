@@ -147,7 +147,8 @@ def main(gctx=None):
 
         polld = poller.poll(timeout=1000)
 
-        for sock, mode in polld:
+        # for sock, mode in polld:
+        while sock, mode in polld:
             #print (str(sock))
             #print (mode)
             msg = sock.recv()
