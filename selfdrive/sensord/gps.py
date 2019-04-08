@@ -172,7 +172,7 @@ def main(gctx=None):
             # time stamp = n/a or might have a different layout resulting in an error
             try:
                 time_stamp2 = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%fZ")
-                time_stamp2 = datetime.timestamp(time_stamp)
+                time_stamp2 = datetime.timestamp(time_stamp2)
             except:
                 time_stamp2 = 0
             
