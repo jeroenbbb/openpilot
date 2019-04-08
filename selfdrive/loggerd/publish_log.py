@@ -153,7 +153,9 @@ def main(gctx=None):
             sock_found = True
         else:
             sock_found = False
-            
+
+        print (sock_found)            
+        
         while sock_found:
             #print (str(sock))
             #print (mode)
@@ -168,7 +170,8 @@ def main(gctx=None):
                 sock_found = True
             else:
                 sock_found = False
-
+            print (sock_found)            
+            print ("2")
             
             # remember last message for every message type
             last_message[evt.which()] = convert_message(evt)
