@@ -143,28 +143,16 @@ def main(gctx=None):
 
     # poll all incoming messages
     priority = 1
-    sock_found = False
+
     while True:
-
-        polld = poller.poll(timeout=1000)
         sock_found = False
-        
-        for sock in polld:
-            sock_found = True
-            sock2 = sock
-            
-        # for sock, mode in polld:
-        #if sock in polld:
-        #    sock_found = True
-        #else:
-        #    sock_found = False
+        polld = poller.poll(timeout=1000)
 
-        print (sock_found)            
-        
-        while sock_found:
+        for sock, mode in polld:
+            sock_found = True
             #print (str(sock))
             #print (mode)
-            msg = sock2.recv()
+            msg = sock.recv()
             # msg = sock.recv_multipart()
             # print (str(msg))
             # print (msg.decode("ascii"))
@@ -189,16 +177,21 @@ def main(gctx=None):
             if priority == 10:
                 upload(evt.which(), evt)
                 priority = 0
-                
+
+        print (sock_found)
+        
         # check if Telegram is asking something
-        updates = telegram.get_updates(last_update_id)
-        print (updates)
-        if len(updates["result"]) > 0:
-            last_update_id = telegram.get_last_update_id(updates) + 1
-            telegram.handle_answer(updates, last_message)
-        time.sleep(2)
-        print ("Sleep" + str(count))
-        count = count + 1
+        # but only when no messages are waiting
+        if sock_found = False:
+            updates = telegram.get_updates(last_update_id)
+            print (updates)
+            if len(updates["result"]) > 0:
+                last_update_id = telegram.get_last_update_id(updates) + 1
+                telegram.handle_answer(updates, last_message)
+            time.sleep(2)
+            print ("Sleep" + str(count))
+            count = count + 1
+            
         
     # loop through all services to listen to the socks    
     #while True:
