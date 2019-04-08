@@ -166,7 +166,7 @@ def main(gctx=None):
             speed     = data_stream.TPV['speed']
             bearing   = data_stream.TPV['track']
             time_stamp= data_stream.TPV['time']
-            accuracy  = data_stream.TPV['ecefpAcc']
+            accuracy  = data_stream.TPV['epx']
             # accuracy gives error in position in meters
             # convert iso8601 timestamp into millisec since 1970
             # time stamp = n/a or might have a different layout resulting in an error
