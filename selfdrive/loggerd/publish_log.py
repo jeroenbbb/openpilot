@@ -143,12 +143,18 @@ def main(gctx=None):
 
     # poll all incoming messages
     priority = 1
+    sock_found = False
     while True:
 
         polld = poller.poll(timeout=1000)
 
         # for sock, mode in polld:
-        while sock, mode in polld:
+        if sock in polld:
+            sock_found = True
+        else:
+            sock_found = False
+            
+        while sock_found:
             #print (str(sock))
             #print (mode)
             msg = sock.recv()
@@ -157,6 +163,12 @@ def main(gctx=None):
             # print (msg.decode("ascii"))
             evt = log.Event.from_bytes(msg)
             print(evt.which())
+            
+            if sock in polld:
+                sock_found = True
+            else:
+                sock_found = False
+
             
             # remember last message for every message type
             last_message[evt.which()] = convert_message(evt)
