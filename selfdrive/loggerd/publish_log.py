@@ -147,12 +147,16 @@ def main(gctx=None):
     while True:
 
         polld = poller.poll(timeout=1000)
-
-        # for sock, mode in polld:
-        if sock in polld:
+        sock_found = False
+        
+        for sock in polld:
             sock_found = True
-        else:
-            sock_found = False
+        
+        # for sock, mode in polld:
+        #if sock in polld:
+        #    sock_found = True
+        #else:
+        #    sock_found = False
 
         print (sock_found)            
         
