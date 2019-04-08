@@ -159,12 +159,6 @@ def main(gctx=None):
             evt = log.Event.from_bytes(msg)
             print(evt.which())
             
-            if sock in polld:
-                sock_found = True
-            else:
-                sock_found = False
-            print (sock_found)            
-            print ("2")
             
             # remember last message for every message type
             last_message[evt.which()] = convert_message(evt)
