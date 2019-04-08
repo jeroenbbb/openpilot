@@ -171,16 +171,16 @@ def main(gctx=None):
             # convert iso8601 timestamp into millisec since 1970
             # time stamp = n/a or might have a different layout resulting in an error
             try:
-                time_stamp = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%fZ")
-                time_stamp = datetime.timestamp(time_stamp)
+                time_stamp2 = datetime.strptime(time_stamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+                time_stamp2 = datetime.timestamp(time_stamp)
             except:
-                time_stamp = 0
+                time_stamp2 = 0
             
             
             test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
-            print (bearing, time_stamp)
+            print (bearing, time_stamp, time_stamp2, bearing)
             
             if not gps_found:
                 if isinstance(latitude, float):
