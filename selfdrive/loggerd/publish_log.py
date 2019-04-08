@@ -182,7 +182,7 @@ def main(gctx=None):
         
         # check if Telegram is asking something
         # but only when no messages are waiting
-        if sock_found = False:
+        if sock_found == False:
             updates = telegram.get_updates(last_update_id)
             print (updates)
             if len(updates["result"]) > 0:
