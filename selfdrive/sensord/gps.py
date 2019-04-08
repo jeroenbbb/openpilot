@@ -167,9 +167,9 @@ def main(gctx=None):
             bearing   = data_stream.TPV['track']
             time_stamp= data_stream.TPV['time']
             # convert iso8601 timestamp into millisec since 1970
-            time_stamp = datetime.datetime.fromisoformat(time_stamp)
-            epoch = datetime.datetime.utcfromtimestamp(0)
-            time_stamp = (time_stamp - epoch).total_secondss() * 1000
+            time_stamp = datetime.timestamp(time_stamp)
+            # och = datetime.datetime.utcfromtimestamp(0)
+            # me_stamp = (time_stamp - epoch).total_secondss() * 1000
             test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
