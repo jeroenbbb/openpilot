@@ -658,6 +658,8 @@ class UBloxMessage:
     ck_a = 0
     ck_b = 0
     for i in data:
+      print (ck_a, ord(i))
+      
       ck_a = (ck_a + ord(i)) & 0xFF
       ck_b = (ck_b + ck_a) & 0xFF
     return (ck_a, ck_b)
