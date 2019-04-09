@@ -220,8 +220,10 @@ def radard_thread(gctx=None):
       link = linkage_vector(track_pts, method='centroid')
       cluster_idxs = fcluster(link, 2.5, criterion='distance')
       clusters = [None]*max(cluster_idxs)
-
-      for idx in xrange(len(track_pts)):
+      
+      # xrange is no longer available in python3
+      # for idx in xrange(len(track_pts)):
+      for idx in range(len(track_pts)):
         cluster_i = cluster_idxs[idx]-1
 
         if clusters[cluster_i] == None:
