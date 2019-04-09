@@ -951,7 +951,7 @@ class UBlox:
     # payload is a bytes
     # buf = struct
     
-    msg._buf += struct.pack(payload)
+    msg._buf += payload
     (ck_a, ck_b) = msg.checksum(msg._buf[2:])
     msg._buf += struct.pack('<BB', ck_a, ck_b)
     self.send(msg)
