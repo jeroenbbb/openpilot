@@ -254,7 +254,7 @@ def handle_msg(dev, msg, nav_frame_buffer):
         ubloxGnss.send(nav.to_bytes())
 
     else:
-      print "UNKNNOWN MESSAGE:", msg.name()
+      print ("UNKNNOWN MESSAGE:", msg.name())
   except ublox.UBloxError as e:
     print(e)
 
