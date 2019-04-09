@@ -210,7 +210,7 @@ def gen_raw(msg):
     cnos = {}
     for meas in measurements_parsed:
       cnos[meas['svId']] = meas['cno']
-    print 'Carrier to noise ratio for each sat: \n', cnos, '\n'
+    print ('Carrier to noise ratio for each sat: \n', cnos, '\n')
   receiverStatus_bools = int_to_bool_list(msg_meta_data['recStat'])
   receiverStatus = {'leapSecValid': receiverStatus_bools[0],
                     'clkReset': receiverStatus_bools[2]}
