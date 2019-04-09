@@ -660,6 +660,7 @@ class UBloxMessage:
     for i in data:
       print ("xxx")
       print (i)
+      print (str(i)[0:1])
       ck_a = (ck_a + ord(str(i))) & 0xFF
       ck_b = (ck_b + ck_a) & 0xFF
     return (ck_a, ck_b)
