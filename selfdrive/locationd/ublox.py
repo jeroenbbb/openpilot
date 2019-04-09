@@ -946,7 +946,8 @@ class UBlox:
     '''send a ublox message with class, id and payload'''
     msg = UBloxMessage()
     msg._buf = struct.pack('<BBBBH', 0xb5, 0x62, msg_class, msg_id, len(payload))
-    msg._buf += payload
+    # python3 gives error. cant concat bytes to str
+    msg._buf += str(payload)
     (ck_a, ck_b) = msg.checksum(msg._buf[2:])
     msg._buf += struct.pack('<BB', ck_a, ck_b)
     self.send(msg)
