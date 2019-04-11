@@ -203,7 +203,7 @@ def main(gctx=None):
         count = count + 1
 
         # check al lvalues
-        if not bearing.isnumeric(): bearing = 0
+        if not string(bearing).isnumeric(): bearing = 0
             
         # send message
         msg = messaging.new_message()
