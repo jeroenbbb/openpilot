@@ -201,7 +201,10 @@ def main(gctx=None):
     
         sleep(0.5)
         count = count + 1
-    
+
+        # check al lvalues
+        if not bearing.isnumeric() then: bearing = 0
+            
         # send message
         msg = messaging.new_message()
         msg.init('gpsLocationExternal')
