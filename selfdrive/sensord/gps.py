@@ -153,14 +153,16 @@ def main(gctx=None):
     count = 0
     gps_found = False
     count_igc_line = 0
-    altitude = 0
-    bearing = 0
 
     # set message stuff
     context = zmq.Context()
     gps_sock = messaging.pub_sock(context, service_list['gpsLocationExternal'].port)
 
     for new_data in gpsd_socket:
+        
+        altitude = 0
+        bearing = 0
+
         if new_data:
             data_stream.unpack(new_data)
             latitude  = data_stream.TPV['lat']
