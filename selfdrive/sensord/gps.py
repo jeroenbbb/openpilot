@@ -188,16 +188,16 @@ def main(gctx=None):
                     gps_found = True
             
             if not isinstance(latitude, float): 
-                # this should not occur
+                # this only occurs when invalid data is received through gpsd
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
                 sleep(5)
                 
         else:
             # nothing received, send some dummy data
-            print ("No GPS found, send dummy" + str(count))
-            sleep(1)
+            sleep(2)
             if not gps_found:
+                print ("No GPS found, send dummy" + str(count))
                 # generate some dummy data for testing
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
