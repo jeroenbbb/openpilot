@@ -153,6 +153,8 @@ def main(gctx=None):
     count = 0
     gps_found = False
     count_igc_line = 0
+    altitude = 0
+    bearing = 0
 
     # set message stuff
     context = zmq.Context()
