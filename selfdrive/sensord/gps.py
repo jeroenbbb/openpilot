@@ -191,6 +191,7 @@ def main(gctx=None):
                 # this should not occur
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
+                sleep(5)
                 
         else:
             # nothing received, send some dummy data
