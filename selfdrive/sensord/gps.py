@@ -181,7 +181,7 @@ def main(gctx=None):
             test      = data_stream.DEVICES
             
             print('Altitude = ',data_stream.TPV['alt'])
-            print (bearing, time_stamp, time_stamp2)
+            print (bearing, latitude, longitude, time_stamp, time_stamp2)
             
             if not gps_found:
                 if isinstance(latitude, float):
@@ -193,8 +193,9 @@ def main(gctx=None):
                 latitude, longitude, count_igc_line = read_next_line(igc_content,count_igc_line)
                 
         else:
-            # noting received, send some dummy data
-            print ("Nothing" + str(count))
+            # nothing received, send some dummy data
+            print ("No GPS found, send dummy" + str(count))
+            sleep(1)
             if not gps_found:
                 # generate some dummy data for testing
                 latitude, longitude, speed, accuracy, bearing = make_some_dummy_data ()
