@@ -139,12 +139,6 @@ def read_next_line(content, count_igc_line):
     return lat, lon, count_igc_line
 
 
-def shut_down():
-    # Closes connection 
-    gpsd_socket.close()
-    print('Keyboard interrupt received\nTerminated by user\nGood Bye.\n')
-    sys.exit(1)
-
 # -------------------------------
 list_usb_devices()
 igc_content = read_igc_file()
@@ -242,7 +236,4 @@ def main(gctx=None):
 
         
 if __name__ == "__main__":
-    try:
-        main()    
-    except KeyboardInterrupt:
-        shut_down()
+    main()    
