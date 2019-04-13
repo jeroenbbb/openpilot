@@ -185,7 +185,8 @@ def main(gctx=None):
                 time_stamp2 = 0
           
             test      = data_stream.DEVICES
-            
+
+            print (test)
             print('Altitude = ',data_stream.TPV['alt'])
             print (bearing, latitude, longitude, time_stamp, time_stamp2)
             
