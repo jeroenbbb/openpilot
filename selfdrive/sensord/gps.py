@@ -165,6 +165,7 @@ def main(gctx=None):
         
         altitude = 0
         bearing = 0
+        time_stamp2 = 0
 
         if new_data:
             data_stream.unpack(new_data)
