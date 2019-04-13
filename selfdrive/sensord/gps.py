@@ -18,6 +18,7 @@
 # http://catb.org/gpsd/
 # http://www.catb.org/gpsd/gpsd_json.html  to show all avaiable fields in the gpsd interface
 # http://ozzmaker.com/using-python-with-a-gps-receiver-on-a-raspberry-pi/
+# https://learn.adafruit.com/adafruit-ultimate-gps-hat-for-raspberry-pi/use-gpsd
 
 # USB device numers:
 # 1546  U-Blox AG
