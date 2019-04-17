@@ -216,11 +216,13 @@ def main(gctx=None):
         count = count + 1
 
         # check all values
-        if not str(bearing).isnumeric() : bearing = 0
-        if not str(altitude).isnumeric(): altitude = 0
+        if not str(bearing).isnumeric() :    bearing = 0
+        if not str(altitude).isnumeric():    altitude = 0
+        if not str(time_stamp2).isnumeric(): time_stamp2 = 0
         
-        bearing = round(bearing,0)
-        altitude = round(altitude,0)
+        bearing     = round(bearing,0)
+        altitude    = round(altitude,0)
+        time_stamp2 = round(time_stamp2,0)
             
         # send message
         msg = messaging.new_message()
